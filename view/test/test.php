@@ -1,3 +1,1 @@
-<?php
-
-echo "hej";
+<h1>Testsida</h1>
