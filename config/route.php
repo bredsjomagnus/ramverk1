@@ -2,7 +2,7 @@
 /**
  * Routes.
  */
- 
+
 require __DIR__ . "/route/views.php";
 require __DIR__ . "/route/internal.php";
 require __DIR__ . "/route/debug.php";

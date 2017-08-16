@@ -1,5 +1,5 @@
 {
-    "name": "anax/bth",
+    "name": "maaa16/ramverk1",
     "description": "anax service modules",
     "require": {
         "anax/request": "^1.0",
@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Anax\\": "src/"
+            "Anax\\": "src/",
+            "Maaa16\\": "src/"
         }
     }
 }

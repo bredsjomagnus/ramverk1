@@ -15,6 +15,7 @@ require ANAX_INSTALL_PATH . "/vendor/autoload.php";
 
 // Add all services to $app
 $app = require ANAX_INSTALL_PATH . "/config/service.php";
+// $app->navbar    = new \Maaa16\Navbar\Navbar();
 
 // Load the routes
 require ANAX_INSTALL_PATH . "/config/route.php";
