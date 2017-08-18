@@ -1,12 +1,10 @@
 ---
-title: "Min fina titel"
+title: "PA1441 RAMVERK 1 | maaa16"
 ...
 
-
-
-Min me-sida
+RAMVERK 1
 =========================
 
-Här kommer innehållet till min fin sida.
+![profilbild](../htdocs/img/magnus-128x128.png)
 
-Den skall fyllas ut och så småningom få en eller två fina bilder. Men först måste grunderna läggas och jag behöver få lite kolla på vad som gör vad. Om jag fortsätter skriva så att det blir ett radbryt kanske man kan se vilken line-height som texten har. Men då måste jag nog skriva lite lite till. Snart borde det nog räcka med text.
+Jag heter Magnus Andersson och går nu in på andra året på Webbprogrammeringsprogrammet 120 p distans. Det blir tredje gången vi får chansen att arbeta med MVC och Anax.

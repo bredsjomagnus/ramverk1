@@ -26,11 +26,12 @@ $app->router->always(function () use ($app) {
     $content = file_get_contents($file);
     $content = $app->textfilter->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
 
-    $app->view->add("incl/header");
 
     // Render a standard page using layout
     $app->view->add("default1/article", [
         "content" => $content->text
     ]);
-    $app->renderPage($content->frontmatter);
+    
+
+    $app->renderPage($content->frontmatter, $path);
 });
