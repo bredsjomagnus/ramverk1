@@ -2,15 +2,37 @@
 * importerar de lessmoduler ur foldern modules som skall bygga upp
 * style.css filen
 */
-.main-wrap {
-  min-height: 900px;
-  padding: 0 20px;
-  margin-bottom: 50px;
-  margin-top: 70px;
-}
 .navbar-wrap .navbar {
   background-color: #3a3c5e;
 }
 .navbar-wrap .navbar a.navactive {
   color: white;
+}
+.navbar-wrap .navbar a.navactive:hover {
+  color: white;
+}
+.navbar-wrap .navbar a.notnavactive:hover {
+  color: #b8b8b8;
+}
+.main-wrap {
+  min-height: 700px;
+  padding: 0 20px;
+  margin-bottom: 50px;
+  margin-top: 70px;
+  margin-left: 16.6667%;
+  width: 66.6667%;
+}
+.footer-wrap .footer {
+  height: 200px;
+  background-color: #3a3c5e;
+}
+.footer-wrap .footer p {
+  color: white;
+}
+.footer-wrap .footer .footerpart {
+  padding: 20px;
+  color: #b8b8b8;
+}
+.footer-wrap .footer .footerpart a {
+  color: #e9ae61;
 }

@@ -119,7 +119,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
         foreach ($value as $itemkey => $link) {
             // echo "[" . $itemkey . " => " . $link . "]";
             $itemkey;
-            $class = ($active == $link['route']) ? "navactive" : "notnavacitve";
+            $class = ($active == $link['route']) ? "navactive" : "notnavactive";
             $class = $class . " " . $link['class'];
             $navhtml = $this->generateLinks($itemkey, $navhtml, $link, $class);
         }

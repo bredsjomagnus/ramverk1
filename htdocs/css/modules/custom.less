@@ -1,15 +1,41 @@
-.main-wrap {
-    min-height: 900px;
-    padding: 0 20px;
-    margin-bottom: 50px;
-    margin-top: 70px;
-}
 .navbar-wrap {
     .navbar {
         background-color: @navbarcolor;
         a.navactive {
             color: white;
         }
+        a.navactive:hover {
+            color: white;
+        }
+        a.notnavactive:hover{
+            color: @notactivehovercolor;
+        }
+    }
+}
+.main-wrap {
+    min-height: 700px;
+    padding: 0 20px;
+    margin-bottom: 50px;
+    margin-top: 70px;
+    margin-left: 16.6667%;
+    width: 66.6667%;
+}
+.footer-wrap {
+    .footer {
+        // float: left;
+        height: 200px;
+        background-color: @navbarcolor;
+        p {
+            color: white;
+        }
+        .footerpart{
+            padding: 20px;
+            color: @notactivehovercolor;
+            a {
+                color: @footerlinkcolor;
+            }
+        }
 
     }
+
 }
