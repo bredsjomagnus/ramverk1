@@ -8,7 +8,8 @@
         <div class="footerpart col-md-4">
             <h5>LÄNKAR</h5>
             <a href="https://github.com/bredsjomagnus/ramverk1">GIT</a><br />
-            <a href="http://www.student.bth.se/~maaa16/dbwebb-kurser/ramverk1">BTH ramverk1</a>
+            <a href="http://www.student.bth.se/~maaa16/dbwebb-kurser/ramverk1">BTH ramverk1</a><br />
+            <a href="https://security.sensiolabs.org/check">SensioLabs - Security Advisories Checker</a>
         </div>
         <div class="footerpart col-md-4">
             <h5>BTH</h5>
