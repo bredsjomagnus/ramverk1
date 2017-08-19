@@ -8,7 +8,7 @@ Redovisningar av kursmoment Ramverk1.
 
 ---
 
-2017-08-18
+*2017-08-18*
 ###KMOM01
 ####Gör din egen kunskapsinventering baserat på PHP The Right Way, berätta om dina styrkor och svagheter som du vill förstärka under det kommande året.
 Måste först säga att jag tyckte mycket om *PHP The Right Way*. Den var övergripande och pedagogisk med möjlighet att kolla vidare på djupet.
@@ -32,7 +32,11 @@ Skall man ha en chans att vara aktiv och bidra behöver man mer på fötterna ä
 ####Vad tror du om begreppet “en ramverkslös värld” som framfördes i videon?
 Visst skulle det vara skönt att inte behöva lära sig ytterligare ett nytt ramverk. Men den decentraliserade utveckling som råder gör det till en utopi. Sen kan man säkert nå en bit med standardisering, om den blir populär. Det kan ju 'tvinga in' andra att utgå från samma principer om tillräckligt många tar till sig denna standard.
 
-####Hur gick dina förberedelser inför kommentarssystemet?
-Svårt att säga.
+####Hur gick dina förberedelser inför kommentarsystemet?
+Har börjar kolla och jämföra olika kommentarsystem. Vad man bör ha med och vilka vägar man kan gå.
+
+Har bara börjat kolla alternativen och vad de kan innebära - vad som krävs beroende på vilken väg jag väljer att gå.
 
 ---
+
+###KMOM02
