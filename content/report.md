@@ -33,9 +33,9 @@ Skall man ha en chans att vara aktiv och bidra behöver man mer på fötterna ä
 Visst skulle det vara skönt att inte behöva lära sig ytterligare ett nytt ramverk. Men den decentraliserade utveckling som råder gör det till en utopi. Sen kan man säkert nå en bit med standardisering, om den blir populär. Det kan ju 'tvinga in' andra att utgå från samma principer om tillräckligt många tar till sig denna standard.
 
 ####Hur gick dina förberedelser inför kommentarsystemet?
-Har börjar kolla och jämföra olika kommentarsystem. Vad man bör ha med och vilka vägar man kan gå.
+Har börjar kolla och jämföra olika kommentarsystem. Vad man bör ha med och vilka vägar man kan gå. Försöker reda ut alternativen och vad de kan innebära - vad som krävs beroende på vilken väg jag väljer att gå. Just nu lutar det åt någon form av system med hierarki för att inte bara kommentera ett inlägg utan att svara andra användares svar. Detta skall då, i sådana fall, även representeras visuellt. Så som man har på Twitter exempelvis. Där syns det med en linje som sammanbinder användare som skriver inlägg till varandra. Annat sätt är den klassiska indenteringen under det inlägg man svarar på. Får se vad det blir. Men processen är igång.
 
-Har bara börjat kolla alternativen och vad de kan innebära - vad som krävs beroende på vilken väg jag väljer att gå.
+Jag avvaktar dock allt kodande än så länge. Vill se vad som kommer i framtida kmom:s och vill även hinna fundera lite till, innan jag sätter igång med det.
 
 ---
 
