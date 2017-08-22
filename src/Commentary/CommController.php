@@ -14,6 +14,33 @@ class CommController implements AppInjectableInterface
 {
     use AppInjectableTrait;
 
+    /**
+     * Start the session and initiate the Commentary.
+     *
+     * @return void
+     */
+     public function commentarypage() {
+         $path = $this->app->request->getRoute();
+         $file = ANAX_INSTALL_PATH . "/content/commentary/index.md";
+
+         // Check that file is really in the right place
+         $real = realpath($file);
+         $base = realpath(ANAX_INSTALL_PATH . "/content/");
+         if (strncmp($base, $real, strlen($base))) {
+             return;
+         }
+
+         // Get content from markdown file
+         $content = file_get_contents($file);
+         $content = $this->app->textfilter->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
+
+         // Render a standard page using layout
+         $this->app->view->add("default1/article", [
+             "content" => $content->text
+         ]);
+
+         $this->app->renderPage($content->frontmatter, $path, "commentary");
+     }
 
 
     /**

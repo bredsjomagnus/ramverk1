@@ -3,7 +3,7 @@
  * Routes for the REM Server.
  */
  /** Start the session and initiate the REM Server. */
-$app->router->add("comm/**", [$app->commController, "anyPrepare"]);
+$app->router->add("commentary", [$app->commController, "commentarypage"]);
 
 /** Init or re-init the REM Server. */
 $app->router->get("comm/init", [$app->commController, "anyInit"]);

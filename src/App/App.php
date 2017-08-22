@@ -20,7 +20,7 @@ class App
     /**
      * Render a standard web page using a specific layout.
      */
-    public function renderPage($data, $path, $status = 200)
+    public function renderPage($data, $path, $layout = "default1", $status = 200)
     {
         $data["stylesheets"] = ["css/style.css"];
 
@@ -34,7 +34,7 @@ class App
         $this->view->add("incl/footer", [], "footer");
 
         // Add layout, render it, add to response and send.
-        $this->view->add("default1/layout", $data, "layout");
+        $this->view->add($layout."/layout", $data, "layout");
 
         $body = $this->view->renderBuffered("layout");
         $this->response->setBody($body)

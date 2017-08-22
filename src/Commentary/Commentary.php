@@ -24,7 +24,7 @@ class Commentary implements ConfigureInterface
     /**
      * @var string $key to use when storing in session.
      */
-    const KEY = "remserver";
+    const KEY = "commentary";
 
 
 
@@ -104,7 +104,7 @@ class Commentary implements ConfigureInterface
      */
     public function saveDataset($key, $dataset)
     {
-        $data = $this->session->get(self::KEY);
+        $data = $this->session->get(self::KEY); 
         $data[$key] = $dataset;
         $this->session->set(self::KEY, $data);
         return $this;
