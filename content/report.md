@@ -8,7 +8,7 @@ Redovisningar av kursmoment Ramverk1.
 
 ---
 
-*2017-08-18*
+*2017-08-21*
 ###KMOM01
 ####Gör din egen kunskapsinventering baserat på PHP The Right Way, berätta om dina styrkor och svagheter som du vill förstärka under det kommande året.
 Måste först säga att jag tyckte mycket om *PHP The Right Way*. Den var övergripande och pedagogisk med möjlighet att kolla vidare på djupet.
@@ -34,8 +34,6 @@ Visst skulle det vara skönt att inte behöva lära sig ytterligare ett nytt ram
 
 ####Hur gick dina förberedelser inför kommentarsystemet?
 Har börjar kolla och jämföra olika kommentarsystem. Vad man bör ha med och vilka vägar man kan gå. Försöker reda ut alternativen och vad de kan innebära - vad som krävs beroende på vilken väg jag väljer att gå. Just nu lutar det åt någon form av system med hierarki för att inte bara kommentera ett inlägg utan att svara andra användares svar. Detta skall då, i sådana fall, även representeras visuellt. Så som man har på Twitter exempelvis. Där syns det med en linje som sammanbinder användare som skriver inlägg till varandra. Annat sätt är den klassiska indenteringen under det inlägg man svarar på. Får se vad det blir. Men processen är igång.
-
-Jag avvaktar dock allt kodande än så länge. Vill se vad som kommer i framtida kmom:s och vill även hinna fundera lite till, innan jag sätter igång med det.
 
 ---
 

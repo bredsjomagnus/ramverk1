@@ -13,7 +13,16 @@ $app->view       = new \Anax\View\ViewContainer();
 $app->textfilter = new \Anax\TextFilter\TextFilter();
 $app->session    = new \Anax\Session\SessionConfigurable();
 $app->navbar     = new \Maaa16\Navbar\Navbar();
+// Add the REM server
+$app->rem           = new \Anax\RemServer\RemServer();
+$app->remController = new \Anax\RemServer\RemServerController();
 
+// Init REM Server
+$app->rem->configure("remserver.php");
+$app->rem->inject(["session" => $app->session]);
+
+// Init controller for the REM Server
+$app->remController->setApp($app);
 // Configure request
 $app->request->init();
 

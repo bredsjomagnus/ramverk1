@@ -32,10 +32,9 @@ class App
         $this->view->add("incl/header", [], "header");
         $this->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
         $this->view->add("incl/footer", [], "footer");
-        
+
         // Add layout, render it, add to response and send.
         $this->view->add("default1/layout", $data, "layout");
-
 
         $body = $this->view->renderBuffered("layout");
         $this->response->setBody($body)
