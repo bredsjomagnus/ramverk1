@@ -22,6 +22,16 @@ return [
                 "text" => "REDOVISNINGAR",
                 "route" => "report",
                 "class" => ""
+            ],
+            "remserver" => [
+                "text" => "REMSERVER",
+                "route" => "remserver",
+                "class" => ""
+            ],
+            "kommentarsmodul" => [
+                "text" => "KOMMENTARSMODUL",
+                "route" => "commentary",
+                "class" => ""
             ]
         ]
     ]
