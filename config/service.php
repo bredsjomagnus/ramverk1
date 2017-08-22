@@ -16,6 +16,9 @@ $app->navbar     = new \Maaa16\Navbar\Navbar();
 // Add the REM server
 $app->rem           = new \Anax\RemServer\RemServer();
 $app->remController = new \Anax\RemServer\RemServerController();
+// Add the Commentary
+$app->comm           = new \Maaa16\Commentary\Commentary();
+$app->commController = new \Maaa16\Commentary\CommController();
 
 // Init REM Server
 $app->rem->configure("remserver.php");
@@ -23,6 +26,14 @@ $app->rem->inject(["session" => $app->session]);
 
 // Init controller for the REM Server
 $app->remController->setApp($app);
+
+
+// Init commentary
+// $app->rem->configure("remserver.php");
+$app->comm->inject(["session" => $app->session]);
+// Init controller for the Commentary
+$app->commController->setApp($app);
+
 // Configure request
 $app->request->init();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Anax\RemServer;
+namespace Maaa16\Commentary;
 
 use \Anax\Configure\ConfigureInterface;
 use \Anax\Configure\ConfigureTrait;
@@ -8,7 +8,7 @@ use \Anax\Configure\ConfigureTrait;
 /**
  * REM Server.
  */
-class RemServer implements ConfigureInterface
+class Commentary implements ConfigureInterface
 {
     use ConfigureTrait;
 
