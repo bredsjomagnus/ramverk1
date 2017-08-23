@@ -31,6 +31,9 @@ class App
 
         $this->view->add("incl/header", [], "header");
         $this->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
+        $this->view->add("commentary/formfield", [], "formfield");
+        $this->view->add("commentary/comments", [], "comments");
+
         $this->view->add("incl/footer", [], "footer");
 
         // Add layout, render it, add to response and send.

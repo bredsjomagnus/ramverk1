@@ -15,7 +15,7 @@ class CommController implements AppInjectableInterface
     use AppInjectableTrait;
 
     /**
-     * Start the session and initiate the Commentary.
+     * Commetnarypage.
      *
      * @return void
      */
@@ -42,6 +42,15 @@ class CommController implements AppInjectableInterface
          $this->app->renderPage($content->frontmatter, $path, "commentary");
      }
 
+
+    /**
+     * Add comment to page
+     *
+     * @return void
+     */
+    public function addcomment() {
+
+    }
 
     /**
      * Start the session and initiate the Commentary.
