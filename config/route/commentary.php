@@ -5,7 +5,7 @@
  /** Start the session and initiate the REM Server. */
 $app->router->add("commentary", [$app->commController, "commentarypage"]);
 
-$app->router->post("addcomment", [$app->commController, "addcomment"]);
+$app->router->get("addcomment", [$app->commController, "addcomment"]);
 
 /** Init or re-init the REM Server. */
 $app->router->get("comm/init", [$app->commController, "anyInit"]);
