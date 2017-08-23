@@ -65,6 +65,35 @@ class Commentary implements ConfigureInterface
 
 
     /**
+    * Set comment to session
+    *
+    * @return boolean tru if dataset exists in session, else false
+    */
+    public function addComment()
+    {
+
+        $this->session->set(self::KEY, $_GET['comment']);
+
+    }
+
+    /**
+    * Get comment from session
+    *
+    * @return boolean tru if dataset exists in session, else false
+    */
+    public function getComment()
+    {
+        $commres = "";
+        if ($this->hasDataset()) {
+            $commres = $this->session->get(self::KEY);
+        } else {
+            $commres = "Inga kommentarer inlagda än så länge";
+        }
+        return $commres;
+    }
+
+
+    /**
      * Check if there is a dataset stored.
      *
      * @return boolean tru if dataset exists in session, else false
@@ -104,7 +133,7 @@ class Commentary implements ConfigureInterface
      */
     public function saveDataset($key, $dataset)
     {
-        $data = $this->session->get(self::KEY); 
+        $data = $this->session->get(self::KEY);
         $data[$key] = $dataset;
         $this->session->set(self::KEY, $data);
         return $this;
