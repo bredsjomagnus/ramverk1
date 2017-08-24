@@ -67,7 +67,8 @@ class Commentary implements ConfigureInterface
     /**
     * Set comment to session
     *
-    * @return boolean tru if dataset exists in session, else false
+    * @param string $comment
+    * @param object $app
     */
     public function addComment($app, $comment)
     {
@@ -80,7 +81,7 @@ class Commentary implements ConfigureInterface
     /**
     * Get comment from session
     *
-    * @return boolean tru if dataset exists in session, else false
+    * @param object $app
     */
     public function getComment($app)
     {
@@ -88,6 +89,20 @@ class Commentary implements ConfigureInterface
         $sql = "SELECT * FROM ramverk1comments";
         $res = $app->database->executeFetchAll($sql);
         return $res;
+    }
+
+    /**
+    * Reset database comments
+    *
+    * @param object $app
+    */
+    public function resetComment($app)
+    {
+        $app->database->connect();
+        $sql = "DROP TABLE IF EXISTS ramverk1comments";
+        $app->database->execute($sql);
+        $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+        $app->database->execute($sql);
     }
 
 

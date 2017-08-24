@@ -19,6 +19,8 @@ $app->remController = new \Anax\RemServer\RemServerController();
 // Add the Commentary
 $app->comm           = new \Maaa16\Commentary\Commentary();
 $app->commController = new \Maaa16\Commentary\CommController();
+$app->commAssembler = new \Maaa16\Commentary\CommAssembler();
+
 // Add database
 $app->database  = new \Maaa16\Database\Database();
 // Init REM Server
@@ -40,6 +42,7 @@ $app->comm->inject(["session" => $app->session]);
 
 // Init controller for the Commentary
 $app->commController->setApp($app);
+$app->commAssembler->setApp($app);
 
 // Configure request
 $app->request->init();

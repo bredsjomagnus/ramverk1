@@ -39,7 +39,10 @@ class CommController implements AppInjectableInterface
              "content" => $content->text
          ]);
 
+         // Hämta comments från databasen och montera ihop tabell som skickas vidare till vyn.
          $comments = $this->app->comm->getComment($this->app);
+         $comments = $this->app->commAssembler->assemble($comments);
+
          $this->app->view->add("commentary/formfield", [], "formfield");
          $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
 
@@ -53,7 +56,11 @@ class CommController implements AppInjectableInterface
      * @return void
      */
     public function addComment() {
-        $this->app->comm->addComment($this->app, $this->app->request->getPost("comment"));
+        if (null !== $this->app->request->getPost("commentbtn")) {
+            $this->app->comm->addComment($this->app, $this->app->request->getPost("comment"));
+        } else if (null !== $this->app->request->getPost("resetdbbtn")) {
+            $this->app->comm->resetComment($this->app);
+        }
         $this->commentarypage();
     }
 
