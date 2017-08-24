@@ -39,7 +39,7 @@ class CommController implements AppInjectableInterface
              "content" => $content->text
          ]);
 
-         $comments = $this->app->comm->getComment();
+         $comments = $this->app->comm->getComment($this->app);
          $this->app->view->add("commentary/formfield", [], "formfield");
          $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
 
@@ -53,7 +53,7 @@ class CommController implements AppInjectableInterface
      * @return void
      */
     public function addComment() {
-        $this->app->comm->addComment($this->app->request->getPost("comment"));
+        $this->app->comm->addComment($this->app, $this->app->request->getPost("comment"));
         $this->commentarypage();
     }
 

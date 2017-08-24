@@ -69,16 +69,12 @@ class Commentary implements ConfigureInterface
     *
     * @return boolean tru if dataset exists in session, else false
     */
-    public function addComment($comment)
+    public function addComment($app, $comment)
     {
-        if ($this->hasDataset()) {
-            $comments[$comment] = $this->session->get(self::KEY);
-            array_push($comments, $comment);
-            $this->session->set(self::KEY, $comments);
-        } else {
-            $comments["startkommentar"] = [$comment];
-            $this->session->set(self::KEY, $comments);
-        }
+        $app->database->connect();
+        $sql = "INSERT INTO ramverk1comments (comm) VALUES (?)";
+        $params = [$comment];
+        $res = $app->database->execute($sql, $params);
     }
 
     /**
@@ -86,15 +82,12 @@ class Commentary implements ConfigureInterface
     *
     * @return boolean tru if dataset exists in session, else false
     */
-    public function getComment()
+    public function getComment($app)
     {
-        $commres = [];
-        if ($this->hasDataset()) {
-            $commres = $this->session->get(self::KEY);
-        } else {
-            $commres = ["Inga kommentarer inlagda än så länge"];
-        }
-        return $commres;
+        $app->database->connect();
+        $sql = "SELECT * FROM ramverk1comments";
+        $res = $app->database->executeFetchAll($sql);
+        return $res;
     }
 
 

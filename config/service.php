@@ -37,6 +37,7 @@ $app->database->setDefaultsFromConfiguration();
 // Init commentary
 // $app->rem->configure("remserver.php");
 $app->comm->inject(["session" => $app->session]);
+
 // Init controller for the Commentary
 $app->commController->setApp($app);
 
