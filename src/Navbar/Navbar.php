@@ -53,21 +53,21 @@ class Navbar implements \Anax\Common\ConfigureInterface
         /*
         * Del som kan lägga till om man vill ha login/logoutfunktion samt cart
         */
-        //  else {
-        //     if ($itemkey == 'login' && !$this->app->session->has('user')) {
-        //         // Om man kommer till login och man inte är inloggad redan så visa den länken
-        //         $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
-        //     } else if ($itemkey == 'logout' && $this->app->session->has('user')) {
-        //         // Om man kommer till logout och man är inloggad så visa den knappen
-        //         $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
-        //
-        //         // För att se om accountinfo är aktiv eller inte kontrolleras route via PATH_INFO¨.
-        //         $accountclass = ((isset($_SERVER['PATH_INFO'])) && $_SERVER['PATH_INFO'] == "/accountinfo") ? "navactive" : "notnavacitve";
-        //         $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->app->url->create('accountinfo') ."#top'>". $this->app->session->get('user', "") ."</a></li>";
-        //     } else if ($itemkey == 'cart' && $this->app->session->has('user')) {
-        //         $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."&nbsp;&nbsp;(".$nrincart.")</a></li>";
-        //     }
-        // }
+         else {
+            if ($itemkey == 'login' && !$this->app->session->has('user')) {
+                // Om man kommer till login och man inte är inloggad redan så visa den länken
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
+            } else if ($itemkey == 'logout' && $this->app->session->has('user')) {
+                // Om man kommer till logout och man är inloggad så visa den knappen
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
+
+                // För att se om accountinfo är aktiv eller inte kontrolleras route via PATH_INFO¨.
+                $accountclass = ((isset($_SERVER['PATH_INFO'])) && $_SERVER['PATH_INFO'] == "/accountinfo") ? "navactive" : "notnavacitve";
+                $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->app->url->create('accountinfo') ."#top'>". $this->app->session->get('user', "") ."</a></li>";
+            } else if ($itemkey == 'cart' && $this->app->session->has('user')) {
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."&nbsp;&nbsp;(".$nrincart.")</a></li>";
+            }
+        }
         return $navhtml;
     }
 

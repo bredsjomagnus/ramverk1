@@ -32,6 +32,16 @@ return [
                 "text" => "KOMMENTARSMODUL",
                 "route" => "commentary",
                 "class" => ""
+            ],
+            "login" => [
+                "text" => "LOGGA IN",
+                "route" => "login",
+                "class" => ""
+            ],
+            "logout" => [
+                "text" => "LOGGA UT",
+                "route" => "logout",
+                "class" => ""
             ]
         ]
     ]

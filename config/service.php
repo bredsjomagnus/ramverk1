@@ -20,6 +20,8 @@ $app->remController = new \Anax\RemServer\RemServerController();
 $app->comm           = new \Maaa16\Commentary\Commentary();
 $app->commController = new \Maaa16\Commentary\CommController();
 $app->commAssembler = new \Maaa16\Commentary\CommAssembler();
+// Add login
+$app->LoginController = new \Maaa16\Login\LoginController();
 
 // Add database
 $app->database  = new \Maaa16\Database\Database();
@@ -32,6 +34,10 @@ $app->remController->setApp($app);
 
 // Inject $app to Database
 $app->database->setApp($app);
+
+// Inject $app to Login
+$app->LoginController->setApp($app);
+
 // Configure Database
 $app->database->configure("database.php");
 $app->database->setDefaultsFromConfiguration();
