@@ -69,11 +69,16 @@ class Commentary implements ConfigureInterface
     *
     * @return boolean tru if dataset exists in session, else false
     */
-    public function addComment()
+    public function addComment($comment)
     {
-
-        $this->session->set(self::KEY, $_GET['comment']);
-
+        if ($this->hasDataset()) {
+            $comments[$comment] = $this->session->get(self::KEY);
+            array_push($comments, $comment);
+            $this->session->set(self::KEY, $comments);
+        } else {
+            $comments["startkommentar"] = [$comment];
+            $this->session->set(self::KEY, $comments);
+        }
     }
 
     /**
@@ -83,11 +88,11 @@ class Commentary implements ConfigureInterface
     */
     public function getComment()
     {
-        $commres = "";
+        $commres = [];
         if ($this->hasDataset()) {
             $commres = $this->session->get(self::KEY);
         } else {
-            $commres = "Inga kommentarer inlagda än så länge";
+            $commres = ["Inga kommentarer inlagda än så länge"];
         }
         return $commres;
     }
