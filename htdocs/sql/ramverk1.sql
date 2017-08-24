@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS ramverk1comments (
       PRIMARY KEY  (id)
   ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   
-  INSERT INTO ramverkcomments (user, comm) VALUES ('Janne Banan', 'åäö rules');
+  -- INSERT INTO ramverkcomments (user, comm) VALUES ('Janne Banan', 'åäö rules');
   SELECT * FROM ramverk1comments;
