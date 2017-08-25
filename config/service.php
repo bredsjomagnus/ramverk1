@@ -22,6 +22,12 @@ $app->commController = new \Maaa16\Commentary\CommController();
 $app->commAssembler = new \Maaa16\Commentary\CommAssembler();
 // Add login
 $app->LoginController = new \Maaa16\Login\LoginController();
+$app->Login = new \Maaa16\Login\Login();
+
+$app->cookie = new \Maaa16\Cookie\Cookie();
+
+$app->session->start();
+
 
 // Add database
 $app->database  = new \Maaa16\Database\Database();

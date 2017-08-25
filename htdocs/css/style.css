@@ -25,6 +25,12 @@
 .main-wrap hr {
   border-top: 1px solid #3a3c5e;
 }
+.main-wrap .pillow-100 {
+  height: 100px;
+}
+.main-wrap .pillow-20 {
+  height: 20px;
+}
 .footer-wrap .footer {
   height: 200px;
   background-color: #3a3c5e;

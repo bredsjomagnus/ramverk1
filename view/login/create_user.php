@@ -1,4 +1,5 @@
 <?php
+// $app->session->start();
 if (isset($_POST['createuserbtn'])) {
     $forname = isset($_POST['forname']) ? htmlentities($_POST['forname']) : null;
     $surname = isset($_POST['surname']) ? htmlentities($_POST['surname']) : null;
@@ -15,7 +16,7 @@ if (isset($_POST['createuserbtn'])) {
         header('Location: login');
     } else {
         $app->database->connect();
-        $sql = "SELECT * FROM accounts WHERE username = '$username'";
+        $sql = "SELECT * FROM ramverk1accounts WHERE username = '$username'";
         if ($passone != $passtwo) {
             $app->session->set('createusererrormsg', "<br /><p class='formerror'>Nytt konto skapades inte.</p><p class='formerror'>Lösenordet var inte samma vid upprepning.</p>");
             header('Location: login');
@@ -24,14 +25,14 @@ if (isset($_POST['createuserbtn'])) {
             header('Location: login');
         } else if ($passone == $passtwo) {
             $securepass = password_hash($passone, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO ramverk1accounts (role, username, pass, forname, surname, email) VALUES (?, ?, ?, ?, ?, ?)";
             $params = ['user', $username, $securepass, $forname, $surname, $email];
             $sth = $app->database->execute($sql, $params);
             $app->session->set("user", $username);
             $app->cookie->set("user", $username);
             $app->cookie->set("forname", $forname);
 
-            header("Location: welcome");
+            header("Location: about");
         }
     }
 }

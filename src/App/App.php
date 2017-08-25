@@ -29,6 +29,7 @@ class App
         //$this->view->add("default1/navbar", [], "navbar");
         //$this->view->add("default1/footer", [], "footer");
 
+
         $this->view->add("incl/header", [], "header");
         $this->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
         $this->view->add("incl/footer", [], "footer");
@@ -39,6 +40,17 @@ class App
         $body = $this->view->renderBuffered("layout");
         $this->response->setBody($body)
                        ->send($status);
+        exit;
+
+    }
+    /**
+     * Render a standard web page using a specific layout.
+     */
+    public function renderViewPage($layout = "default1", $status = 200)
+    {
+        
+        $this->response->setBody([$this->view, "render"])
+                      ->send();
         exit;
     }
 }

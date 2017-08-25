@@ -63,9 +63,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
 
                 // För att se om accountinfo är aktiv eller inte kontrolleras route via PATH_INFO¨.
                 $accountclass = ((isset($_SERVER['PATH_INFO'])) && $_SERVER['PATH_INFO'] == "/accountinfo") ? "navactive" : "notnavacitve";
-                $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->app->url->create('accountinfo') ."#top'>". $this->app->session->get('user', "") ."</a></li>";
-            } else if ($itemkey == 'cart' && $this->app->session->has('user')) {
-                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."&nbsp;&nbsp;(".$nrincart.")</a></li>";
+                $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->app->url->create('accountinfo') ."#top'>". $this->app->cookie->get('forname', "") ."</a></li>";
             }
         }
         return $navhtml;

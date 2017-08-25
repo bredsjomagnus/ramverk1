@@ -18,7 +18,7 @@ if (isset($_POST['loginsubmit'])) {
         $loginuser =  htmlentities($_POST["user"]);
         $loginpass =  htmlentities($_POST["pass"]);
         $app->database->connect();
-        $sql = "SELECT * FROM accounts WHERE BINARY username = BINARY '$loginuser'";
+        $sql = "SELECT * FROM ramverk1accounts WHERE BINARY username = BINARY '$loginuser'";
         if ($res = $app->database->executeFetchAll($sql)) {
             $dbpass = $res[0]->pass;
             $passwordverify = password_verify($loginpass, $dbpass);
@@ -76,7 +76,6 @@ if (isset($_POST['loginsubmit'])) {
             <br />
 
         </div>
-
 
         <!-- modal -->
         <div class="modal fade" id="addemployeemodal" tabindex="-1" role="dialog" aria-labelledby="addemployeemodalLabel">
