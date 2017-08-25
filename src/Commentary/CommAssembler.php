@@ -43,7 +43,7 @@ class CommAssembler implements AppInjectableInterface
                         </tr>
                         <tr>
                             <td></td>
-                            <td><i>".$comment->created." ".$comment->username."</i></td>
+                            <td><i>".$comment->created."&nbsp&nbsp&nbsp".$comment->username.", ".$comment->email."</i></td>
                         </tr>";
         }
         $table .=   "</tbody>

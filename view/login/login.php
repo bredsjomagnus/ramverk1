@@ -27,6 +27,7 @@ if (isset($_POST['loginsubmit'])) {
             } else if ($passwordverify) {
                 $app->session->set("user", $loginuser);
                 $app->session->set("role", $res[0]->role);
+                $app->session->set("email", $res[0]->email);
                 $app->session->set("hash", password_hash($loginpass, PASSWORD_DEFAULT));
                 // $app->session->set("forname", $res[0]->forname);
                 $app->cookie->set("user", $loginuser);
@@ -74,7 +75,6 @@ if (isset($_POST['loginsubmit'])) {
                 <?= $loginmsg ?>
             </form>
             <br />
-
         </div>
 
         <!-- modal -->

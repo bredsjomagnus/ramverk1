@@ -70,11 +70,11 @@ class Commentary implements ConfigureInterface
     * @param string $comment
     * @param object $app
     */
-    public function addComment($app, $comment)
+    public function addComment($app, $username, $email, $comment)
     {
         $app->database->connect();
-        $sql = "INSERT INTO ramverk1comments (comm) VALUES (?)";
-        $params = [$comment];
+        $sql = "INSERT INTO ramverk1comments (username, email, comm) VALUES (?, ?, ?)";
+        $params = [$username, $email, $comment];
         $res = $app->database->execute($sql, $params);
     }
 

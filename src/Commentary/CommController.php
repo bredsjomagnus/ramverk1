@@ -57,7 +57,10 @@ class CommController implements AppInjectableInterface
      */
     public function addComment() {
         if (null !== $this->app->request->getPost("commentbtn")) {
-            $this->app->comm->addComment($this->app, $this->app->request->getPost("comment"));
+            $comment = $this->app->request->getPost("comment");
+            $username = $this->app->request->getPost("username");
+            $email = $this->app->request->getPost("email");
+            $this->app->comm->addComment($this->app, $username, $email, $comment);
         } else if (null !== $this->app->request->getPost("resetdbbtn")) {
             $this->app->comm->resetComment($this->app);
         }
