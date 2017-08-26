@@ -3,6 +3,7 @@
  * Routes for the Login procedure.
  */
 $app->router->add("login", [$app->LoginController, "loginpage"]);
+$app->router->add("accountinfo", [$app->LoginController, "accountpage"]);
 // $app->router->post("loginprocess", [$app->LoginController, "loginprocess"]);
 
 $app->router->add("createuser", function () use ($app) {

@@ -20,33 +20,33 @@ class CommController implements AppInjectableInterface
      * @return void
      */
      public function commentarypage() {
-         $path = $this->app->request->getRoute();
-         $file = ANAX_INSTALL_PATH . "/content/commentary/index.md";
+        $path = $this->app->request->getRoute();
+        $file = ANAX_INSTALL_PATH . "/content/commentary/index.md";
 
-         // Check that file is really in the right place
-         $real = realpath($file);
-         $base = realpath(ANAX_INSTALL_PATH . "/content/");
-         if (strncmp($base, $real, strlen($base))) {
-             return;
-         }
+        // Check that file is really in the right place
+        $real = realpath($file);
+        $base = realpath(ANAX_INSTALL_PATH . "/content/");
+        if (strncmp($base, $real, strlen($base))) {
+            return;
+        }
 
-         // Get content from markdown file
-         $content = file_get_contents($file);
-         $content = $this->app->textfilter->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
+        // Get content from markdown file
+        $content = file_get_contents($file);
+        $content = $this->app->textfilter->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
 
-         // Render a standard page using layout
-         $this->app->view->add("default1/article", [
-             "content" => $content->text
-         ]);
+        // Render a standard page using layout
+        $this->app->view->add("default1/article", [
+            "content" => $content->text
+        ]);
 
-         // Hämta comments från databasen och montera ihop tabell som skickas vidare till vyn.
-         $comments = $this->app->comm->getComment($this->app);
-         $comments = $this->app->commAssembler->assemble($comments);
+        // Hämta comments från databasen och montera ihop tabell som skickas vidare till vyn.
+        $comments = $this->app->comm->getComment($this->app);
+        $comments = $this->app->commAssembler->assemble($this->app, $comments);
 
-         $this->app->view->add("commentary/formfield", [], "formfield");
-         $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
+        $this->app->view->add("commentary/formfield", [], "formfield");
+        $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
 
-         $this->app->renderPage($content->frontmatter, $path, "commentary");
+        $this->app->renderPage($content->frontmatter, $path, "commentary");
      }
 
 

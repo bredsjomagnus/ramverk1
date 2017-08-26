@@ -31,6 +31,17 @@
 .main-wrap .pillow-20 {
   height: 20px;
 }
+.main-wrap .commenttable td {
+  height: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.main-wrap .commenttable .avatarcolumn {
+  width: 50px;
+}
+.main-wrap .commenttable .commentaryunderline {
+  border-bottom: 1px solid #b5b6c0;
+}
 .footer-wrap .footer {
   height: 200px;
   background-color: #3a3c5e;

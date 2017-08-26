@@ -35,6 +35,26 @@ class LoginController implements AppInjectableInterface
     }
 
     /**
+    * Loginpage.
+    *
+    * @return void
+    */
+    public function accountpage()
+    {
+        // För att tala om för navbaren vilken länk som är aktiv
+        $path = $this->app->request->getRoute();
+        // $this->app->view->add("login/login", [], "main");
+        $this->app->view->add("login/accountinfo");
+        // $this->app->view->add("incl/header", [], "header");
+        // $this->app->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
+        // $this->app->view->add("incl/footer", [], "footer");
+        $title = "Konto | maaa16";
+        // $this->app->response->setBody([$this->app->view, "render"])
+        //               ->send();
+        $this->app->renderPage(["title" => $title], $path);
+    }
+
+    /**
     * Loginprocess
     *
     * @return void

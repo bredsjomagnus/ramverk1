@@ -8,7 +8,7 @@ $adminurl = $app->url->create('adminpage');
 $adminrow = ($app->session->get('role') == 'admin') ? "<tr><td><b>Roll</b></td><td><a href='$adminurl'>Administratör</a></td></tr>": "";
 $username = $app->session->get('user');
 $app->database->connect();
-$sql = "SELECT * FROM accounts WHERE username = '$username'";
+$sql = "SELECT * FROM ramverk1accounts WHERE username = '$username'";
 if ($res = $app->database->executeFetchAll($sql)) {
     $forname = $res[0]->forname;
     $surname = $res[0]->surname;
@@ -41,12 +41,12 @@ if (isset($_POST['editaccount'])) {
     $emailedit = (isset($_POST['email']) || $_POST['email'] != "") ? htmlentities($_POST['email']) : null;
 
     if ($fornameedit != null && $surnameedit != null && $emailedit != null) {
-        $sql = "UPDATE accounts SET forname = ?, surname = ?, email = ? WHERE username = ?";
+        $sql = "UPDATE ramverk1accounts SET forname = ?, surname = ?, email = ? WHERE username = ?";
         $params = [$fornameedit, $surnameedit, $emailedit, $username];
         $sth = $app->database->execute($sql, $params);
 
         // Ser till att uppdatera sidan korrekt efter förändringarna
-        $sql = "SELECT * FROM accounts WHERE username = '$username'";
+        $sql = "SELECT * FROM ramverk1accounts WHERE username = '$username'";
         if ($res = $app->database->executeFetchAll($sql)) {
             $forname = $res[0]->forname;
             $surname = $res[0]->surname;
@@ -62,7 +62,7 @@ if (isset($_POST['editaccount'])) {
     }
 } else if (isset($_POST['deleteaccount'])) {
     $app->database->connect();
-    $sql = "DELETE FROM accounts WHERE username = ?";
+    $sql = "DELETE FROM ramverk1accounts WHERE username = ?";
     $params = [$username];
     $app->database->execute($sql, $params);
     header('Location: logout');
@@ -72,12 +72,12 @@ if (isset($_POST['editaccount'])) {
     $newpasstwoedit = (isset($_POST['newpasstwo']) && $_POST['newpasstwo'] != "") ? htmlentities($_POST['newpasstwo']) : null;
     if ($oldpassedit != null && $newpassoneedit != null && $newpasstwoedit != null) {
         $app->database->connect();
-        $sql = "SELECT * FROM accounts WHERE username = '$username'";
+        $sql = "SELECT * FROM ramverk1accounts WHERE username = '$username'";
         if ($res = $app->database->executeFetchAll($sql)) {
             $oldpass = $res[0]->pass;
             if (password_verify($oldpassedit, $oldpass)) {
                 if ($newpassoneedit == $newpasstwoedit) {
-                    $sql = "UPDATE accounts SET pass = ? WHERE username = ?";
+                    $sql = "UPDATE ramverk1accounts SET pass = ? WHERE username = ?";
                     $securepass = password_hash($newpassoneedit, PASSWORD_DEFAULT);
                     $params = [$securepass, $username];
                     $sth = $app->database->execute($sql, $params);

@@ -17,14 +17,13 @@ class CommAssembler implements AppInjectableInterface
     *
     * @param array $comments restable from databas comments
     */
-    public function assemble($comments)
+    public function assemble($app, $comments)
     {
         $table = "";
         $table = "<table class='commenttable'>";
         $table .=   "<thead>
                         <tr>
-                            <th colspan='1'>
-                                KOMMENTAR
+                            <th class='avatarcolumn'>
                             </th>
                         </tr>
                     </thead>
@@ -35,15 +34,20 @@ class CommAssembler implements AppInjectableInterface
             $gravatar->size = 30;
             $gravatar->rating = "G";
             $gravatar->border = "FF0000";
+            $filteredcomment = $app->textfilter->markdown($comment->comm);
 
             // <td>".$gravatar->toHTML()."</td>
             $table .=   "<tr>
                             <td>".$gravatar->toHTML()."</td>
-                            <td>".$comment->comm."</td>
+                            <td>".$filteredcomment."</td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><i>".$comment->created."&nbsp&nbsp&nbsp".$comment->username.", ".$comment->email."</i></td>
+                            <td><a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a></td>
+                        </tr>
+                        <tr>
+                            <td class='commentaryunderline'></td>
+                            <td class='text-muted commentaryunderline'><i>".$comment->created."&nbsp&nbsp&nbsp".$comment->username.", ".$comment->email."</i></td>
                         </tr>";
         }
         $table .=   "</tbody>

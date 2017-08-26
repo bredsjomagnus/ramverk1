@@ -42,8 +42,8 @@ if (isset($_POST['loginsubmit'])) {
                 // $app->renderPage(["title" => "välkommen"], "login");
                 // exit;
 
-                // funkar inte.
                 // header("Location: welcome");
+                // funkar inte.
             } else {
                 $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>";
             }
