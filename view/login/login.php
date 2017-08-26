@@ -1,4 +1,5 @@
 <?php
+
 $usermsg = "";
 $passmsg = "";
 $loginmsg = isset($_SESSION['createusererrormsg']) ? $_SESSION['createusererrormsg']: "";
@@ -35,8 +36,14 @@ if (isset($_POST['loginsubmit'])) {
                 if (isset($_POST['remember'])) {
                     $app->cookie->set("password", $loginpass);
                 }
-                // $app->cookie->set("name", $app->database->get($))
-                header("Location: welcome");
+                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Du är nu inloggad, ".$res[0]->forname."</span>";
+                // Koden nedan ger maximum nesting reached.
+                // $app->view->add("login/welcome");
+                // $app->renderPage(["title" => "välkommen"], "login");
+                // exit;
+
+                // funkar inte.
+                // header("Location: welcome");
             } else {
                 $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>";
             }

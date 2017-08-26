@@ -23,7 +23,8 @@ class LoginController implements AppInjectableInterface
     {
         // För att tala om för navbaren vilken länk som är aktiv
         $path = $this->app->request->getRoute();
-        $this->app->view->add("login/login", [], "main");
+        // $this->app->view->add("login/login", [], "main");
+        $this->app->view->add("login/login");
         // $this->app->view->add("incl/header", [], "header");
         // $this->app->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
         // $this->app->view->add("incl/footer", [], "footer");

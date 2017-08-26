@@ -23,7 +23,7 @@ class RemServerController implements AppInjectableInterface
      */
     public function anyPrepare()
     {
-        $this->app->session->start();
+        // $this->app->session->start();
 
         if (!$this->app->rem->hasDataset()) {
             $this->app->rem->init();
