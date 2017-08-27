@@ -48,12 +48,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
         if ($itemkey != 'login' && $itemkey != 'logout' && $itemkey != 'cart') {
             // Med undantag för login och logout visa de länkarna utan förbehåll.
             $navhtml .= "<li><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
-        }
-
-        /*
-        * Del som kan lägga till om man vill ha login/logoutfunktion samt cart
-        */
-         else {
+        } else {
             if ($itemkey == 'login' && !$this->app->session->has('user')) {
                 // Om man kommer till login och man inte är inloggad redan så visa den länken
                 $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";

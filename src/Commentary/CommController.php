@@ -19,7 +19,8 @@ class CommController implements AppInjectableInterface
      *
      * @return void
      */
-     public function commentarypage() {
+    public function commentarypage()
+    {
         $path = $this->app->request->getRoute();
         $file = ANAX_INSTALL_PATH . "/content/commentary/index.md";
 
@@ -47,7 +48,7 @@ class CommController implements AppInjectableInterface
         $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
 
         $this->app->renderPage($content->frontmatter, $path, "commentary");
-     }
+    }
 
 
     /**
@@ -55,7 +56,8 @@ class CommController implements AppInjectableInterface
      *
      * @return void
      */
-    public function addComment() {
+    public function addComment()
+    {
         if (null !== $this->app->request->getPost("commentbtn")) {
             $comment = $this->app->request->getPost("comment");
             $username = $this->app->request->getPost("username");

@@ -41,16 +41,15 @@ class App
         $this->response->setBody($body)
                        ->send($status);
         exit;
-
     }
-    /**
-     * Render a standard web page using a specific layout.
-     */
-    public function renderViewPage($layout = "default1", $status = 200)
-    {
-        
-        $this->response->setBody([$this->view, "render"])
-                      ->send();
-        exit;
-    }
+    // /**
+    //  * Render a standard web page using a specific layout.
+    //  */
+    // public function renderViewPage($layout = "default1", $status = 200)
+    // {
+    //
+    //     $this->response->setBody([$this->view, "render"])
+    //                   ->send();
+    //     exit;
+    // }
 }

@@ -36,14 +36,18 @@ class CommAssembler implements AppInjectableInterface
             $gravatar->border = "FF0000";
             $filteredcomment = $app->textfilter->markdown($comment->comm);
 
+            $editlink = "";
+            if ($app->session->get('email') == $comment->email) {
+                $editlink = "<a href='#'>redigera</a>";
+            }
             // <td>".$gravatar->toHTML()."</td>
             $table .=   "<tr>
-                            <td>".$gravatar->toHTML()."</td>
+                            <td valign=top>".$gravatar->toHTML()."</td>
                             <td>".$filteredcomment."</td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a></td>
+                            <td><a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a>&nbsp&nbsp&nbsp".$editlink."</td>
                         </tr>
                         <tr>
                             <td class='commentaryunderline'></td>
@@ -54,5 +58,4 @@ class CommAssembler implements AppInjectableInterface
                     </table>";
         return $table;
     }
-
 }

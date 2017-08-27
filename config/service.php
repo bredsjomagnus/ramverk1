@@ -22,7 +22,7 @@ $app->commController = new \Maaa16\Commentary\CommController();
 $app->commAssembler = new \Maaa16\Commentary\CommAssembler();
 // Add login
 $app->LoginController = new \Maaa16\Login\LoginController();
-$app->Login = new \Maaa16\Login\Login();
+// $app->Login = new \Maaa16\Login\Login();
 
 $app->cookie = new \Maaa16\Cookie\Cookie();
 

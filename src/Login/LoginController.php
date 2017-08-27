@@ -66,10 +66,9 @@ class LoginController implements AppInjectableInterface
             $pass = $this->app->request->getPost("pass");
             $remember = $this->app->request->getPost("remember");
             $this->app->view->add("login/loginprocess", ["user" => $user, "pass" => $pass, "remember" => $remember]);
-            $this->app->response->setBody([$app->view, "render"])
+            $this->app->response->setBody([$this->app->view, "render"])
                           ->send();
         }
         // $this->loginpage();
-
     }
 }

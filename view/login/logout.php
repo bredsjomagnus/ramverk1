@@ -7,4 +7,3 @@ $app->cookie->delete('user');
 $app->cookie->delete('forname');
 
 // header("Location: logoutscreen");
-?>

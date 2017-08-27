@@ -12,8 +12,8 @@ class Login implements ConfigureInterface
 {
     use ConfigureTrait;
 
-    public function loginprocess($app, $user, $pass, $remember)
-    {
-        
-    }
+    // public function loginprocess($app, $user, $pass, $remember)
+    // {
+    //
+    // }
 }

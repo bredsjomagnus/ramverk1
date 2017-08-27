@@ -126,7 +126,6 @@ class Database implements \Anax\Common\ConfigureInterface
         }
 
         return $sth;
-
     }
 
 

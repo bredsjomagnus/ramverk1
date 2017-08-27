@@ -75,7 +75,7 @@ class Commentary implements ConfigureInterface
         $app->database->connect();
         $sql = "INSERT INTO ramverk1comments (username, email, comm) VALUES (?, ?, ?)";
         $params = [$username, $email, $comment];
-        $res = $app->database->execute($sql, $params);
+        $app->database->execute($sql, $params);
     }
 
     /**
