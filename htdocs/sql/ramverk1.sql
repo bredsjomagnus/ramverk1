@@ -4,7 +4,7 @@ use ramverk1;
 -- show tables;
 
 DROP TABLE IF EXISTS ramverk1comments;
-DROP TABLE IF EXISTS ramverk1accounts;
+-- DROP TABLE IF EXISTS ramverk1accounts;
 
 CREATE TABLE IF NOT EXISTS ramverk1comments (
      id INT AUTO_INCREMENT NOT NULL,
