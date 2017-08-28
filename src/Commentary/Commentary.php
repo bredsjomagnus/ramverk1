@@ -73,8 +73,8 @@ class Commentary implements ConfigureInterface
     public function addComment($app, $username, $email, $comment)
     {
         $app->database->connect();
-        $sql = "INSERT INTO ramverk1comments (username, email, comm) VALUES (?, ?, ?)";
-        $params = [$username, $email, $comment];
+        $sql = "INSERT INTO ramverk1comments (username, email, comm, edited) VALUES (?, ?, ?, ?)";
+        $params = [$username, $email, $comment, NULL];
         $app->database->execute($sql, $params);
     }
 
@@ -101,12 +101,12 @@ class Commentary implements ConfigureInterface
         $app->database->connect();
         $sql = "DROP TABLE IF EXISTS ramverk1comments";
         $app->database->execute($sql);
-        $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+        $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, edited TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
         $app->database->execute($sql);
     }
 
     /**
-    * Reset database comments
+    * Load comment to edit
     *
     * @param object $app
     */
@@ -117,5 +117,20 @@ class Commentary implements ConfigureInterface
         $params = [$id];
         $res = $app->database->executeFetchAll($sql, $params);
         return $res;
+    }
+
+    /**
+    * Save edited comment
+    *
+    * @param object $app
+    * @param integer $id
+    * @param string $comment
+    */
+    public function editCommentSave($app, $id, $comment)
+    {
+        $app->database->connect();
+        $sql = "UPDATE ramverk1comments SET comm = ? WHERE id = ?";
+        $params = [$comment, $id];
+        $app->database->execute($sql, $params);
     }
 }

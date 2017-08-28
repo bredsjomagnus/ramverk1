@@ -41,6 +41,10 @@ class CommAssembler implements AppInjectableInterface
                 $editcommenturl = $app->url->create("editcomment") ."?id=". $comment->id;
                 $editlink = "<a href='".$editcommenturl."'>redigera</a>";
             }
+            $edited = "";
+            if ($comment->edited !== null) {
+                $edited = "REDIGERAD: " . $comment->edited;
+            }
             // <td>".$gravatar->toHTML()."</td>
             $table .=   "<tr>
                             <td valign=top>".$gravatar->toHTML()."</td>
@@ -48,7 +52,7 @@ class CommAssembler implements AppInjectableInterface
                         </tr>
                         <tr>
                             <td></td>
-                            <td><a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a>&nbsp&nbsp&nbsp".$editlink."</td>
+                            <td><a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a>&nbsp&nbsp&nbsp".$editlink."&nbsp&nbsp&nbsp<span class='text-muted'>".$edited."</span></td>
                         </tr>
                         <tr>
                             <td class='commentaryunderline'></td>

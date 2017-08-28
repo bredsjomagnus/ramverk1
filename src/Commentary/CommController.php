@@ -61,7 +61,11 @@ class CommController implements AppInjectableInterface
             $comment = $this->app->request->getPost("comment");
             $username = $this->app->request->getPost("username");
             $email = $this->app->request->getPost("email");
-            $this->app->comm->addComment($this->app, $username, $email, $comment);
+            // Kontroll om textarean är tom innan den läggs till.
+            if (strlen(trim($comment))) {
+                $this->app->comm->addComment($this->app, $username, $email, $comment);
+            }
+
         } else if (null !== $this->app->request->getPost("resetdbbtn")) {
             $this->app->comm->resetComment($this->app);
         }
@@ -101,13 +105,31 @@ class CommController implements AppInjectableInterface
             // $comments = $this->app->comm->getComment($this->app);
             // $comments = $this->app->commAssembler->assemble($this->app, $res);
 
-            $this->app->view->add("commentary/editcomment", ["comment" => $res[0]->comm, "email" => $res[0]->email], "formfield");
+            $this->app->view->add("commentary/editcomment", ["comment" => $res[0]->comm, "email" => $res[0]->email, "id" => $res[0]->id], "formfield");
             // $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
 
             $this->app->renderPage($content->frontmatter, $path, "commentary");
         } else {
             $this->commentarypage();
         }
+    }
 
+    /**
+     * Edit comment
+     *
+     * @return void
+     */
+    public function editCommentProcess()
+    {
+        if (null !== $this->app->request->getPost("editcommentbtn")) {
+            $comment = $this->app->request->getPost("comment");
+            $id = $this->app->request->getPost("id");
+            if (strlen(trim($comment))) {
+                $this->app->comm->editCommentSave($this->app, $id, $comment);
+            }
+            $this->commentarypage();
+
+        }
+        $this->commentarypage();
     }
 }

@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS ramverk1comments;
 CREATE TABLE IF NOT EXISTS ramverk1comments (
      id INT AUTO_INCREMENT NOT NULL,
      created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     edited TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      username varchar(100) NOT NULL default 'NA',
      email VARCHAR(200) NOT NULL DEFAULT 'na@email.com',
      comm VARCHAR(100000),

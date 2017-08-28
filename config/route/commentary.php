@@ -9,3 +9,5 @@ $app->router->add("commentary", [$app->commController, "commentarypage"]);
 $app->router->post("addcomment", [$app->commController, "addComment"]);
 // Edit comment
 $app->router->get("editcomment", [$app->commController, "editComment"]);
+// Edit comment process
+$app->router->post("editcommentprocess", [$app->commController, "editCommentProcess"]);
