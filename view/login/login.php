@@ -36,7 +36,7 @@ if (isset($_POST['loginsubmit'])) {
                 if (isset($_POST['remember'])) {
                     $app->cookie->set("password", $loginpass);
                 }
-                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Du är nu inloggad, ".$res[0]->forname."</span>";
+                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Du är nu inloggad, ".$res[0]->forname.", ".$app->session->get('email')."</span>";
                 // Koden nedan ger maximum nesting reached.
                 // $app->view->add("login/welcome");
                 // $app->renderPage(["title" => "välkommen"], "login");

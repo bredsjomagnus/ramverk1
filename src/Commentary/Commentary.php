@@ -74,7 +74,7 @@ class Commentary implements ConfigureInterface
     {
         $app->database->connect();
         $sql = "INSERT INTO ramverk1comments (username, email, comm, edited) VALUES (?, ?, ?, ?)";
-        $params = [$username, $email, $comment, NULL];
+        $params = [$username, $email, $comment, null];
         $app->database->execute($sql, $params);
     }
 
@@ -131,6 +131,20 @@ class Commentary implements ConfigureInterface
         $app->database->connect();
         $sql = "UPDATE ramverk1comments SET comm = ? WHERE id = ?";
         $params = [$comment, $id];
+        $app->database->execute($sql, $params);
+    }
+
+    /**
+    * Delete one single comment
+    *
+    * @param object $app
+    * @param integer $id
+    */
+    public function deleteComment($app, $id)
+    {
+        $app->database->connect();
+        $sql = "DELETE FROM ramverk1comments WHERE id = ?";
+        $params = [$id];
         $app->database->execute($sql, $params);
     }
 }

@@ -65,7 +65,6 @@ class CommController implements AppInjectableInterface
             if (strlen(trim($comment))) {
                 $this->app->comm->addComment($this->app, $username, $email, $comment);
             }
-
         } else if (null !== $this->app->request->getPost("resetdbbtn")) {
             $this->app->comm->resetComment($this->app);
         }
@@ -126,9 +125,12 @@ class CommController implements AppInjectableInterface
             $id = $this->app->request->getPost("id");
             if (strlen(trim($comment))) {
                 $this->app->comm->editCommentSave($this->app, $id, $comment);
+            } else {
+                $this->app->comm->deleteComment($this->app, $id);
             }
-            $this->commentarypage();
-
+        } else if (null !== $this->app->request->getPost("deletecommentbtn")) {
+            $id = $this->app->request->getPost("id");
+            $this->app->comm->deleteComment($this->app, $id);
         }
         $this->commentarypage();
     }

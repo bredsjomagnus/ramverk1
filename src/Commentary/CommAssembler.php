@@ -36,15 +36,21 @@ class CommAssembler implements AppInjectableInterface
             $gravatar->border = "FF0000";
             $filteredcomment = $app->textfilter->markdown($comment->comm);
 
-            $editlink = "";
+            $likeanswereditline = "";
             if ($app->session->get('email') == $comment->email) {
                 $editcommenturl = $app->url->create("editcomment") ."?id=". $comment->id;
-                $editlink = "<a href='".$editcommenturl."'>redigera</a>";
+                $likeanswereditline = "<a href='".$editcommenturl."'>redigera</a>";
+            } else if ($app->session->has('user')) {
+                $likeanswereditline = "<a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a>";
             }
             $edited = "";
             if ($comment->edited !== null) {
-                $edited = "REDIGERAD: " . $comment->edited;
+                $edited = "<span class='text-muted'>REDIGERAD: " . $comment->edited."</span>";
+                $likeanswereditline .= "&nbsp&nbsp&nbsp".$edited;
             }
+
+
+
             // <td>".$gravatar->toHTML()."</td>
             $table .=   "<tr>
                             <td valign=top>".$gravatar->toHTML()."</td>
@@ -52,7 +58,7 @@ class CommAssembler implements AppInjectableInterface
                         </tr>
                         <tr>
                             <td></td>
-                            <td><a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a>&nbsp&nbsp&nbsp".$editlink."&nbsp&nbsp&nbsp<span class='text-muted'>".$edited."</span></td>
+                            <td>".$likeanswereditline."</td>
                         </tr>
                         <tr>
                             <td class='commentaryunderline'></td>

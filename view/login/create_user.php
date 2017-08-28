@@ -29,6 +29,8 @@ if (isset($_POST['createuserbtn'])) {
             $params = ['user', $username, $securepass, $forname, $surname, $email];
             $sth = $app->database->execute($sql, $params);
             $app->session->set("user", $username);
+            $app->session->set("email", $email);
+            $app->session->set("role", 'user');
             $app->cookie->set("user", $username);
             $app->cookie->set("forname", $forname);
 
