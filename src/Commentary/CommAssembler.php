@@ -31,17 +31,23 @@ class CommAssembler implements AppInjectableInterface
         foreach ($comments as $comment) {
             $default = "http://i.imgur.com/CrOKsOd.png"; // Optional
             $gravatar = new \Maaa16\Gravatar\Gravatar($comment->email, $default);
-            $gravatar->size = 30;
+            $gravatar->size = 50;
             $gravatar->rating = "G";
             $gravatar->border = "FF0000";
             $filteredcomment = $app->textfilter->markdown($comment->comm);
+
+            $commentlikes = explode(",", $comment->likes);
 
             $likeanswereditline = "";
             if ($app->session->get('email') == $comment->email) {
                 $editcommenturl = $app->url->create("editcomment") ."?id=". $comment->id;
                 $likeanswereditline = "<a href='".$editcommenturl."'>redigera</a>";
             } else if ($app->session->has('user')) {
-                $likeanswereditline = "<a href='#'>Gilla</a>&nbsp&nbsp&nbsp<a href='#'>Svara</a>";
+                $addlikeprocessurl = $app->url->create("addlikeprocess")."?userid=".$app->session->get('userid')."&commentid=".$comment->id;
+                if (!in_array($app->session->get('userid'), $commentlikes)) {
+                    $likeanswereditline = "<a href='".$addlikeprocessurl."'>Gilla</a>&nbsp&nbsp&nbsp";
+                }
+                $likeanswereditline .= "<a href='#'>Svara</a>";
             }
             $edited = "";
             if ($comment->edited !== null) {

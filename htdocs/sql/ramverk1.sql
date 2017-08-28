@@ -1,18 +1,19 @@
 -- CREATE DATABASE ramverk1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- show databases;
-use maaa16;
-show tables;
+use ramverk1;
+-- show tables;
 
 DROP TABLE IF EXISTS ramverk1comments;
-DROP TABLE IF EXISTS ramverk1accounts;
+-- DROP TABLE IF EXISTS ramverk1accounts;
 
 CREATE TABLE IF NOT EXISTS ramverk1comments (
      id INT AUTO_INCREMENT NOT NULL,
      created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     edited TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+     edited TIMESTAMP NULL,
      username varchar(100) NOT NULL default 'NA',
      email VARCHAR(200) NOT NULL DEFAULT 'na@email.com',
      comm VARCHAR(100000),
+     likes VARCHAR(1000) DEFAULT '',
       PRIMARY KEY  (id)
   ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   
@@ -34,3 +35,4 @@ created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   SELECT * FROM ramverk1comments;
   SELECT * FROM ramverk1accounts;
   -- UPDATE ramverk1accounts SET active = 'yes' WHERE id = 1;
+  -- UPDATE ramverk1accounts SET role = 'admin' WHERE id = 9;

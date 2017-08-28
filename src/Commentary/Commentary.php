@@ -101,7 +101,7 @@ class Commentary implements ConfigureInterface
         $app->database->connect();
         $sql = "DROP TABLE IF EXISTS ramverk1comments";
         $app->database->execute($sql);
-        $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, edited TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+        $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, edited TIMESTAMP NULL, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), likes VARCHAR(1000) DEFAULT '', PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
         $app->database->execute($sql);
     }
 
@@ -129,7 +129,7 @@ class Commentary implements ConfigureInterface
     public function editCommentSave($app, $id, $comment)
     {
         $app->database->connect();
-        $sql = "UPDATE ramverk1comments SET comm = ? WHERE id = ?";
+        $sql = "UPDATE ramverk1comments SET comm = ?, edited = CURRENT_TIMESTAMP WHERE id = ?";
         $params = [$comment, $id];
         $app->database->execute($sql, $params);
     }
@@ -145,6 +145,29 @@ class Commentary implements ConfigureInterface
         $app->database->connect();
         $sql = "DELETE FROM ramverk1comments WHERE id = ?";
         $params = [$id];
+        $app->database->execute($sql, $params);
+    }
+
+    /**
+    * Add like to comment
+    *
+    * @param object $app
+    * @param integer $id
+    */
+    public function addLike($app, $userid, $commentid)
+    {
+        $app->database->connect();
+        $sql = "SELECT likes FROM ramverk1comments WHERE id = ?";
+        $params = [$commentid];
+        $res = $app->database->executeFetchAll($sql, $params);
+        $commentlikes = $res[0]->likes;
+
+        $commentlikes .= ",".$userid;
+        if ($commentlikes[0] == ",") {
+            $commentlikes = substr($commentlikes, 1);
+        }
+        $sql = "UPDATE ramverk1comments SET likes = ? WHERE id = ?";
+        $params = [$commentlikes, $commentid];
         $app->database->execute($sql, $params);
     }
 }

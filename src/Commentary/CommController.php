@@ -134,4 +134,25 @@ class CommController implements AppInjectableInterface
         }
         $this->commentarypage();
     }
+
+    /**
+     * Add like to comment
+     *
+     * @return void
+     */
+    public function addLikeProcess()
+    {
+
+
+        // Om användaren stämmer med vad som skickas. Så att ingen annan via url kan 'Gilla' kommentar som annan användare
+        if ($this->app->session->get('userid') == $this->app->request->getGet("userid")) {
+            // Om det finns ifylld id för comment
+            if (null !== $this->app->request->getGet("commentid")) {
+                $userid = $this->app->request->getGet("userid");
+                $commentid = $this->app->request->getGet("commentid");
+                $this->app->comm->addLike($this->app, $userid, $commentid);
+            }
+        }
+        $this->commentarypage();
+    }
 }

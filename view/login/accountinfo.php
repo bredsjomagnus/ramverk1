@@ -164,7 +164,7 @@ if (isset($_POST['editaccount'])) {
                         </form>
                     </div>
                 </div>
-
+                <?php var_dump($_SESSION); ?>
         </div>
 
         <div class="col-md-5">

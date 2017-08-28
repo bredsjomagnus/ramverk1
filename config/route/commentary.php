@@ -11,3 +11,5 @@ $app->router->post("addcomment", [$app->commController, "addComment"]);
 $app->router->get("editcomment", [$app->commController, "editComment"]);
 // Edit comment process
 $app->router->post("editcommentprocess", [$app->commController, "editCommentProcess"]);
+// Add like to comment
+$app->router->get("addlikeprocess", [$app->commController, "addLikeProcess"]);

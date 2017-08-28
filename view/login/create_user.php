@@ -32,6 +32,7 @@ if (isset($_POST['createuserbtn'])) {
             $app->session->set("email", $email);
             $app->session->set("role", 'user');
             $app->cookie->set("user", $username);
+            $app->session->set("userid", $app->database->lastInsertId());
             $app->cookie->set("forname", $forname);
 
             header("Location: about");
