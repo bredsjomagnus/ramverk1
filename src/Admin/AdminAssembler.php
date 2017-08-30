@@ -12,7 +12,8 @@ class AdminAssembler implements AppInjectableInterface
 {
     use AppInjectableTrait;
 
-    public function getComments($res) {
+    public function getComments($res)
+    {
         $table = "<table class='commenttable'>";
         $table .=   "<thead>
                         <tr>
