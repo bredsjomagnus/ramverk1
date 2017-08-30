@@ -59,8 +59,10 @@ class CommAssembler implements AppInjectableInterface
             }
 
             $numberlikes = "";
+            $likersusernames = "";
             if (count($commentlikes) > 0 && $commentlikes[0] != "") {
-                $numberlikes = "<div class='likecircle'>+".count($commentlikes)."</div>";
+                $likersusernames = $app->comm->getLikersUsernames($app, $commentlikes);
+                $numberlikes = "<div class='likecircle' data-toggle='tooltip' data-placement='right' title='".$likersusernames."'>+".count($commentlikes)."</div>";
             }
 
             // <td>".$gravatar->toHTML()."</td>

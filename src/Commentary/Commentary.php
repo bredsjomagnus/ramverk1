@@ -170,4 +170,29 @@ class Commentary implements ConfigureInterface
         $params = [$commentlikes, $commentid];
         $app->database->execute($sql, $params);
     }
+
+    /**
+    * Get usernames of those who liked a comment
+    *
+    * @param object $app
+    * @param array $likersid array of idnumbers of users who liked a comment
+    *
+    * @return string $usernames of names of those who liked a comment. "name1, name2, name3,..."
+    */
+    public function getLikersUsernames($app, $likersid)
+    {
+        $usernames = "";
+        $app->database->connect();
+        foreach ($likersid as $id) {
+            if ($id != "") {
+                $sql = "SELECT username FROM ramverk1accounts WHERE id = ?";
+                $params = [$id];
+                $res = $app->database->executeFetchAll($sql, $params);
+                $usernames .= ", " . $res[0]->username;
+            }
+
+        }
+        $usernames = substr($usernames, 2);
+        return $usernames;
+    }
 }
