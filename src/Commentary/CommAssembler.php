@@ -46,21 +46,34 @@ class CommAssembler implements AppInjectableInterface
                 $addlikeprocessurl = $app->url->create("addlikeprocess")."?userid=".$app->session->get('userid')."&commentid=".$comment->id;
                 if (!in_array($app->session->get('userid'), $commentlikes)) {
                     $likeanswereditline = "<a href='".$addlikeprocessurl."'>Gilla</a>&nbsp&nbsp&nbsp";
+                } else {
+                    $likeanswereditline = "<span>Gilla</span>&nbsp&nbsp&nbsp";
                 }
                 $likeanswereditline .= "<a href='#'>Svara</a>";
             }
+
             $edited = "";
             if ($comment->edited !== null) {
                 $edited = "<span class='text-muted'>REDIGERAD: " . $comment->edited."</span>";
                 $likeanswereditline .= "&nbsp&nbsp&nbsp".$edited;
             }
 
-
+            $numberlikes = "";
+            if (count($commentlikes) > 0 && $commentlikes[0] != "") {
+                $numberlikes = "<div class='likecircle'>+".count($commentlikes)."</div>";
+            }
 
             // <td>".$gravatar->toHTML()."</td>
             $table .=   "<tr>
                             <td valign=top>".$gravatar->toHTML()."</td>
                             <td>".$filteredcomment."</td>
+                        </tr>
+                        <tr class='commentarydottedunderline' >
+                            <td></td>
+                            <td>
+                                ".$numberlikes."
+                            </div>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
