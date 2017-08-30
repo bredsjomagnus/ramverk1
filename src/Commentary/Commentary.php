@@ -190,7 +190,6 @@ class Commentary implements ConfigureInterface
                 $res = $app->database->executeFetchAll($sql, $params);
                 $usernames .= ", " . $res[0]->username;
             }
-
         }
         $usernames = substr($usernames, 2);
         return $usernames;

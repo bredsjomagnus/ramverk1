@@ -24,6 +24,10 @@ $app->commAssembler = new \Maaa16\Commentary\CommAssembler();
 $app->LoginController = new \Maaa16\Login\LoginController();
 // $app->Login = new \Maaa16\Login\Login();
 
+$app->adminController = new \Maaa16\Admin\AdminController();
+$app->adminAssembler = new \Maaa16\Admin\AdminAssembler();
+$app->admin = new \Maaa16\Admin\Admin();
+
 $app->cookie = new \Maaa16\Cookie\Cookie();
 
 $app->session->start();
@@ -43,6 +47,11 @@ $app->database->setApp($app);
 
 // Inject $app to Login
 $app->LoginController->setApp($app);
+
+// Inject $app to Admin
+$app->adminController->setApp($app);
+$app->adminAssembler->setApp($app);
+$app->admin->setApp($app);
 
 // Configure Database
 $app->database->configure("database.php");

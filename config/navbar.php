@@ -44,5 +44,37 @@ return [
                 "class" => ""
             ]
         ]
+    ],
+    "navbar-admin" => [
+        "config" => [
+            "navbar-class" => "nav navbar-nav"
+        ],
+        "items" => [
+            "hem" => [
+                "text" => "HEM",
+                "route" => "",
+                "class" => ""
+            ],
+            "webshop" => [
+                "text" => "KOMMENTARER",
+                "route" => "admincomments",
+                "class" => ""
+            ],
+            "account" => [
+                "text" => "ANVÄNDARKONTON",
+                "route" => "adminpageaccounts",
+                "class" => ""
+            ],
+            "login" => [
+                "text" => "LOGGA IN",
+                "route" => "login",
+                "class" => ""
+            ],
+            "logout" => [
+                "text" => "LOGGA UT",
+                "route" => "logoutprocess",
+                "class" => ""
+            ]
+        ]
     ]
 ];
