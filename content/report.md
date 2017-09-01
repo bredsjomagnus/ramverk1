@@ -35,6 +35,8 @@ Visst skulle det vara skönt att inte behöva lära sig ytterligare ett nytt ram
 ####Hur gick dina förberedelser inför kommentarsystemet?
 Har börjar kolla och jämföra olika kommentarsystem. Vad man bör ha med och vilka vägar man kan gå. Försöker reda ut alternativen och vad de kan innebära - vad som krävs beroende på vilken väg jag väljer att gå. Just nu lutar det åt någon form av system med hierarki för att inte bara kommentera ett inlägg utan att svara andra användares svar. Detta skall då, i sådana fall, även representeras visuellt. Så som man har på Twitter exempelvis. Där syns det med en linje som sammanbinder användare som skriver inlägg till varandra. Annat sätt är den klassiska indenteringen under det inlägg man svarar på. Får se vad det blir. Men processen är igång.
 
+Den svåra biten är att egentligen förstå hur. Vad är MVC och hur programmerar man enligt den modellen? Vad är en modell, vad är en controller och så vidare. Innan jag får mer klarhet i vad det innebär och är blir det bara väldigt skissartat. Men tankarna har satts igång i vilket fall.
+
 ---
 
 ###KMOM02
