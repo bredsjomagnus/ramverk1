@@ -14,6 +14,19 @@
 .navbar-wrap .navbar a.notnavactive:hover {
   color: #b8b8b8;
 }
+.navbar-wrap .navbar-nav > li > .dropdown-menu {
+  background-color: #3a3c5e;
+}
+.navbar-wrap .dropdown-menu > li > a:hover {
+  background-color: #4e5074;
+  color: white;
+}
+.navbar-wrap .dropdown-menu > li > a {
+  color: #b8b8b8;
+}
+.navbar-wrap .navbar-default .navbar-nav > li > a:hover {
+  color: white;
+}
 .main-wrap {
   min-height: 700px;
   padding: 0 20px;

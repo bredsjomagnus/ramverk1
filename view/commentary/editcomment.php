@@ -1,5 +1,5 @@
 <?php
-if ($app->session->get('email') == $email) {
+if ($app->session->get('email') == $email || $app->session->get('role') == 'admin') {
      $form = "<form action='editcommentprocess' method='post'>
          <textarea name='comment' rows='20' cols='200'> $comment </textarea>
          <input type='hidden' name='id' value='$id' />

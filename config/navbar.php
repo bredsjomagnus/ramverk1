@@ -43,6 +43,15 @@ return [
                 "route" => "logout",
                 "class" => ""
             ]
+        ],
+        "dropdown" => [
+            "namn" => "ARTIKLAR",
+            "items" => [
+                "mvc" => [
+                    "text" => "MVC",
+                    "route" => "article/mvc"
+                ]
+            ]
         ]
     ],
     "navbar-admin" => [
@@ -55,14 +64,9 @@ return [
                 "route" => "",
                 "class" => ""
             ],
-            "webshop" => [
+            "comments" => [
                 "text" => "KOMMENTARER",
                 "route" => "admincomments",
-                "class" => ""
-            ],
-            "account" => [
-                "text" => "ANVÄNDARKONTON",
-                "route" => "adminpageaccounts",
                 "class" => ""
             ],
             "login" => [

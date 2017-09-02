@@ -29,7 +29,6 @@ class App
         //$this->view->add("default1/navbar", [], "navbar");
         //$this->view->add("default1/footer", [], "footer");
 
-
         $this->view->add("incl/header", [], "header");
         $this->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
         $this->view->add("incl/footer", [], "footer");
@@ -59,7 +58,7 @@ class App
         $this->view->add("incl/header", [], "header");
         $this->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-admin"], "navbar");
         $this->view->add("incl/footer", [], "footer");
-        
+
         // Add layout, render it, add to response and send.
         $this->view->add($layout."/layout", $data, "layout");
 

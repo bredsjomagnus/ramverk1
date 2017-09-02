@@ -19,6 +19,8 @@ class AdminAssembler implements AppInjectableInterface
                         <tr>
                             <th class='avatarcolumn'>
                             </th>
+                            <th>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -29,10 +31,16 @@ class AdminAssembler implements AppInjectableInterface
             $gravatar->rating = "G";
             $gravatar->border = "FF0000";
             $filteredcomment = $this->app->textfilter->markdown($comment->comm);
-            // <td>".$gravatar->toHTML()."</td>
+
+            $editcommenturl = $this->app->url->create("editcomment") ."?id=". $comment->id;
+
             $table .=   "<tr>
                             <td valign=top>".$gravatar->toHTML()."</td>
                             <td>".$filteredcomment."</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a href='".$editcommenturl."'>Redigera</a></td>
                         </tr>";
         }
         $table .=   "</tbody>

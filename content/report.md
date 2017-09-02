@@ -39,4 +39,31 @@ Den svåra biten är att egentligen förstå hur. Vad är MVC och hur programmer
 
 ---
 
+*2017-09-02*
+
 ###KMOM02
+
+####Vilka tidigare erfarenheter har du av MVC? Gick arbetet bra med artikeln om MVC?
+Detta är nytt för mig. Har kollat runt lite och läst lite i forum, inlägg, artiklar och annat och börjar nog får mer kolla på läget dock. Tänkte först att man hade en controller och att $app agerade som controller. Men förstår att så inte är fallet. Har försökt, med remservern som mall, göra även en admindel och kommentardelen med controller och modullager. Även login, men att det inte blev så bra. Där stannade jag halvvägs. Låter det vara som det är nu och ser om jag backar eller går vidare med det senare.
+
+####Kom du fram till vad begreppet SOLID innebar och vilka källor använde du? Kan du förklara SOLID på ett par rader med dina egna ord?
+Tyckte videoklippet bitvis var lite för snabbt och lite för mycket. Men man fick ändå en hyfsad förklaring på vad SOLID är. Kollade även runt lite och fann då denna [artikel](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) om SOLID. Den förklarade med några klargörande exempel.
+
+SOLID skall göra koden lättare att underhålla och möjlig att lätt bygga ut.
+- S - Enbart ett problem för en klass. Likt commentary controllern ser till att sammanbinda. Medan Commentary anterar data och commentaryAssembler ser till att skapa ett output i form av tabeller.
+- O - Eftersträva möjlighet att lägga till vilket kan göras med interfaces som ser till att klasser fyller kraven för att göra detta möjligt. Man bör välja interface framför extend.
+- L - Subklasser skall matcha deras föräldrar vad gäller metoderna. Så att exempelvis klasserna returnerar samma datatyp.
+- I - Interfaces skall enbart ha metoder som kommer användas. Bättre att dela upp i fler interfaces än att lägga ihop i ett stort.
+- D - Istället för att göra klasser beroende av andra klasser använder man interfaces och koden blir mer fristående.
+
+####Gick arbetet med REM servern bra och du lyckades integrera den i din me-sida?
+Det tycker jag. Denna delen var viktigt för min förståelse av MVC och hur jag kunde gå vidare med kommentarsmodulen. Det som krånglade lite var att det krockade när sessionen startade för min login-funktion. Men med hjälp och guidening i gitter så löste sig även det. Valde bland annat på grund av detta att inte använda session till en början i kommentarsmodulen. Satte igång med databas direkt.
+
+####Berätta om arbetet med din kommentarsmodul, hur långt har du kommit och hur tänker du?
+I nu läget har jag en testroute med en 'artikel' som kan kommenteras. Man måste vara inloggad för att kommentera. Man kan redigera sina egna kommentarer och gör man det kommer det synas under att kommentaren blivit redigerad med datum för redigeringen. Det är även möjligt att helt ta bort kommentaren.
+
+Man kan även gilla andras kommentarer och antalet gillande markeras med siffra strax under kommentaren.
+
+En admin kan via sin accountsida nå admingränssnittet och där se lagda kommentarer. Där har admin möjlighet att redigera och/eller helt ta bort lagda kommentarer. Funderar på att lägga in så att det syns specifikt när det är admin som redigerar en kommentar till skillnad från när användaren själv gör det.
+
+Hade även ambitionen att lägga in så man kan svara på andras kommentarer. Men det får längre fram.

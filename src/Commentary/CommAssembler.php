@@ -49,7 +49,7 @@ class CommAssembler implements AppInjectableInterface
                 } else {
                     $likeanswereditline = "<span>Gilla</span>&nbsp&nbsp&nbsp";
                 }
-                $likeanswereditline .= "<a href='#'>Svara</a>";
+                // $likeanswereditline .= "<a href='#'>Svara</a>";
             }
 
             $edited = "";

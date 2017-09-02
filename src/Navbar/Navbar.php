@@ -72,7 +72,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
         foreach ($value as $dropkey => $link) {
             if ($dropkey == "namn") {   //sätter ut namnet på dropdownmenyn
                 // echo $link;
-                $class = ($active == "dropdown") ? "dropdown-toggle navactive" : "dropdown-toggle notnavacitve";
+                $class = ($active == "article/mvc") ? "dropdown-toggle navactive" : "dropdown-toggle notnavacitve";
                 $navhtml .= "<a href='#' class='{$class}' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>". $link ." <span class='caret'></span></a>";
                 $navhtml .= "<ul class='dropdown-menu'>";
             } else if ($dropkey == "items") {    //sätter ut länkarna i dropdownmenyn
