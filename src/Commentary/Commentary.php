@@ -70,12 +70,12 @@ class Commentary implements ConfigureInterface
     * @param string $comment
     * @param object $app
     */
-    public function addComment($app, $username, $email, $comment)
+    public function addComment($di, $username, $email, $comment)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "INSERT INTO ramverk1comments (username, email, comm, edited) VALUES (?, ?, ?, ?)";
         $params = [$username, $email, $comment, null];
-        $app->database->execute($sql, $params);
+        $di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -83,11 +83,11 @@ class Commentary implements ConfigureInterface
     *
     * @param object $app
     */
-    public function getComment($app)
+    public function getComment($di)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "SELECT * FROM ramverk1comments";
-        $res = $app->database->executeFetchAll($sql);
+        $res = $di->get("database")->executeFetchAll($sql);
         return $res;
     }
 
@@ -96,13 +96,13 @@ class Commentary implements ConfigureInterface
     *
     * @param object $app
     */
-    public function resetComment($app)
+    public function resetComment($di)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "DROP TABLE IF EXISTS ramverk1comments";
-        $app->database->execute($sql);
+        $di->get("database")->execute($sql);
         $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, edited TIMESTAMP NULL, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), likes VARCHAR(1000) DEFAULT '', PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-        $app->database->execute($sql);
+        $di->get("database")->execute($sql);
     }
 
     /**
@@ -110,12 +110,12 @@ class Commentary implements ConfigureInterface
     *
     * @param object $app
     */
-    public function editCommentLoad($app, $id)
+    public function editCommentLoad($di, $id)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "SELECT * FROM ramverk1comments WHERE id = ?";
         $params = [$id];
-        $res = $app->database->executeFetchAll($sql, $params);
+        $res = $di->get("database")->executeFetchAll($sql, $params);
         return $res;
     }
 
@@ -126,12 +126,12 @@ class Commentary implements ConfigureInterface
     * @param integer $id
     * @param string $comment
     */
-    public function editCommentSave($app, $id, $comment)
+    public function editCommentSave($di, $id, $comment)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "UPDATE ramverk1comments SET comm = ?, edited = CURRENT_TIMESTAMP WHERE id = ?";
         $params = [$comment, $id];
-        $app->database->execute($sql, $params);
+        $di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -140,12 +140,12 @@ class Commentary implements ConfigureInterface
     * @param object $app
     * @param integer $id
     */
-    public function deleteComment($app, $id)
+    public function deleteComment($di, $id)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "DELETE FROM ramverk1comments WHERE id = ?";
         $params = [$id];
-        $app->database->execute($sql, $params);
+        $di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -154,12 +154,12 @@ class Commentary implements ConfigureInterface
     * @param object $app
     * @param integer $id
     */
-    public function addLike($app, $userid, $commentid)
+    public function addLike($di, $userid, $commentid)
     {
-        $app->database->connect();
+        $di->get("database")->connect();
         $sql = "SELECT likes FROM ramverk1comments WHERE id = ?";
         $params = [$commentid];
-        $res = $app->database->executeFetchAll($sql, $params);
+        $res = $di->get("database")->executeFetchAll($sql, $params);
         $commentlikes = $res[0]->likes;
 
         $commentlikes .= ",".$userid;
@@ -168,7 +168,7 @@ class Commentary implements ConfigureInterface
         }
         $sql = "UPDATE ramverk1comments SET likes = ? WHERE id = ?";
         $params = [$commentlikes, $commentid];
-        $app->database->execute($sql, $params);
+        $di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -179,15 +179,15 @@ class Commentary implements ConfigureInterface
     *
     * @return string $usernames of names of those who liked a comment. "name1, name2, name3,..."
     */
-    public function getLikersUsernames($app, $likersid)
+    public function getLikersUsernames($di, $likersid)
     {
         $usernames = "";
-        $app->database->connect();
+        $di->get("database")->connect();
         foreach ($likersid as $id) {
             if ($id != "") {
                 $sql = "SELECT username FROM ramverk1accounts WHERE id = ?";
                 $params = [$id];
-                $res = $app->database->executeFetchAll($sql, $params);
+                $res = $di->get("database")->executeFetchAll($sql, $params);
                 $usernames .= ", " . $res[0]->username;
             }
         }

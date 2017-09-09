@@ -2,21 +2,21 @@
 
 namespace Maaa16\Admin;
 
-use \Anax\Common\AppInjectableInterface;
-use \Anax\Common\AppInjectableTrait;
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 
 /**
  * REM Server.
  */
-class Admin implements AppInjectableInterface
+class Admin implements InjectionAwareInterface
 {
-    use AppInjectableTrait;
+    use InjectionAwareTrait;
 
     public function getComments()
     {
-        $this->app->database->connect();
+        $this->di->get("database")->connect();
         $sql = "SELECT * FROM ramverk1comments";
-        $res = $this->app->database->executeFetchAll($sql);
+        $res = $this->di->get("database")->executeFetchAll($sql);
         return $res;
     }
 }

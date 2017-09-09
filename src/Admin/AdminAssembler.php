@@ -2,15 +2,15 @@
 
 namespace Maaa16\Admin;
 
-use \Anax\Common\AppInjectableInterface;
-use \Anax\Common\AppInjectableTrait;
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 
 /**
  * REM Server.
  */
-class AdminAssembler implements AppInjectableInterface
+class AdminAssembler implements InjectionAwareInterface
 {
-    use AppInjectableTrait;
+    use InjectionAwareTrait;
 
     public function getComments($res)
     {
@@ -30,9 +30,9 @@ class AdminAssembler implements AppInjectableInterface
             $gravatar->size = 50;
             $gravatar->rating = "G";
             $gravatar->border = "FF0000";
-            $filteredcomment = $this->app->textfilter->markdown($comment->comm);
+            $filteredcomment = $this->di->get("textfilter")->markdown($comment->comm);
 
-            $editcommenturl = $this->app->url->create("editcomment") ."?id=". $comment->id;
+            $editcommenturl = $this->di->get("url")->create("editcomment") ."?id=". $comment->id;
 
             $table .=   "<tr>
                             <td valign=top>".$gravatar->toHTML()."</td>

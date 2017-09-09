@@ -2,17 +2,17 @@
 
 namespace Maaa16\Admin;
 
-use \Anax\Common\AppInjectableInterface;
-use \Anax\Common\AppInjectableTrait;
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 
 /**
  * A controller for the Commentary.
  *
  * @SuppressWarnings(PHPMD.ExitExpression)
  */
-class AdminController implements AppInjectableInterface
+class AdminController implements InjectionAwareInterface
 {
-    use AppInjectableTrait;
+    use InjectionAwareTrait;
 
     /**
      * Adminpage.
@@ -21,7 +21,7 @@ class AdminController implements AppInjectableInterface
      */
     public function adminPage()
     {
-        $path = $this->app->request->getRoute();
+        $path = $this->di->get("request")->getRoute();
         $file = ANAX_INSTALL_PATH . "/content/admin/index.md";
 
         // Check that file is really in the right place
@@ -33,10 +33,10 @@ class AdminController implements AppInjectableInterface
 
         // Get content from markdown file
         $content = file_get_contents($file);
-        $content = $this->app->textfilter->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
+        $content = $this->di->get("textfilter")->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
 
         // Render a standard page using layout
-        $this->app->view->add("default1/article", [
+        $this->di->get("view")->add("default1/article", [
             "content" => $content->text
         ]);
 
@@ -44,9 +44,9 @@ class AdminController implements AppInjectableInterface
         // $comments = $this->app->comm->getComment($this->app);
         // $comments = $this->app->commAssembler->assemble($this->app, $comments);
 
-        $this->app->view->add("admin/adminpage");
+        $this->di->get("view")->add("admin/adminpage");
 
-        $this->app->renderAdminPage($content->frontmatter, $path);
+        $this->di->get("pageRender")->renderAdminPage($content->frontmatter, $path);
     }
 
     /**

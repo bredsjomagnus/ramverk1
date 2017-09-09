@@ -2,22 +2,22 @@
 
 namespace Maaa16\Commentary;
 
-use \Anax\Common\AppInjectableInterface;
-use \Anax\Common\AppInjectableTrait;
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 
 /**
  * REM Server.
  */
-class CommAssembler implements AppInjectableInterface
+class CommAssembler implements InjectionAwareInterface
 {
-    use AppInjectableTrait;
+    use InjectionAwareTrait;
 
     /**
     * Get comment from session
     *
     * @param array $comments restable from databas comments
     */
-    public function assemble($app, $comments)
+    public function assemble($comments)
     {
         $table = "";
         $table = "<table class='commenttable'>";
@@ -34,17 +34,17 @@ class CommAssembler implements AppInjectableInterface
             $gravatar->size = 50;
             $gravatar->rating = "G";
             $gravatar->border = "FF0000";
-            $filteredcomment = $app->textfilter->markdown($comment->comm);
+            $filteredcomment = $this->di->get("textfilter")->markdown($comment->comm);
 
             $commentlikes = explode(",", $comment->likes);
 
             $likeanswereditline = "";
-            if ($app->session->get('email') == $comment->email) {
-                $editcommenturl = $app->url->create("editcomment") ."?id=". $comment->id;
+            if ($this->di->get("session")->get('email') == $comment->email) {
+                $editcommenturl = $this->di->get("url")->create("editcomment") ."?id=". $comment->id;
                 $likeanswereditline = "<a href='".$editcommenturl."'>redigera</a>";
-            } else if ($app->session->has('user')) {
-                $addlikeprocessurl = $app->url->create("addlikeprocess")."?userid=".$app->session->get('userid')."&commentid=".$comment->id;
-                if (!in_array($app->session->get('userid'), $commentlikes)) {
+            } else if ($this->di->get("session")->has('user')) {
+                $addlikeprocessurl = $this->di->get("url")->create("addlikeprocess")."?userid=".$this->di->get("session")->get('userid')."&commentid=".$comment->id;
+                if (!in_array($this->di->get("session")->get('userid'), $commentlikes)) {
                     $likeanswereditline = "<a href='".$addlikeprocessurl."'>Gilla</a>&nbsp&nbsp&nbsp";
                 } else {
                     $likeanswereditline = "<span>Gilla</span>&nbsp&nbsp&nbsp";
@@ -61,7 +61,7 @@ class CommAssembler implements AppInjectableInterface
             $numberlikes = "";
             $likersusernames = "";
             if (count($commentlikes) > 0 && $commentlikes[0] != "") {
-                $likersusernames = $app->comm->getLikersUsernames($app, $commentlikes);
+                $likersusernames = $this->di->get("comm")->getLikersUsernames($this->di, $commentlikes);
                 $numberlikes = "<div class='likecircle' data-toggle='tooltip' data-placement='right' title='".$likersusernames."'>+".count($commentlikes)."</div>";
             }
 
