@@ -1,9 +1,15 @@
 <?php
 namespace Maaa16\Navbar;
 
-class Navbar implements \Anax\Common\ConfigureInterface
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
+use \Anax\Configure\ConfigureInterface;
+use \Anax\Configure\ConfigureTrait;
+
+class Navbar implements ConfigureInterface, InjectionAwareInterface
 {
-    use \Anax\Common\ConfigureTrait;
+    use ConfigureTrait;
+    use InjectionAwareTrait;
 
     /**
      * Set the app object to inject into view rendering phase.
@@ -12,11 +18,11 @@ class Navbar implements \Anax\Common\ConfigureInterface
      *
      * @return $this
      */
-    public function setApp($app)
-    {
-        $this->app = $app;
-        return $this;
-    }
+    // public function setApp($di)
+    // {
+    //     $this->app = $app;
+    //     return $this;
+    // }
 
     /**
      * Set default values from configuration.
@@ -47,18 +53,18 @@ class Navbar implements \Anax\Common\ConfigureInterface
 
         if ($itemkey != 'login' && $itemkey != 'logout' && $itemkey != 'cart') {
             // Med undantag för login och logout visa de länkarna utan förbehåll.
-            $navhtml .= "<li><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
+            $navhtml .= "<li><a class='{$class}' href='". $this->di->get("url")->create($link['route']) ."#top'>".$link['text']."</a></li>";
         } else {
-            if ($itemkey == 'login' && !$this->app->session->has('user')) {
+            if ($itemkey == 'login' && !$this->di->get("session")->has('user')) {
                 // Om man kommer till login och man inte är inloggad redan så visa den länken
-                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
-            } else if ($itemkey == 'logout' && $this->app->session->has('user')) {
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->di->get("url")->create($link['route']) ."#top'>".$link['text']."</a></li>";
+            } else if ($itemkey == 'logout' && $this->di->get("session")->has('user')) {
                 // Om man kommer till logout och man är inloggad så visa den knappen
-                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."#top'>".$link['text']."</a></li>";
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->di->get("url")->create($link['route']) ."#top'>".$link['text']."</a></li>";
 
                 // För att se om accountinfo är aktiv eller inte kontrolleras route via PATH_INFO¨.
                 $accountclass = ((isset($_SERVER['PATH_INFO'])) && $_SERVER['PATH_INFO'] == "/accountinfo") ? "navactive" : "notnavacitve";
-                $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->app->url->create('accountinfo') ."#top'>". $this->app->cookie->get('forname', "") ."</a></li>";
+                $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->di->get("url")->create('accountinfo') ."#top'>". $this->di->get("cookie")->get('forname', "") ."</a></li>";
             }
         }
         return $navhtml;
@@ -77,7 +83,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
                 $navhtml .= "<ul class='dropdown-menu'>";
             } else if ($dropkey == "items") {    //sätter ut länkarna i dropdownmenyn
                 foreach ($link as $droplink) {
-                    $navhtml .= "<li><a class='dropdownlink' href='". $this->app->url->create($droplink['route']) ."' style='color: white;'>".$droplink['text']."</a></li>";
+                    $navhtml .= "<li><a class='dropdownlink' href='". $this->di->get("url")->create($droplink['route']) ."' style='color: white;'>".$droplink['text']."</a></li>";
                 }
             }
         }
@@ -154,10 +160,10 @@ class Navbar implements \Anax\Common\ConfigureInterface
      */
     public function getNrInCart()
     {
-        $this->app->database->connect();
+        $this->di->get("database")->connect();
         $sql = "SELECT items FROM WSCartView WHERE cart = ?";
-        $param = [$this->app->session->get('userid', 0)];
-        $res = $this->app->database->execute($sql, $param);
+        $param = [$this->di->get("session")->get('userid', 0)];
+        $res = $this->di->get("database")->execute($sql, $param);
         $nrincart = 0;
         foreach ($res as $row) {
             $nrincart = $nrincart + intval($row->items);

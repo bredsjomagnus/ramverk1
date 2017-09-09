@@ -71,6 +71,15 @@ return [
             "shared" => true,
             "callback" => "\Anax\TextFilter\TextFilter",
         ],
+        "navbar" => [
+            "shared" => true,
+            "callback" => function () {
+                $navbar = new \Maaa16\Navbar\Navbar();
+                $navbar->configure("navbar.php");
+                $navbar->setDI($this);
+                return $navbar;
+            }
+        ],
         "rem" => [
             "shared" => true,
             "callback" => function () {
