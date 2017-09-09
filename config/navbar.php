@@ -43,16 +43,16 @@ return [
                 "route" => "logout",
                 "class" => ""
             ]
-        ],
-        "dropdown" => [
-            "namn" => "ARTIKLAR",
-            "items" => [
-                "mvc" => [
-                    "text" => "MVC",
-                    "route" => "article/mvc"
-                ]
-            ]
         ]
+        // "dropdown" => [
+        //     "namn" => "ARTIKLAR",
+        //     "items" => [
+        //         "mvc" => [
+        //             "text" => "MVC",
+        //             "route" => "article/mvc"
+        //         ]
+        //     ]
+        // ]
     ],
     "navbar-admin" => [
         "config" => [

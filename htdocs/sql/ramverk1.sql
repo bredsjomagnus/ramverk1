@@ -35,4 +35,4 @@ created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   SELECT * FROM ramverk1comments;
   SELECT * FROM ramverk1accounts;
   -- UPDATE ramverk1accounts SET active = 'yes' WHERE id = 1;
-  -- UPDATE ramverk1accounts SET role = 'admin' WHERE id = 9;
+UPDATE ramverk1accounts SET role = 'admin' WHERE id = 5;
