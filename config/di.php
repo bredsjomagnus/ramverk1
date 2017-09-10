@@ -120,6 +120,14 @@ return [
                 return $commAssembler;
             }
         ],
+        "loginController" => [
+            "shared" => false,
+            "callback" => function () {
+                $loginController = new \Maaa16\Login\LoginController();
+                $loginController->setDI($this);
+                return $loginController;
+            }
+        ],
         "admin" => [
             "shared" => true,
             "callback" => function () {

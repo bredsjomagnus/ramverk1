@@ -2,17 +2,17 @@
 
 namespace Maaa16\Login;
 
-use \Anax\Common\AppInjectableInterface;
-use \Anax\Common\AppInjectableTrait;
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 
 /**
  * A controller for the Commentary.
  *
  * @SuppressWarnings(PHPMD.ExitExpression)
  */
-class LoginController implements AppInjectableInterface
+class LoginController implements InjectionAwareInterface
 {
-    use AppInjectableTrait;
+    use InjectionAwareTrait;
 
     /**
     * Loginpage.
@@ -22,16 +22,13 @@ class LoginController implements AppInjectableInterface
     public function loginpage()
     {
         // För att tala om för navbaren vilken länk som är aktiv
-        $path = $this->app->request->getRoute();
-        // $this->app->view->add("login/login", [], "main");
-        $this->app->view->add("login/login");
-        // $this->app->view->add("incl/header", [], "header");
-        // $this->app->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
-        // $this->app->view->add("incl/footer", [], "footer");
+        $path = $this->di->get("request")->getRoute();
+        $this->di->get("view")->add("login/login");
         $title = "Login | maaa16";
-        // $this->app->response->setBody([$this->app->view, "render"])
-        //               ->send();
-        $this->app->renderPage(["title" => $title], $path);
+        $this->di->get("response")->setBody([$this->di->get("view"), "render"])
+                      ->send();
+
+        // $this->di->get("pageRender")->renderPage(["title" => $title], $path);
     }
 
     /**
