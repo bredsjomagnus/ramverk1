@@ -60,7 +60,7 @@
              "callable" => ["remController", "anyUnsupported"]
          ],
      ]
-];
+ ];
 //  /** Start the session and initiate the REM Server. */
 // $app->router->add("api/**", [$app->remController, "anyPrepare"]);
 //

@@ -1,12 +1,15 @@
 <?php
 namespace Maaa16\Database;
 
+use \Anax\Configure\ConfigureInterface;
+use \Anax\Configure\ConfigureTrait;
+
 /**
  * Class to collect all database activities.
  */
-class Database implements \Anax\Common\ConfigureInterface
+class Database implements ConfigureInterface
 {
-    use \Anax\Common\ConfigureTrait;
+    use ConfigureTrait;
 
     /** @var $pdo the PDO connection. */
     private $pdo;
@@ -24,6 +27,7 @@ class Database implements \Anax\Common\ConfigureInterface
      */
     public function connect()
     {
+        // var_dump($this->dbconfig);
         try {
             $this->pdo = new \PDO($this->dbconfig['dns'], $this->dbconfig['user'], $this->dbconfig['password'], $this->dbconfig['options']);
             $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
@@ -42,11 +46,11 @@ class Database implements \Anax\Common\ConfigureInterface
      *
      * @return $this
      */
-    public function setApp($app)
-    {
-        $this->app = $app;
-        return $this;
-    }
+    // public function setApp($app)
+    // {
+    //     $this->app = $app;
+    //     return $this;
+    // }
 
     /**
      * Do SELECT with optional parameters and return a resultset.
@@ -78,11 +82,14 @@ class Database implements \Anax\Common\ConfigureInterface
      */
     public function execute($sql, $param = [])
     {
+        var_dump($this->pdo);
         $sth = $this->pdo->prepare($sql);
         if (!$sth) {
             $this->statementException($sth, $sql, $param);
         }
 
+        // var_dump($sql);
+        // var_dump($param);
         $status = $sth->execute($param);
         if (!$status) {
             $this->statementException($sth, $sql, $param);

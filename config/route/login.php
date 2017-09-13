@@ -11,7 +11,7 @@ return [
             "callable" => ["loginController", "loginpage"]
         ]
     ]
-]
+];
 
 
 // $app->router->add("login", [$app->LoginController, "loginpage"]);

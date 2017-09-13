@@ -29,6 +29,11 @@ return [
         [
             // These are for internal error handling and exceptions
             "mount" => null,
+            "file" => __DIR__ . "/route/login.php",
+        ],
+        [
+            // These are for internal error handling and exceptions
+            "mount" => null,
             "file" => __DIR__ . "/route/internal.php",
         ],
         [

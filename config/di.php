@@ -98,9 +98,10 @@ return [
             }
         ],
         "comm" => [
-            "shared" => true,
+            "shared" => false,
             "callback" => function () {
                 $comm = new \Maaa16\Commentary\Commentary();
+                $comm->setDI($this);
                 return $comm;
             }
         ],
@@ -126,6 +127,15 @@ return [
                 $loginController = new \Maaa16\Login\LoginController();
                 $loginController->setDI($this);
                 return $loginController;
+            }
+        ],
+        "database" => [
+            "shared" => false,
+            "callback" => function () {
+                $database = new \Maaa16\Database\Database();
+                $database->configure("database.php");
+                $database->setDefaultsFromConfiguration();
+                return $database;
             }
         ],
         "admin" => [

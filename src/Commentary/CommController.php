@@ -41,7 +41,7 @@ class CommController implements InjectionAwareInterface
         ]);
 
         // Hämta comments från databasen och montera ihop tabell som skickas vidare till vyn.
-        $comments = $this->di->get("comm")->getComment($this->di);
+        $comments = $this->di->get("comm")->getComment();
         $comments = $this->di->get("commAssembler")->assemble($comments);
 
         $this->di->get("view")->add("commentary/formfield", [], "formfield");
@@ -63,10 +63,10 @@ class CommController implements InjectionAwareInterface
             $email = $this->di->get("request")->getPost("email");
             // Kontroll om textarean är tom innan den läggs till.
             if (strlen(trim($comment))) {
-                $this->di->get("comm")->addComment($this->di, $username, $email, $comment);
+                $this->di->get("comm")->addComment($username, $email, $comment);
             }
         } else if (null !== $this->di->get("request")->getPost("resetdbbtn")) {
-            $this->di->get("comm")->resetComment($this->di);
+            $this->di->get("comm")->resetComment();
         }
         $this->commentarypage();
     }
@@ -80,7 +80,7 @@ class CommController implements InjectionAwareInterface
     {
         if (null !== $this->di->get("request")->getGet("id")) {
             $id = $this->di->get("request")->getGet("id");
-            $res = $this->di->get("comm")->editCommentLoad($this->di, $id);
+            $res = $this->di->get("comm")->editCommentLoad($id);
 
             $path = $this->di->get("request")->getRoute();
             $file = ANAX_INSTALL_PATH . "/content/editcomment.md";
@@ -124,13 +124,13 @@ class CommController implements InjectionAwareInterface
             $comment = $this->di->get("request")->getPost("comment");
             $id = $this->di->get("request")->getPost("id");
             if (strlen(trim($comment))) {
-                $this->di->get("comm")->editCommentSave($this->di, $id, $comment);
+                $this->di->get("comm")->editCommentSave($id, $comment);
             } else {
-                $this->di->get("comm")->deleteComment($this->di, $id);
+                $this->di->get("comm")->deleteComment($id);
             }
         } else if (null !== $this->di->get("request")->getPost("deletecommentbtn")) {
             $id = $this->di->get("request")->getPost("id");
-            $this->di->get("comm")->deleteComment($this->di, $id);
+            $this->di->get("comm")->deleteComment($id);
         }
         $this->commentarypage();
     }
@@ -148,7 +148,7 @@ class CommController implements InjectionAwareInterface
             if (null !== $this->di->get("request")->getGet("commentid")) {
                 $userid = $this->di->get("request")->getGet("userid");
                 $commentid = $this->di->get("request")->getGet("commentid");
-                $this->di->get("comm")->addLike($this->di, $userid, $commentid);
+                $this->di->get("comm")->addLike($userid, $commentid);
             }
         }
         $this->commentarypage();

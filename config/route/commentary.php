@@ -4,7 +4,7 @@
  */
 return [
     "routes" => [
-         [
+        [
             "info" => "Kommentarssida",
             "requestMethod" => null,
             "path" => "commentary",

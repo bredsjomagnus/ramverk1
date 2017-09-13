@@ -2,15 +2,18 @@
 
 namespace Maaa16\Commentary;
 
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
 use \Anax\Configure\ConfigureInterface;
 use \Anax\Configure\ConfigureTrait;
 
 /**
  * REM Server.
  */
-class Commentary implements ConfigureInterface
+class Commentary implements ConfigureInterface, InjectionAwareInterface
 {
     use ConfigureTrait;
+    use InjectionAwareTrait;
 
 
 
@@ -70,12 +73,12 @@ class Commentary implements ConfigureInterface
     * @param string $comment
     * @param object $app
     */
-    public function addComment($di, $username, $email, $comment)
+    public function addComment($username, $email, $comment)
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "INSERT INTO ramverk1comments (username, email, comm, edited) VALUES (?, ?, ?, ?)";
         $params = [$username, $email, $comment, null];
-        $di->get("database")->execute($sql, $params);
+        $this->di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -83,11 +86,11 @@ class Commentary implements ConfigureInterface
     *
     * @param object $app
     */
-    public function getComment($di)
+    public function getComment()
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "SELECT * FROM ramverk1comments";
-        $res = $di->get("database")->executeFetchAll($sql);
+        $res = $this->di->get("database")->executeFetchAll($sql);
         return $res;
     }
 
@@ -96,13 +99,13 @@ class Commentary implements ConfigureInterface
     *
     * @param object $app
     */
-    public function resetComment($di)
+    public function resetComment()
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "DROP TABLE IF EXISTS ramverk1comments";
-        $di->get("database")->execute($sql);
+        $this->di->get("database")->execute($sql);
         $sql = "CREATE TABLE IF NOT EXISTS ramverk1comments (id INT AUTO_INCREMENT NOT NULL, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, edited TIMESTAMP NULL, username varchar(100) NOT NULL default 'NA', email varchar(200) NOT NULL default 'na@email.com', comm VARCHAR(1000), likes VARCHAR(1000) DEFAULT '', PRIMARY KEY  (id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-        $di->get("database")->execute($sql);
+        $this->di->get("database")->execute($sql);
     }
 
     /**
@@ -110,12 +113,12 @@ class Commentary implements ConfigureInterface
     *
     * @param object $app
     */
-    public function editCommentLoad($di, $id)
+    public function editCommentLoad($id)
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "SELECT * FROM ramverk1comments WHERE id = ?";
         $params = [$id];
-        $res = $di->get("database")->executeFetchAll($sql, $params);
+        $res = $this->di->get("database")->executeFetchAll($sql, $params);
         return $res;
     }
 
@@ -126,12 +129,12 @@ class Commentary implements ConfigureInterface
     * @param integer $id
     * @param string $comment
     */
-    public function editCommentSave($di, $id, $comment)
+    public function editCommentSave($id, $comment)
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "UPDATE ramverk1comments SET comm = ?, edited = CURRENT_TIMESTAMP WHERE id = ?";
         $params = [$comment, $id];
-        $di->get("database")->execute($sql, $params);
+        $this->di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -140,12 +143,12 @@ class Commentary implements ConfigureInterface
     * @param object $app
     * @param integer $id
     */
-    public function deleteComment($di, $id)
+    public function deleteComment($id)
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "DELETE FROM ramverk1comments WHERE id = ?";
         $params = [$id];
-        $di->get("database")->execute($sql, $params);
+        $this->di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -154,12 +157,12 @@ class Commentary implements ConfigureInterface
     * @param object $app
     * @param integer $id
     */
-    public function addLike($di, $userid, $commentid)
+    public function addLike($userid, $commentid)
     {
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         $sql = "SELECT likes FROM ramverk1comments WHERE id = ?";
         $params = [$commentid];
-        $res = $di->get("database")->executeFetchAll($sql, $params);
+        $res = $this->di->get("database")->executeFetchAll($sql, $params);
         $commentlikes = $res[0]->likes;
 
         $commentlikes .= ",".$userid;
@@ -168,7 +171,7 @@ class Commentary implements ConfigureInterface
         }
         $sql = "UPDATE ramverk1comments SET likes = ? WHERE id = ?";
         $params = [$commentlikes, $commentid];
-        $di->get("database")->execute($sql, $params);
+        $this->di->get("database")->execute($sql, $params);
     }
 
     /**
@@ -179,15 +182,15 @@ class Commentary implements ConfigureInterface
     *
     * @return string $usernames of names of those who liked a comment. "name1, name2, name3,..."
     */
-    public function getLikersUsernames($di, $likersid)
+    public function getLikersUsernames($likersid)
     {
         $usernames = "";
-        $di->get("database")->connect();
+        $this->di->get("database")->connect();
         foreach ($likersid as $id) {
             if ($id != "") {
                 $sql = "SELECT username FROM ramverk1accounts WHERE id = ?";
                 $params = [$id];
-                $res = $di->get("database")->executeFetchAll($sql, $params);
+                $res = $this->di->get("database")->executeFetchAll($sql, $params);
                 $usernames .= ", " . $res[0]->username;
             }
         }

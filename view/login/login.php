@@ -65,11 +65,11 @@ if (isset($_POST['loginsubmit'])) {
                 <legend>LOGGA IN</legend>
                 <div class="form-group">
                     <label for="user">Användarnamn </label><span class="formerror"><?= $usermsg ?></span>
-                    <input class="form-control" type="text" name="user" value="<?= $app->cookie->get("user", ""); ?>" placeholder="Användarnamn">
+                    <input class="form-control" type="text" name="user" value="" placeholder="Användarnamn">
                 </div>
                 <div class="form-group">
                     <label for="pass">Lösenord: </label><span class="formerror"><?= $passmsg ?></span>
-                    <input class="form-control" type="password" name="pass" value="<?= $app->cookie->get("password", ""); ?>" placeholder="Lösenord">
+                    <input class="form-control" type="password" name="pass" value="" placeholder="Lösenord">
                 </div>
                 <span>
                     <input class='btn btn-primary' type='submit' name='loginsubmit' value='Logga in'>

@@ -25,10 +25,10 @@ class LoginController implements InjectionAwareInterface
         $path = $this->di->get("request")->getRoute();
         $this->di->get("view")->add("login/login");
         $title = "Login | maaa16";
-        $this->di->get("response")->setBody([$this->di->get("view"), "render"])
-                      ->send();
+        // $this->di->get("response")->setBody([$this->di->get("view"), "render"])
+        //               ->send();
 
-        // $this->di->get("pageRender")->renderPage(["title" => $title], $path);
+        $this->di->get("pageRender")->renderPage(["title" => $title], $path);
     }
 
     /**
