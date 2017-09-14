@@ -47,7 +47,7 @@ class CommController implements InjectionAwareInterface
         $this->di->get("view")->add("commentary/formfield", [], "formfield");
         $this->di->get("view")->add("commentary/comments", ["comments" => $comments], "comments");
 
-        $this->di->get("pageRender")->renderPage($content->frontmatter, $path, "commentary");
+        $this->di->get("pageRender")->renderPage($content->frontmatter, "commentary", 200);
     }
 
     /**

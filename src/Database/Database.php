@@ -27,10 +27,11 @@ class Database implements ConfigureInterface
      */
     public function connect()
     {
-        // var_dump($this->dbconfig);
+
         try {
             $this->pdo = new \PDO($this->dbconfig['dns'], $this->dbconfig['user'], $this->dbconfig['password'], $this->dbconfig['options']);
             $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
+            // var_dump($this->pdo);
         } catch (Exception $e) {
             // Rethrow to hide connection details, through the original
             // exception to view all connection details.
@@ -82,7 +83,7 @@ class Database implements ConfigureInterface
      */
     public function execute($sql, $param = [])
     {
-        var_dump($this->pdo);
+        // var_dump($this->pdo);
         $sth = $this->pdo->prepare($sql);
         if (!$sth) {
             $this->statementException($sth, $sql, $param);
@@ -94,7 +95,6 @@ class Database implements ConfigureInterface
         if (!$status) {
             $this->statementException($sth, $sql, $param);
         }
-
         return $sth;
     }
 

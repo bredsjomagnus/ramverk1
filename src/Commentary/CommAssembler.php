@@ -61,7 +61,7 @@ class CommAssembler implements InjectionAwareInterface
             $numberlikes = "";
             $likersusernames = "";
             if (count($commentlikes) > 0 && $commentlikes[0] != "") {
-                $likersusernames = $this->di->get("comm")->getLikersUsernames($this->di, $commentlikes);
+                $likersusernames = $this->di->get("comm")->getLikersUsernames($commentlikes);
                 $numberlikes = "<div class='likecircle' data-toggle='tooltip' data-placement='right' title='".$likersusernames."'>+".count($commentlikes)."</div>";
             }
 

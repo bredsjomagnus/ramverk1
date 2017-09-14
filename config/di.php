@@ -130,7 +130,7 @@ return [
             }
         ],
         "database" => [
-            "shared" => false,
+            "shared" => true,
             "callback" => function () {
                 $database = new \Maaa16\Database\Database();
                 $database->configure("database.php");

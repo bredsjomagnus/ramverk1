@@ -22,13 +22,13 @@ class LoginController implements InjectionAwareInterface
     public function loginpage()
     {
         // För att tala om för navbaren vilken länk som är aktiv
-        $path = $this->di->get("request")->getRoute();
+        // $path = $this->di->get("request")->getRoute();
         $this->di->get("view")->add("login/login");
         $title = "Login | maaa16";
         // $this->di->get("response")->setBody([$this->di->get("view"), "render"])
         //               ->send();
 
-        $this->di->get("pageRender")->renderPage(["title" => $title], $path);
+        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
     }
 
     /**
