@@ -48,12 +48,9 @@ class Navbar implements ConfigureInterface, InjectionAwareInterface
      */
     public function generateLinks($itemkey, $navhtml, $link, $class)
     {
-
-        // $nrincart = $this->getNrInCart();
-
-        if ($itemkey != 'login' && $itemkey != 'logout' && $itemkey != 'cart') {
-            // Med undantag för login och logout visa de länkarna utan förbehåll.
-            $navhtml .= "<li><a class='{$class}' href='". $this->di->get("url")->create($link['route']) ."#top'>".$link['text']."</a></li>";
+        if ($itemkey != 'login' && $itemkey != 'logout') {
+            // Med undantag för login och logout
+            $navhtml .= "<li><a class='{$class}' href='". $this->di->get("url")->create($link['route'])."'>".$link['text']."</a></li>";
         } else {
             if ($itemkey == 'login' && !$this->di->get("session")->has('user')) {
                 // Om man kommer till login och man inte är inloggad redan så visa den länken

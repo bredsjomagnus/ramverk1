@@ -29,4 +29,4 @@ $app->router->handle(
     $app->request->getMethod()
 );
 
-$app->session->start();
+// $di->get("session")->start();

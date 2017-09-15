@@ -6,11 +6,6 @@ return [
     // Load these routefiles in order specified and optionally mount them
     // onto a base route.
     "routeFiles" => [
-        // [
-        //     // These are for internal error handling and exceptions
-        //     "mount" => null,
-        //     "file" => __DIR__ . "/route/remserver.php",
-        // ],
         [
             // These are for internal error handling and exceptions
             "mount" => null,
@@ -40,6 +35,11 @@ return [
             // For debugging and development details on Anax
             "mount" => "debug",
             "file" => __DIR__ . "/route/debug.php",
+        ],
+        [
+            // These are for internal error handling and exceptions
+            "mount" => null,
+            "file" => __DIR__ . "/route/remserver.php",
         ],
         [
             // To read flat file content in Markdown from content/

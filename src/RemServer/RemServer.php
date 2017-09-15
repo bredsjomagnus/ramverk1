@@ -57,7 +57,6 @@ class RemServer implements ConfigureInterface
             $key = pathinfo($file, PATHINFO_FILENAME);
             $dataset[$key] = json_decode($content, true);
         }
-
         $this->session->set(self::KEY, $dataset);
         return $this;
     }

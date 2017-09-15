@@ -21,34 +21,9 @@ class LoginController implements InjectionAwareInterface
     */
     public function loginpage()
     {
-        // För att tala om för navbaren vilken länk som är aktiv
-        // $path = $this->di->get("request")->getRoute();
         $this->di->get("view")->add("login/login");
         $title = "Login | maaa16";
-        // $this->di->get("response")->setBody([$this->di->get("view"), "render"])
-        //               ->send();
-
         $this->di->get("pageRender")->renderPage(["title" => $title], "login");
-    }
-
-    /**
-    * Loginpage.
-    *
-    * @return void
-    */
-    public function accountpage()
-    {
-        // För att tala om för navbaren vilken länk som är aktiv
-        $path = $this->app->request->getRoute();
-        // $this->app->view->add("login/login", [], "main");
-        $this->app->view->add("login/accountinfo");
-        // $this->app->view->add("incl/header", [], "header");
-        // $this->app->view->add("incl/navbar", ["active" => $path, "navbar" => "navbar-main"], "navbar");
-        // $this->app->view->add("incl/footer", [], "footer");
-        $title = "Konto | maaa16";
-        // $this->app->response->setBody([$this->app->view, "render"])
-        //               ->send();
-        $this->app->renderPage(["title" => $title], $path);
     }
 
     /**
@@ -56,16 +31,95 @@ class LoginController implements InjectionAwareInterface
     *
     * @return void
     */
-    public function loginprocess()
+    public function loginProcess()
     {
-        if (null !== $this->app->request->getPost("loginsubmit")) {
-            $user = $this->app->request->getPost("user");
-            $pass = $this->app->request->getPost("pass");
-            $remember = $this->app->request->getPost("remember");
-            $this->app->view->add("login/loginprocess", ["user" => $user, "pass" => $pass, "remember" => $remember]);
-            $this->app->response->setBody([$this->app->view, "render"])
-                          ->send();
+        // $this->di->get("session")->set("loginmsg", )
+        // $loginmsg = isset($_SESSION['createusererrormsg']) ? $_SESSION['createusererrormsg']: "";
+        if (isset($_POST['loginsubmit'])) {
+            $userdone = true;
+            $passdone = true;
+            // $passdone = false;
+            if ($_POST['user'] == "") {
+                $this->di->get("session")->set("usermsg", "&nbsp;&nbsp;&nbsp; Måste fylla i användarnamn");
+                $userdone = false;
+            }
+            if ($_POST['pass'] == "") {
+                $this->di->get("session")->set("passmsg", "&nbsp;&nbsp;&nbsp;* Måste fylla i lösenord");
+                $passdone = false;
+            }
+            if ($userdone && $passdone) {
+                $loginuser =  htmlentities($_POST["user"]);
+                $loginpass =  htmlentities($_POST["pass"]);
+                $this->di->get("database")->connect();
+                $sql = "SELECT * FROM ramverk1accounts WHERE BINARY username = BINARY '$loginuser'";
+                if ($res = $this->di->get("database")->executeFetchAll($sql)) {
+                    $dbpass = $res[0]->pass;
+                    $this->di->get("session")->set("loginmsg", "<span>kommer åt databasen vid inloggningsförsök</span>");
+                    $passwordverify = password_verify($loginpass, $dbpass);
+                    if ($res[0]->active != 'yes') {
+                        $this->di->get("session")->set("loginmsg", "<span class='formerror'>&nbsp;&nbsp;&nbsp; Konto deaktiverat av administratör.</span>");
+                    } else if ($passwordverify) {
+                        // $this->di->get("session")->set("user", $loginuser);
+                        // $this->di->get("session")->set("user", "fiskmås");
+
+                        $this->di->get("session")->set("user", $loginuser);
+                        $this->di->get("session")->set("role", $res[0]->role);
+                        $this->di->get("session")->set("email", $res[0]->email);
+                        $this->di->get("session")->set("userid", $res[0]->id);
+                        $this->di->get("session")->set("hash", password_hash($loginpass, PASSWORD_DEFAULT));
+                        // $app->session->set("forname", $res[0]->forname);
+                        $this->di->get("cookie")->set("user", $loginuser);
+                        $this->di->get("cookie")->set("forname", $res[0]->forname);
+                        if (isset($_POST['remember'])) {
+                            $this->di->get("cookie")->set("password", $loginpass);
+                        }
+                        // $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Du är nu inloggad, ".$res[0]->forname.", ".$this->di->get("session")->get('email')."</span>";
+                        $this->di->get("session")->set("loginmsg", "<span class='formerror'>&nbsp;&nbsp;&nbsp; Du är nu inloggad, ".$this->di->get("session")->get('user').", ".$this->di->get("session")->get('email')."</span>");
+                        // Koden nedan ger maximum nesting reached.
+                        // $app->view->add("login/welcome");
+                        // $app->renderPage(["title" => "välkommen"], "login");
+                        // exit;
+
+                        $this->di->get("session")->delete("loginmsg");
+                        $this->di->get("session")->delete("usermsg");
+                        $this->di->get("session")->delete("passmsg");
+                        $this->di->get("response")->redirect("accountinfo");
+                        // funkar inte.
+                    } else {
+                        $this->di->get("session")->set("loginmsg", "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>");
+                    }
+                } else {
+                    $this->di->get("session")->set("loginmsg", "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>");
+                }
+            }
         }
-        // $this->loginpage();
+        $this->loginpage();
+    }
+
+    /**
+    * Accountpage
+    *
+    * @return void
+    */
+    public function accountPage()
+    {
+        $this->di->get("view")->add("login/accountinfo");
+        $title = "Konto | maaa16";
+        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
+    }
+
+    /**
+    * Logoutprocess
+    *
+    * @return void
+    */
+    public function logoutProcess()
+    {
+        $this->di->get("session")->delete('user');
+        $this->di->get("session")->delete('role');
+        $this->di->get("session")->delete('email');
+        $this->di->get("cookie")->delete('user');
+        $this->di->get("cookie")->delete('forname');
+        $this->loginpage();
     }
 }

@@ -9,6 +9,24 @@ return [
             "requestMethod" => null,
             "path" => "login",
             "callable" => ["loginController", "loginpage"]
+        ],
+        [
+            "info" => "Logga ut process",
+            "requestMethod" => null,
+            "path" => "logout",
+            "callable" => ["loginController", "logoutProcess"]
+        ],
+        [
+            "info" => "Logga in process",
+            "requestMethod" => null,
+            "path" => "loginprocess",
+            "callable" => ["loginController", "loginProcess"]
+        ],
+        [
+            "info" => "Kontosida",
+            "requestMethod" => null,
+            "path" => "accountinfo",
+            "callable" => ["loginController", "accountPage"]
         ]
     ]
 ];

@@ -64,7 +64,15 @@ return [
             "callback" => function () {
                 $session = new \Anax\Session\SessionConfigurable();
                 $session->configure("session.php");
+                $session->start();
                 return $session;
+            }
+        ],
+        "cookie" => [
+            "shared" => true,
+            "callback" => function () {
+                $cookie = new \Maaa16\Cookie\Cookie();
+                return $cookie;
             }
         ],
         "textfilter" => [
@@ -92,9 +100,9 @@ return [
         "remController" => [
             "shared" => false,
             "callback" => function () {
-                $rem = new \Anax\RemServer\RemServerController();
-                $rem->setDI($this);
-                return $rem;
+                $remController = new \Anax\RemServer\RemServerController();
+                $remController->setDI($this);
+                return $remController;
             }
         ],
         "comm" => [

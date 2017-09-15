@@ -1,74 +1,16 @@
-<?php
-
-$usermsg = "";
-$passmsg = "";
-$loginmsg = isset($_SESSION['createusererrormsg']) ? $_SESSION['createusererrormsg']: "";
-if (isset($_POST['loginsubmit'])) {
-    $userdone = true;
-    $passdone = true;
-    // $passdone = false;
-    if ($_POST['user'] == "") {
-        $usermsg = "&nbsp;&nbsp;&nbsp; Måste fylla i användarnamn";
-        $userdone = false;
-    }
-    if ($_POST['pass'] == "") {
-        $passmsg = "&nbsp;&nbsp;&nbsp;* Måste fylla i lösenord";
-        $passdone = false;
-    }
-    if ($userdone && $passdone) {
-        $loginuser =  htmlentities($_POST["user"]);
-        $loginpass =  htmlentities($_POST["pass"]);
-        $app->database->connect();
-        $sql = "SELECT * FROM ramverk1accounts WHERE BINARY username = BINARY '$loginuser'";
-        if ($res = $app->database->executeFetchAll($sql)) {
-            $dbpass = $res[0]->pass;
-            $passwordverify = password_verify($loginpass, $dbpass);
-            if ($res[0]->active != 'yes') {
-                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Konto deaktiverat av administratör.</span>";
-            } else if ($passwordverify) {
-                $app->session->set("user", $loginuser);
-                $app->session->set("role", $res[0]->role);
-                $app->session->set("email", $res[0]->email);
-                $app->session->set("userid", $res[0]->id);
-                $app->session->set("hash", password_hash($loginpass, PASSWORD_DEFAULT));
-                // $app->session->set("forname", $res[0]->forname);
-                $app->cookie->set("user", $loginuser);
-                $app->cookie->set("forname", $res[0]->forname);
-                if (isset($_POST['remember'])) {
-                    $app->cookie->set("password", $loginpass);
-                }
-                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Du är nu inloggad, ".$res[0]->forname.", ".$app->session->get('email')."</span>";
-                // Koden nedan ger maximum nesting reached.
-                // $app->view->add("login/welcome");
-                // $app->renderPage(["title" => "välkommen"], "login");
-                // exit;
-
-                $app->response->redirect("welcome");
-                // funkar inte.
-            } else {
-                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>";
-            }
-        } else {
-            $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>";
-        }
-    }
-}
-?>
-
-
 <div class="page">
     <div class="container">
         <div class="pillow-100">
         </div>
         <div class="col-md-offset-4 col-md-4">
-            <form action="#" method="POST">
+            <form action="<?= $this->di->get("url")->create("loginprocess") ?>" method="POST">
                 <legend>LOGGA IN</legend>
                 <div class="form-group">
-                    <label for="user">Användarnamn </label><span class="formerror"><?= $usermsg ?></span>
-                    <input class="form-control" type="text" name="user" value="" placeholder="Användarnamn">
+                    <label for="user">Användarnamn </label><span class="formerror"><?= $this->di->get("session")->get("usermsg", "") ?></span>
+                    <input class="form-control" type="text" name="user" value="<?= $this->di->get("cookie")->get("user", "")?>" placeholder="Användarnamn">
                 </div>
                 <div class="form-group">
-                    <label for="pass">Lösenord: </label><span class="formerror"><?= $passmsg ?></span>
+                    <label for="pass">Lösenord: </label><span class="formerror"><?= $this->di->get("session")->get("passmsg", "") ?></span>
                     <input class="form-control" type="password" name="pass" value="" placeholder="Lösenord">
                 </div>
                 <span>
@@ -80,7 +22,8 @@ if (isset($_POST['loginsubmit'])) {
 
                 </div>
                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addemployeemodal" aria-expanded="false" aria-controls="addemployeemodal">Skapa konto</button>
-                <?= $loginmsg ?>
+                <br />
+                <?= $this->di->get("session")->get("loginmsg", "") ?>
             </form>
             <br />
         </div>
