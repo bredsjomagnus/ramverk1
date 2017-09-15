@@ -21,7 +21,7 @@ class AdminController implements InjectionAwareInterface
      */
     public function adminPage()
     {
-        $path = $this->di->get("request")->getRoute();
+        // $path = $this->di->get("request")->getRoute();
         $file = ANAX_INSTALL_PATH . "/content/admin/index.md";
 
         // Check that file is really in the right place
@@ -45,8 +45,8 @@ class AdminController implements InjectionAwareInterface
         // $comments = $this->app->commAssembler->assemble($this->app, $comments);
 
         $this->di->get("view")->add("admin/adminpage");
-
-        $this->di->get("pageRender")->renderAdminPage($content->frontmatter, $path);
+        $title = "Admin | Maaa16";
+        $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
     }
 
     /**
@@ -56,7 +56,6 @@ class AdminController implements InjectionAwareInterface
      */
     public function adminComments()
     {
-        $path = $this->app->request->getRoute();
         $file = ANAX_INSTALL_PATH . "/content/admin/comments.md";
 
         // Check that file is really in the right place
@@ -68,22 +67,18 @@ class AdminController implements InjectionAwareInterface
 
         // Get content from markdown file
         $content = file_get_contents($file);
-        $content = $this->app->textfilter->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
+        $content = $this->di->get("textfilter")->parse($content, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
 
         // Render a standard page using layout
-        $this->app->view->add("default1/article", [
+        $this->di->get("view")->add("default1/article", [
             "content" => $content->text
         ]);
-
+        $title = "Admin | Maaa16";
         // Hämta comments från databasen och montera ihop tabell som skickas vidare till vyn.
-        $comments = $this->app->comm->getComment($this->app);
-        $comments = $this->app->commAssembler->assemble($this->app, $comments);
+        $comments = $this->di->get("comm")->getComment();
+        $comments = $this->di->get("adminAssembler")->getComments($comments);
+        $this->di->get("view")->add("admin/admincomments", ["comments" => $comments]);
 
-        $comments = $this->app->admin->getComments();
-        $comments = $this->app->adminAssembler->getComments($comments);
-
-        $this->app->view->add("admin/admincomments", ["comments" => $comments]);
-
-        $this->app->renderAdminPage($content->frontmatter, $path);
+        $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
     }
 }

@@ -76,7 +76,7 @@ return [
             ],
             "logout" => [
                 "text" => "LOGGA UT",
-                "route" => "logoutprocess",
+                "route" => "logout",
                 "class" => ""
             ]
         ]

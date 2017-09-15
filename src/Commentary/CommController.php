@@ -21,7 +21,7 @@ class CommController implements InjectionAwareInterface
      */
     public function commentarypage()
     {
-        $path = $this->di->get("request")->getRoute();
+        // $path = $this->di->get("request")->getRoute();
         $file = ANAX_INSTALL_PATH . "/content/commentary/index.md";
 
         // Check that file is really in the right place
@@ -82,7 +82,7 @@ class CommController implements InjectionAwareInterface
             $id = $this->di->get("request")->getGet("id");
             $res = $this->di->get("comm")->editCommentLoad($id);
 
-            $path = $this->di->get("request")->getRoute();
+            // $path = $this->di->get("request")->getRoute();
             $file = ANAX_INSTALL_PATH . "/content/editcomment.md";
             // Check that file is really in the right place
             $real = realpath($file);
@@ -107,7 +107,7 @@ class CommController implements InjectionAwareInterface
             $this->di->get("view")->add("commentary/editcomment", ["comment" => $res[0]->comm, "email" => $res[0]->email, "id" => $res[0]->id], "formfield");
             // $this->app->view->add("commentary/comments", ["comments" => $comments], "comments");
 
-            $this->di->get("pageRender")->renderPage($content->frontmatter, $path, "commentary");
+            $this->di->get("pageRender")->renderPage($content->frontmatter, "commentary");
         } else {
             $this->commentarypage();
         }

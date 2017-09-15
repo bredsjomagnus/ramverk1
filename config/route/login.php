@@ -27,6 +27,18 @@ return [
             "requestMethod" => null,
             "path" => "accountinfo",
             "callable" => ["loginController", "accountPage"]
+        ],
+        [
+            "info" => "Skapa nytt konto",
+            "requestMethod" => "post",
+            "path" => "createaccount",
+            "callable" => ["loginController", "createAccountProcess"]
+        ],
+        [
+            "info" => "Ändra användares lösenord",
+            "requestMethod" => "post",
+            "path" => "changepassword",
+            "callable" => ["loginController", "changePasswordProcess"]
         ]
     ]
 ];

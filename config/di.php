@@ -137,6 +137,14 @@ return [
                 return $loginController;
             }
         ],
+        "login" => [
+            "shared" => false,
+            "callback" => function () {
+                $login = new \Maaa16\Login\Login();
+                $login->setDI($this);
+                return $login;
+            }
+        ],
         "database" => [
             "shared" => true,
             "callback" => function () {

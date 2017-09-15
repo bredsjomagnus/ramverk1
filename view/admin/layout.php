@@ -26,6 +26,7 @@
 <?php if ($this->regionHasContent("main")) : ?>
 <div class="main-wrap">
     <?php $this->renderRegion("main") ?>
+    <?php $this->renderRegion("comments") ?>
 </div>
 <?php endif; ?>
 

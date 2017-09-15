@@ -4,7 +4,7 @@ if (!$app->session->has('user')) {
 }
 $msg = "";
 $passerror = "";
-$adminurl = $app->url->create('adminpage');
+$adminurl = $this->di->get("url")->create('admin');
 $adminrow = ($app->session->get('role') == 'admin') ? "<tr><td><b>Roll</b></td><td><a href='$adminurl'>Administratör</a></td></tr>": "";
 $username = $app->session->get('user');
 $app->database->connect();

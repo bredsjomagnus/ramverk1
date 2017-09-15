@@ -8,7 +8,7 @@ return [
         [
             "info" => "Admin startsida",
             "requestMethod" => null,
-            "path" => "adminpage",
+            "path" => "admin",
             "callable" => ["adminController", "adminPage"]
         ],
         [

@@ -15,7 +15,7 @@
                 </div>
                 <span>
                     <input class='btn btn-primary' type='submit' name='loginsubmit' value='Logga in'>
-                    <span>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="remember" value="">&nbsp;&nbsp;&nbsp;Kom ihåg mig på denna datorn</span>
+                    <!-- <span>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="remember" value="">&nbsp;&nbsp;&nbsp;Kom ihåg mig på denna datorn</span> -->
                 </span>
                 <br />
                 <div class="pillow-20">
@@ -23,7 +23,9 @@
                 </div>
                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addemployeemodal" aria-expanded="false" aria-controls="addemployeemodal">Skapa konto</button>
                 <br />
-                <?= $this->di->get("session")->get("loginmsg", "") ?>
+                <?= $this->di->get("session")->get("loginmsg", "") ?><br />
+                <?= $this->di->get("session")->get("createusererrormsg", "") ?><br />
+
             </form>
             <br />
         </div>
@@ -36,7 +38,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="addemployeemodalLabel">SKAPA KONTO</h4>
                     </div>
-                    <form role="form" method="POST" action="createuser">
+                    <form role="form" method="POST" action="<?= $this->di->get("url")->create("createaccount") ?>">
                         <div class="modal-body">
                             <i>Alla fält måste fyllas i.</i>
                             <div class="modal-subheader">
@@ -75,9 +77,6 @@
                                 <label class="modal-label" for="passtwo">Upprepa lösenordet </label>
                                 <input type="password" name="passtwo" class="form-control" placeholder="Upprepa lösenord"/>
                             </div>
-
-
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Ångra</button>
