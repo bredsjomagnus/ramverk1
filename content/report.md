@@ -68,3 +68,23 @@ Man kan även gilla andras kommentarer och antalet gillande markeras med siffra 
 En admin kan via sin accountsida nå admingränssnittet och där se lagda kommentarer. Där har admin möjlighet att redigera och/eller helt ta bort lagda kommentarer. Funderar på att lägga in så att det syns specifikt när det är admin som redigerar en kommentar till skillnad från när användaren själv gör det.
 
 Hade även ambitionen att lägga in så man kan svara på andras kommentarer. Men det får bli längre fram.
+
+
+---
+
+*2017-09-18*
+
+###KMOM03
+
+####Hur känns det att jobba med begreppen kring dependency injection, service locator och lazy loading?
+Som med det mesta nytt som kommer in och gör att man måste lära om saker man börjat få lite kolla på så reagerar jag först med grymtningar och fraser som "varför då" och "vad skall det där vara bra för". Men jag tycker, nu när refactoringen är klar, att det blev smidigare med di.php istället för service.php. Detta och att dela upp i contollers och moduler känns som en strukrur som ger en bra överblick och är lättare att ändra, ta bort eller lägga till i. Det är "bara" att jacka in klasser och med MVC i kombination kan man lättare ändra utan att behöva skriva om i andra klasser.
+####Hur känns det att göra dig av med beroendet till $app, blir $di bättre?
+Att det samlas kring just $di istället gör ingen större skillnad i sig. Men, som jag skrev ovan, är det en stor skillnad i hanterbarheten. Gillar verligen konfigurerbarheten och hur smidigt det är att arbeta med. Man kan lätt lägga till eller ta bort delar på detta sätt. Använder detta nu i individuella projektet och kan på ett enkelt och smidigt sätt lägga till delar från tidigare kod och få tiden över till nya och för mig mer tekniskt utmanande delar.
+####Hur känns det att återigen göra refaktoring på din me-sida, blir det förbättringar på kodstrukturen, eller bara annorlunda?
+Nuddade lite vid det innan. Det tar emot. Just denna gång lyckades jag trassla till det extra mycket och kunde inte för mitt liv få till databasen efter refaktoreringen. Tackar för allt hjälp jag fick att lösa det. Det är så många delar som hänger ihop. Så många filer som kräver varandra att det är alltför lätt att missa en del i kedjan och allt stannar upp. Sen kommer en osäkerhetsfaktor in vad gäller exemeplvis om det skall vara shared: true eller shared: false. Det blir lite att testa sig fram och hålla tummarna att nästa försök blir lyckat. Kan, om det drar ut på tiden, vara väldigt tålamodskrävande och frustrerande. Men när jag nu kommit igenom denna refaktorering tycker jag att det blev bättre.
+####Lyckades du införa begreppen kring DI när du vidareutvecklade ditt kommentarssystem?
+Ja. Nu finns beroende till $di istället. Det behöver dock renodlas mer vad gäller MVC och är något jag kommer ta tag i allteftersom i framtida kmoms. Har upptäckt några $app ute i vyer som jag måste arbeta bort.
+####Påbörjade du arbetet (hur gick det) med databasmodellen eller avvaktar du till kommande kmom?
+Jag lade till databas i kmom02 och har därmed startat upp med detta. Men tror säker att det kommer bli en hel del förändringar från hur det ser ut idag. Det var inte det lättaste att få till refaktoriseringen med just databasen. Tyckte att det gick smidigare än man kan förtjäna till en böjan. Men det tog fleratalet försök och dagar innan jag återigen kunde kommentera eller logga in.
+####Allmänna kommentare kring din me-sida och dess kodstruktur?
+Det har gått från att ha upplevt total förvirring vad gäller MVC till att äntligen fått en förståelse och framför allt sett vinsten med en sådan struktur. Det finns mer renodling att göra innan jag är helt framme. Men som jag förstått det kommer det mer refaktoring längre fram och strukturarbetet kommer vara något ständigt pågående. Allt nytt görs på nya sättet. Allt gammalt skall struktureras om efterhand.

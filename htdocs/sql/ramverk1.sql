@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS ramverk1comments (
      likes VARCHAR(1000) DEFAULT '',
       PRIMARY KEY  (id)
   ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-  
-CREATE TABLE IF NOT EXISTS ramverk1accounts 
+
+CREATE TABLE IF NOT EXISTS ramverk1accounts
 (
 id int(5) auto_increment primary key,
 active char(5) default 'yes',
@@ -30,9 +30,9 @@ email varchar(50) not null,
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-  
+
 -- INSERT INTO ramverkcomments (user, comm) VALUES ('Janne Banan', 'åäö rules');
-  SELECT * FROM ramverk1comments;
-  SELECT * FROM ramverk1accounts;
+--  SELECT * FROM ramverk1comments;
+ -- SELECT * FROM ramverk1accounts;
   -- UPDATE ramverk1accounts SET active = 'yes' WHERE id = 1;
-UPDATE ramverk1accounts SET role = 'admin' WHERE id = 5;
+-- UPDATE ramverk1accounts SET role = 'admin' WHERE id = 5;
