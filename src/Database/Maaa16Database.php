@@ -7,7 +7,7 @@ use \Anax\Configure\ConfigureTrait;
 /**
  * Class to collect all database activities.
  */
-class Database implements ConfigureInterface
+class Maaa16Database implements ConfigureInterface
 {
     use ConfigureTrait;
 
@@ -131,7 +131,6 @@ class Database implements ConfigureInterface
         if (!$status) {
             $this->statementException($sth, $sql, $param);
         }
-
         return $sth;
     }
 

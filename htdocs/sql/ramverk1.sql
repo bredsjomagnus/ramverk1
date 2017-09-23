@@ -1,6 +1,6 @@
 -- CREATE DATABASE ramverk1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
--- show databases;
-use maaa16;
+show databases;
+use ramverk1;
 -- show tables;
 
 DROP TABLE IF EXISTS ramverk1comments;

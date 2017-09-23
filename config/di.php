@@ -162,7 +162,7 @@ return [
         "database" => [
             "shared" => true,
             "callback" => function () {
-                $database = new \Maaa16\Database\Database();
+                $database = new \Maaa16\Database\Maaa16Database();
                 $database->configure("database.php");
                 $database->setDefaultsFromConfiguration();
                 return $database;

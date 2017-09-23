@@ -26,7 +26,7 @@ class CreateUserForm extends FormModel
                 "legend" => "Skapa konto",
             ],
             [
-                "acronym" => [
+                "username" => [
                     "type"        => "text",
                 ],
 
@@ -43,7 +43,7 @@ class CreateUserForm extends FormModel
 
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Create user",
+                    "value" => "Skapa konto",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -245,7 +245,7 @@ class CreateUserForm extends FormModel
     public function callbackSubmit()
     {
         // Get values from the submitted form
-        $acronym       = $this->form->value("acronym");
+        $acronym       = $this->form->value("username");
         $password      = $this->form->value("password");
         $passwordAgain = $this->form->value("password-again");
 
@@ -257,19 +257,19 @@ class CreateUserForm extends FormModel
         }
 
         // samma som nedan fast med active record
-        $user = new User();
-        $user->setDb($this->di->get("db"));
-        $user->acronym = $acronym;
-        $user->setPassword($password);
-        $user->save();
+        // $user = new User();
+        // $user->setDb($this->di->get("db"));
+        // $user->acronym = $acronym;
+        // $user->setPassword($password);
+        // $user->save();
 
 
         // Save to database
-        // $db = $this->di->get("db");
-        // $password = password_hash($password, PASSWORD_DEFAULT);
-        // $db->connect()
-        //    ->insert("User", ["acronym", "password"])
-        //    ->execute([$acronym, $password]);
+        $db = $this->di->get("db");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $db->connect()
+           ->insert("RVDBaccounts", ["username", "pass"])
+           ->execute([$acronym, $password]);
 
         $this->form->addOutput("User was created.");
         return true;
