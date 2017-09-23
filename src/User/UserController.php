@@ -65,20 +65,28 @@ class UserController implements
      */
     public function getPostLogin()
     {
-        $title      = "A login page";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
+        // $this->di->get("view")->add("login/login");
+        // $title = "Login | maaa16";
+        // $this->di->get("pageRender")->renderPage(["title" => $title], "login");
+
+        // $title      = "A login page";
+        // $view       = $this->di->get("view");
+        // $pageRender = $this->di->get("pageRender");
         $form       = new UserLoginForm($this->di);
 
         $form->check();
 
-        $data = [
-            "content" => $form->getHTML(),
-        ];
+        // $data = [
+        //     "content" => $form->getHTML(),
+        // ];
 
-        $view->add("default2/article", $data);
+        // $view->add("default2/article", $data);
+        //
+        // $pageRender->renderPage(["title" => $title]);
 
-        $pageRender->renderPage(["title" => $title]);
+        $this->di->get("view")->add("login/loginnew", ["form" => $form->getHTML()]);
+        $title = "Login | maaa16";
+        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
     }
 
 
@@ -94,19 +102,23 @@ class UserController implements
      */
     public function getPostCreateUser()
     {
-        $title      = "A create user page";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
+        // $title      = "A create user page";
+        // $view       = $this->di->get("view");
+        // $pageRender = $this->di->get("pageRender");
         $form       = new CreateUserForm($this->di);
 
         $form->check();
 
-        $data = [
-            "content" => $form->getHTML(),
-        ];
+        // $data = [
+        //     "content" => $form->getHTML(),
+        // ];
+        //
+        // $view->add("default2/article", $data);
+        //
+        // $pageRender->renderPage(["title" => $title]);
 
-        $view->add("default2/article", $data);
-
-        $pageRender->renderPage(["title" => $title]);
+        $this->di->get("view")->add("login/create", ["form" => $form->getHTML()]);
+        $title = "Skapa nytt konto | maaa16";
+        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
     }
 }

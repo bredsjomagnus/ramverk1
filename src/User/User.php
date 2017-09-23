@@ -41,7 +41,7 @@ class User extends ActiveRecordModel
      */
     public function setPassword($password)
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->pass = password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
@@ -56,6 +56,11 @@ class User extends ActiveRecordModel
     public function verifyPassword($acronym, $password)
     {
         $this->find("username", $acronym);
-        return password_verify($password, $this->password);
+        return password_verify($password, $this->pass);
+    }
+
+    public function uniqueUser($acronym)
+    {
+        return $this->find('username', $acronym);
     }
 }

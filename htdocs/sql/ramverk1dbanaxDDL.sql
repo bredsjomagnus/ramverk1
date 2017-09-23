@@ -7,12 +7,12 @@ CREATE TABLE IF NOT EXISTS RVDBaccounts
 (
 id int(5) auto_increment primary key,
 active char(5) default 'yes',
-role char(20) not null,
+role char(20) default 'user',
 username varchar(20) not null unique,
 pass char(100) not null,
-firstname char(20) not null,
-surname char(20) not null,
-email varchar(50) not null,
+firstname char(20) default 'anon',
+surname char(20) default 'anon',
+email varchar(50) default 'anon',
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated TIMESTAMP NULL,
 deleted TIMESTAMP NULL

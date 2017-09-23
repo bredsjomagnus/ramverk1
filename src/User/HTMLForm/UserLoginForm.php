@@ -23,17 +23,21 @@ class UserLoginForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "User Login"
+                "legend" => "Logga in"
             ],
             [
                 "user" => [
+                    "label"       => "Användarnamn",
                     "type"        => "text",
+                    "class"       => "form-control"
                     //"description" => "Here you can place a description.",
                     //"placeholder" => "Here is a placeholder",
                 ],
 
                 "password" => [
+                    "label"       => "Lösenord",
                     "type"        => "password",
+                    "class"       => "form-control"
                     //"description" => "Here you can place a description.",
                     //"placeholder" => "Here is a placeholder",
                 ],
@@ -41,6 +45,7 @@ class UserLoginForm extends FormModel
                 "submit" => [
                     "type" => "submit",
                     "value" => "Login",
+                    "class"       => "btn btn-primary",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -66,9 +71,9 @@ class UserLoginForm extends FormModel
         $res = $user->verifyPassword($acronym, $password);
 
         if (!$res) {
-           $this->form->rememberValues();
-           $this->form->addOutput("User or password did not match.");
-           return false;
+            $this->form->rememberValues();
+            $this->form->addOutput("User or password did not match.");
+            return false;
         }
 
 
