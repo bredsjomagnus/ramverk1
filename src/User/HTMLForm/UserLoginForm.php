@@ -94,6 +94,14 @@ class UserLoginForm extends FormModel
         // }
 
         $this->form->addOutput("User logged in.");
+        $this->di->get("session")->set("user", $acronym);
+        // $this->di->get("session")->set("email", $email);
+        $this->di->get("session")->set("role", $user->role);
+        // $this->di->get("cookie")->set("user", $username);
+        // $this->di->get("session")->set("userid", $this->di->get("database")->lastInsertId());
+        // $this->di->get("cookie")->set("forname", $forname);
+        $this->di->get("cookie")->set("user", $acronym);
+        $this->di->get("response")->redirect("user/accountinfo");
         return true;
     }
 

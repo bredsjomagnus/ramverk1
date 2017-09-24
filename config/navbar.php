@@ -28,6 +28,11 @@ return [
                 "route" => "remserver",
                 "class" => ""
             ],
+            "books" => [
+                "text" => "BÖCKER",
+                "route" => "book",
+                "class" => ""
+            ],
             "kommentarsmodul" => [
                 "text" => "KOMMENTARSMODUL",
                 "route" => "commentary",

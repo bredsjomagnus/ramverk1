@@ -121,4 +121,11 @@ class UserController implements
         $title = "Skapa nytt konto | maaa16";
         $this->di->get("pageRender")->renderPage(["title" => $title], "login");
     }
+
+    public function accountInfoPage($id)
+    {
+        $this->di->get("view")->add("login/accountinfonew", ["id" => $id]);
+        $title = "Kontosida | maaa16";
+        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
+    }
 }

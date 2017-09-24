@@ -22,6 +22,11 @@ return [
             "file" => __DIR__ . "/route/userController.php",
         ],
         [
+            // Add routes from bookController and mount on book/
+            "mount" => "book",
+            "file" => __DIR__ . "/route/bookcontroller.php",
+        ],
+        [
             // These are for internal error handling and exceptions
             "mount" => null,
             "file" => __DIR__ . "/route/internal.php",

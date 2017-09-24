@@ -22,5 +22,11 @@ return [
             "path" => "create",
             "callable" => ["userController", "getPostCreateUser"],
         ],
+        [
+            "info" => "Accountpage",
+            "requestMethod" => "get",
+            "path" => "accountinfo",
+            "callable" => ["userController", "accountInfoPage"],
+        ],
     ]
 ];

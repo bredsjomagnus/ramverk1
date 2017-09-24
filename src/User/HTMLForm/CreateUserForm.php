@@ -103,7 +103,7 @@ class CreateUserForm extends FormModel
         // $db->connect()
         //    ->insert("RVDBaccounts", ["username", "pass"])
         //    ->execute([$acronym, $password]);
-
+        $this->di->get("response")->redirect("user/login");
         $this->form->addOutput("User was created.");
         return true;
     }
