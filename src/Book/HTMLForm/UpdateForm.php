@@ -21,39 +21,82 @@ class UpdateForm extends FormModel
     {
         parent::__construct($di);
         $book = $this->getItemDetails($id);
+
+        $categories = explode(", ",$book->categories);
+
+
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Update details of the item",
+                "legend" => "Redigera bok",
             ],
             [
+                "title" => [
+                    "label"         => "Titel*",
+                    "type"          => "text",
+                    "class"         => "form-control",
+                    "validation"    => ["not_empty"],
+                    "value"         => $book->title
+                ],
+
+                "author" => [
+                    "label"         => "Författare*",
+                    "type"          => "text",
+                    "class"         => "form-control",
+                    "validation"    => ["not_empty"],
+                    "value"         => $book->author
+                ],
+
+                "publisher" => [
+                    "label"         => "Förlag",
+                    "type"          => "text",
+                    "class"         => "form-control",
+                    // "validation"    => ["not_empty"],
+                    "value"         => $book->publisher
+                ],
+                "categories" => [
+                    "type"          => "select-multiple",
+                    "label"         => "Välj en eller flera kategorier",
+                    "class"         => "form-control",
+                    // "description"   => "Here you can place a description.",
+                    "size"          => 10,
+                    "options"       => [
+                        "Ingen_kategori"   => "Ingen",
+                        "Skönlitteratur"             => "Skönlitteratur",
+                        "Deckare"          => "Deckare",
+                        "Fantasy"           => "Fantasy",
+                        "Sci-Fi"            => "Sci-Fi",
+                        "Barn"               => "Barn",
+                        "Medicin"           => "Medicin",
+                        "Fakta"             => "Fakta",
+                        "Mat"              => "Mat",
+                        "Inredning"            => "Inredning",
+                    ],
+                    "checked"   => $categories,
+                ],
+
                 "id" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"],
-                    "readonly" => true,
-                    "value" => $book->id,
-                ],
-
-                "column1" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"],
-                    "value" => $book->column1,
-                ],
-
-                "column2" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"],
-                    "value" => $book->column2,
+                    "type"      => "hidden",
+                    "value"     => $book->id
                 ],
 
                 "submit" => [
-                    "type" => "submit",
-                    "value" => "Save",
-                    "callback" => [$this, "callbackSubmit"]
+                    "type"          => "submit",
+                    "class"         => "btn btn-primary",
+                    "value"         => "Utför redigering",
+                    "callback"      => [$this, "callbackSubmit"]
                 ],
 
-                "reset" => [
+                "delete" => [
+                    "type"          => "submit",
+                    "class"         => "btn btn-danger",
+                    "value"         => "Ta bort",
+                    "callback"      => [$this, "callbackDelete"]
+                ],
+
+                "Återställ" => [
                     "type"      => "reset",
+                    "class"     => "btn btn-default"
                 ],
             ]
         );
@@ -65,7 +108,7 @@ class UpdateForm extends FormModel
      * Get details on item to load form with.
      *
      * @param integer $id get details on item with id.
-     * 
+     *
      * @return boolean true if okey, false if something went wrong.
      */
     public function getItemDetails($id)
@@ -86,12 +129,54 @@ class UpdateForm extends FormModel
      */
     public function callbackSubmit()
     {
+        // $book = new Book();
+        // $book->setDb($this->di->get("db"));
+        // $book->find("id", $this->form->value("id"));
+        // $book->column1 = $this->form->value("title");
+        // $book->column2 = $this->form->value("column2");
+        // $book->save();
+        // $this->di->get("response")->redirect("book/update/{$book->id}");
         $book = new Book();
         $book->setDb($this->di->get("db"));
         $book->find("id", $this->form->value("id"));
-        $book->column1 = $this->form->value("column1");
-        $book->column2 = $this->form->value("column2");
+
+        $book->title  = $this->form->value("title");
+        $book->author = $this->form->value("author");
+        $book->publisher = $this->form->value("publisher");
+        $categories = $this->form->value("categories");
+        $categories = implode(", ", $categories);
+        $book->categories = $categories;
         $book->save();
-        $this->di->get("response")->redirect("book/update/{$book->id}");
+
+        $this->form->addOutput($book->title . " redigerad");
+
+        // $this->di->get("response")->redirect("book/view-all");
+        return true;
+    }
+
+    /**
+     * Callback for submit-button which should return true if it could
+     * carry out its work and false if something failed.
+     *
+     * @return boolean true if okey, false if something went wrong.
+     */
+    public function callbackDelete()
+    {
+        // $book = new Book();
+        // $book->setDb($this->di->get("db"));
+        // $book->find("id", $this->form->value("id"));
+        // $book->column1 = $this->form->value("title");
+        // $book->column2 = $this->form->value("column2");
+        // $book->save();
+        // $this->di->get("response")->redirect("book/update/{$book->id}");
+        $book = new Book();
+        $book->setDb($this->di->get("db"));
+        $book->find("id", $this->form->value("id"));
+        $book->delete();
+
+        // $this->form->addOutput($book->title . " redigerad");
+
+        $this->di->get("response")->redirect("book/view-all");
+        // return true;
     }
 }

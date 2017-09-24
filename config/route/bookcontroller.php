@@ -20,19 +20,19 @@ return [
             "info" => "Create an item.",
             "requestMethod" => "get|post",
             "path" => "add-book",
-            "callable" => ["bookController", "getPostCreateItem"],
+            "callable" => ["bookController", "getPostCreateBook"],
         ],
         [
-            "info" => "Delete an item.",
+            "info" => "Delete books.",
             "requestMethod" => "get|post",
             "path" => "delete",
-            "callable" => ["bookController", "getPostDeleteItem"],
+            "callable" => ["bookController", "getPostDeleteBooks"],
         ],
         [
             "info" => "Update an item.",
             "requestMethod" => "get|post",
-            "path" => "update/{id:digit}",
-            "callable" => ["bookController", "getPostUpdateItem"],
+            "path" => "edit/{id:digit}",
+            "callable" => ["bookController", "getPostEditBook"],
         ],
     ]
 ];

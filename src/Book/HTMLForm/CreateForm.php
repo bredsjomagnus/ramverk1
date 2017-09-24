@@ -98,7 +98,7 @@ class CreateForm extends FormModel
         $book->author = $this->form->value("author");
         $book->publisher = $this->form->value("publisher");
         $categories = $this->form->value("categories");
-        $categories = implode(",", $categories);
+        $categories = implode(", ", $categories);
         $book->categories = $categories;
         $book->save();
 

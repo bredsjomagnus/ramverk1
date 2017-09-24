@@ -22,18 +22,22 @@ class DeleteForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Delete an item",
+                "legend" => "Ta bort böcker",
             ],
             [
-                "select" => [
-                    "type"        => "select",
-                    "label"       => "Select item to delete:",
-                    "options"     => $this->getAllItems(),
+                "deleting_ids" => [
+                    "type"        => "select-multiple",
+                    "label"         => "Välj en eller flera böcker att ta bort",
+                    "class"         => "form-control",
+                    // "description"   => "Here you can place a description.",
+                    "size"          => count($this->getAllBooks()),
+                    "options"     => $this->getAllBooks(),
                 ],
 
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Delete item",
+                    "value" => "Ta bort valda böcker",
+                    "class"     => "btn btn-danger",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -47,14 +51,14 @@ class DeleteForm extends FormModel
      *
      * @return array with key value of all items.
      */
-    protected function getAllItems()
+    protected function getAllBooks()
     {
         $book = new Book();
         $book->setDb($this->di->get("db"));
 
-        $books = ["-1" => "Select an item..."];
-        foreach ($book->findAll() as $obj) {
-            $books[$obj->id] = "{$obj->column1} ({$obj->id})";
+        $books = [];
+        foreach ($book->findAll() as $book) {
+            $books[$book->id] = "{$book->title}";
         }
 
         return $books;
@@ -72,8 +76,11 @@ class DeleteForm extends FormModel
     {
         $book = new Book();
         $book->setDb($this->di->get("db"));
-        $book->find("id", $this->form->value("select"));
-        $book->delete();
-        $this->di->get("response")->redirect("book");
+        $deleting_ids = $this->form->value("deleting_ids");
+        foreach ($deleting_ids as $delete_id) {
+            $book->find("id", $delete_id);
+            $book->delete();
+        }
+        $this->di->get("response")->redirect("book/view-all");
     }
 }

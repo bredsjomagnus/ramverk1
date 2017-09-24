@@ -30,7 +30,7 @@ $books = isset($books) ? $books : null;
             <div class="col-md-12">
                 <a href=<?= $this->di->get("url")->create("book") ?>>Tillbaka</a> |
                 <a href=<?= $this->di->get("url")->create("book/add-book") ?>>Lägg till bok</a> |
-                <a href=<?= $this->di->get("url")->create("book/edit-book") ?>>Redigera databas</a>
+                <a href=<?= $this->di->get("url")->create("book/delete") ?>>Ta bort böcker</a>
                 <br /><br />
             </div>
         </div>
@@ -51,7 +51,7 @@ endif;?>
         <div class="col-md-12">
             <a href=<?= $this->di->get("url")->create("book") ?>>Tillbaka</a> |
             <a href=<?= $this->di->get("url")->create("book/add-book") ?>>Lägg till bok</a> |
-            <a href=<?= $this->di->get("url")->create("book/edit-book") ?>>Redigera databas</a>
+            <a href=<?= $this->di->get("url")->create("book/delete") ?>>Ta bort böcker</a>
             <br /><br />
         </div>
     </div>
@@ -67,7 +67,7 @@ endif;?>
                 </tr>
                 <?php foreach ($books as $book) : ?>
                 <tr>
-                    <td><a href="<?= url("book/update/{$book->id}"); ?>"><?= $book->title ?></a></td>
+                    <td><a href="<?= url("book/edit/{$book->id}"); ?>"><?= $book->title ?></a></td>
                     <td><?= $book->author ?></td>
                     <td><?= $book->publisher ?></td>
                     <td><?= $book->categories ?></td>

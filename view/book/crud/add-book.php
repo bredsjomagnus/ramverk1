@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <a href=<?= $this->di->get("url")->create("book") ?>>Tillbaka</a> |
             <a href=<?= $this->di->get("url")->create("book/view-all") ?>>Alla böcker</a> |
-            <a href=<?= $this->di->get("url")->create("book/edit-book") ?>>Redigera databas</a>
+            <a href=<?= $this->di->get("url")->create("book/delete") ?>>Ta bort böcker</a>
             <br /><br />
         </div>
     </div>

@@ -85,7 +85,7 @@ class BookController implements
      *
      * @return void
      */
-    public function getPostCreateItem()
+    public function getPostCreateBook()
     {
         $title      = "Lägg till bok | Maaa16";
         $view       = $this->di->get("view");
@@ -110,20 +110,18 @@ class BookController implements
      *
      * @return void
      */
-    public function getPostDeleteItem()
+    public function getPostDeleteBooks()
     {
-        $title      = "Delete an item";
+        $title      = "Ta bort böcker | Maaa16";
         $view       = $this->di->get("view");
         $pageRender = $this->di->get("pageRender");
         $form       = new DeleteForm($this->di);
-
+        $book = new Book();
+        $book->setDb($this->di->get("db"));
         $form->check();
 
-        $data = [
-            "form" => $form->getHTML(),
-        ];
 
-        $view->add("book/crud/delete", $data);
+        $view->add("book/crud/delete", ["books" => $book->findAll(), "form" => $form->getHTML()]);
 
         $pageRender->renderPage(["title" => $title]);
     }
@@ -131,13 +129,13 @@ class BookController implements
 
 
     /**
-     * Handler with form to update an item.
+     * Handler with form to update an book.
      *
      * @return void
      */
-    public function getPostUpdateItem($id)
+    public function getPostEditBook($id)
     {
-        $title      = "Update an item";
+        $title      = "Redigera bokinformation | Maaa16";
         $view       = $this->di->get("view");
         $pageRender = $this->di->get("pageRender");
         $form       = new UpdateForm($this->di, $id);
@@ -148,7 +146,7 @@ class BookController implements
             "form" => $form->getHTML(),
         ];
 
-        $view->add("book/crud/update", $data);
+        $view->add("book/crud/edit", $data);
 
         $pageRender->renderPage(["title" => $title]);
     }
