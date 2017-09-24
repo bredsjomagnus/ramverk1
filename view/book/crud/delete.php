@@ -17,7 +17,7 @@ $books = isset($books) ? $books : null;
         <div class="row">
             <div class="col-md-12">
                 <a href=<?= $this->di->get("url")->create("book") ?>>Tillbaka</a> |
-                <a href=<?= $this->di->get("url")->create("book/view-all") ?>>Böcker</a> |
+                <a href=<?= $this->di->get("url")->create("book/view-all") ?>>Alla böcker</a> |
                 <a href=<?= $this->di->get("url")->create("book/add-book") ?>>Lägg till bok</a>
             </div>
         </div>

@@ -36,7 +36,7 @@ class AdminAssembler implements InjectionAwareInterface
 
             $table .=   "<tr>
                             <td valign=top>".$gravatar->toHTML()."</td>
-                            <td>".$filteredcomment."</td>
+                            <td><b>".$comment->username."</b><br />".$filteredcomment."</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -59,6 +59,8 @@ class AdminAssembler implements InjectionAwareInterface
             $gravatar->border = "FF0000";
             // $filteredcomment = $this->di->get("textfilter")->markdown($comment->comm);
 
+            $notes = ($account->notes == null) ? "" : "<hr /><h5 class='text-muted'>ANTECKNINGAR</h5>".$account->notes;
+
             $lastloggedin = $this->di->get("admin")->getLastLoggedIn($account->id, "Kontot är oanvänt");
             $phonenumbers = ($account->phone == null) ? $account->mobile : $account->phone.", ".$account->mobile;
             $address = ($account->address == null) ? "" : $account->address."<br />";
@@ -78,12 +80,13 @@ class AdminAssembler implements InjectionAwareInterface
               </div>
               <div id='accountcollapse-".$account->id."' class='panel-collapse collapse' role='tabpanel' aria-labelledby='accountheading-".$account->id."'>
                 <div class='panel-body admin-accordian-panel-body'>
+                    <b>Användarnamn: </b>".$account->username."<br />
                     <b>Skapat:</b> ".$account->created."<br />
                     <b>roll:</b> ".$account->role.", <b>Aktivt:</b> ".$account->active."<br />
                     ".$address."
                     ".$postcity."
                     ".$phonenumbers."<br />
-                    ".$account->notes."
+                    ".$notes."
                 </div>
               </div>
             </div>";
@@ -93,6 +96,10 @@ class AdminAssembler implements InjectionAwareInterface
         return $accountHTML;
     }
 
+    /**
+    *
+    * @SuppressWarnings(PHPMD)
+    */
     public function getEditAccountTable($res)
     {
         $activeselected_yes = ($res[0]->active == 'yes') ? 'selected' : '';

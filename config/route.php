@@ -16,11 +16,11 @@ return [
             "mount" => null,
             "file" => __DIR__ . "/route/login.php",
         ],
-        [
-            // Add routes from userController and mount on user/
-            "mount" => "user",
-            "file" => __DIR__ . "/route/userController.php",
-        ],
+        // [
+        //     // Add routes from userController and mount on user/
+        //     "mount" => "user",
+        //     "file" => __DIR__ . "/route/userController.php",
+        // ],
         [
             // Add routes from bookController and mount on book/
             "mount" => "book",

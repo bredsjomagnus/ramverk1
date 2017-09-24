@@ -81,11 +81,14 @@ class LoginController implements InjectionAwareInterface
                         $this->di->get("session")->delete("loginmsg");
                         $this->di->get("session")->delete("usermsg");
                         $this->di->get("session")->delete("passmsg");
-                        $this->di->get("response")->redirect("accountinfo");
 
                         $sql = "UPDATE ramverk1accounts SET inlogged = CURRENT_TIMESTAMP WHERE BINARY username = BINARY ?";
                         $params = [$loginuser];
                         $this->di->get("database")->execute($sql, $params);
+
+                        $this->di->get("response")->redirect("accountinfo");
+
+
                         // funkar inte.
                     } else {
                         $this->di->get("session")->set("loginmsg", "<span class='formerror'>&nbsp;&nbsp;&nbsp; Felaktigt användarnamn eller lösenord</span>");
