@@ -17,6 +17,24 @@ return [
             "path" => "admincomments",
             "callable" => ["adminController", "adminComments"]
         ],
+        [
+            "info" => "Admin konton",
+            "requestMethod" => null,
+            "path" => "adminaccounts",
+            "callable" => ["adminController", "adminAccounts"]
+        ],
+        [
+            "info" => "Admin redigera konto",
+            "requestMethod" => "get",
+            "path" => "admineditaccount",
+            "callable" => ["adminController", "adminEditAccount"]
+        ],
+        [
+            "info" => "Admin redigering av medlems process",
+            "requestMethod" => "post",
+            "path" => "admineditaccountprocess",
+            "callable" => ["adminController", "adminEditAccountProcess"]
+        ],
     ]
 ];
 

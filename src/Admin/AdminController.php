@@ -81,4 +81,70 @@ class AdminController implements InjectionAwareInterface
 
         $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
     }
+
+    /**
+     * Admin accounts.
+     *
+     * @return void
+     */
+     public function adminAccounts()
+     {
+         if ($this->checkAdminRole()) {
+             $title = "Admin | Konton";
+             $accounts = $this->di->get("admin")->getAccounts();
+             $accountstable = $this->di->get("adminAssembler")->getAccountsTable($accounts);
+             $this->di->get("view")->add("admin/adminaccounts", ["accountstable" => $accountstable]);
+             $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
+         } else {
+             $this->di->get("response")->redirect("login");
+         }
+     }
+
+     /**
+      * Edit accounts
+      *
+      * @return void
+      */
+     public function adminEditAccount()
+     {
+         if ($this->checkAdminRole()) {
+             $title = "Admin | Redigera konton";
+             $singleaccount = $this->di->get("admin")->getSingleAccount($this->di->get("request")->getGet('id'));
+             $editaccountHTML = $this->di->get("adminAssembler")->getEditAccountTable($singleaccount);
+             $this->di->get("view")->add("admin/admineditaccount", ["editaccountHTML" => $editaccountHTML]);
+             $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
+         } else {
+             $this->di->get("response")->redirect("login");
+         }
+     }
+
+     public function adminEditAccountProcess()
+     {
+         if ($this->checkAdminRole()) {
+             if ($this->di->get('request')->getPost('editaccountbtn') != null) {
+                 $userdata = [
+                                 "role" => htmlentities($this->di->get("request")->getPost('role')),
+                                 "active" => htmlentities($this->di->get("request")->getPost('active')),
+                                 "forname" => htmlentities($this->di->get("request")->getPost('forname')),
+                                 "surname" => htmlentities($this->di->get("request")->getPost('surname')),
+                                 // "username" => htmlentities($this->di->get("request")->getPost('username')),
+                                 // "email" => htmlentities($this->di->get("request")->getPost('email')),
+                                 "address" => htmlentities($this->di->get("request")->getPost('address')),
+                                 "postnumber" => htmlentities($this->di->get("request")->getPost('postnumber')),
+                                 "city" => htmlentities($this->di->get("request")->getPost('city')),
+                                 "phone" => htmlentities($this->di->get("request")->getPost('phone')),
+                                 "mobile" => htmlentities($this->di->get("request")->getPost('mobile')),
+                                 "notes" => htmlentities($this->di->get("request")->getPost('notes'))
+                             ];
+                 $id = htmlentities($this->di->get("request")->getPost('id'));
+                 $this->di->get("admin")->editAccount($id, $userdata);
+                 $this->adminAccounts();
+             }
+         }
+     }
+
+     public function checkAdminRole()
+     {
+         return ($this->di->get("session")->get("role") == "admin") ? true : false;
+     }
 }

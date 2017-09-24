@@ -74,6 +74,11 @@ return [
                 "route" => "admincomments",
                 "class" => ""
             ],
+            "accounts" => [
+                "text" => "ANVÄNDARE",
+                "route" => "adminaccounts",
+                "class" => ""
+            ],
             "login" => [
                 "text" => "LOGGA IN",
                 "route" => "login",
