@@ -34,12 +34,12 @@ return [
             "path" => "createaccount",
             "callable" => ["loginController", "createAccountProcess"]
         ],
-        [
-            "info" => "Ändra användares lösenord",
-            "requestMethod" => "post",
-            "path" => "changepassword",
-            "callable" => ["loginController", "changePasswordProcess"]
-        ]
+        // [
+        //     "info" => "Ändra användares lösenord",
+        //     "requestMethod" => "post",
+        //     "path" => "changepassword",
+        //     "callable" => ["loginController", "changePasswordProcess"]
+        // ]
     ]
 ];
 

@@ -35,6 +35,18 @@ return [
             "path" => "admineditaccountprocess",
             "callable" => ["adminController", "adminEditAccountProcess"]
         ],
+        [
+            "info" => "Admin redigering av medlems process",
+            "requestMethod" => "post",
+            "path" => "adminresetpassword",
+            "callable" => ["adminController", "adminResetPassword"]
+        ],
+        [
+            "info" => "Admin redigering av medlems process",
+            "requestMethod" => "post",
+            "path" => "adminresetpasswordprocess",
+            "callable" => ["adminController", "adminResetPasswordProcess"]
+        ],
     ]
 ];
 

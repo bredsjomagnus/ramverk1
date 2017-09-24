@@ -108,6 +108,10 @@ class AdminController implements InjectionAwareInterface
     public function adminEditAccount()
     {
         if ($this->checkAdminRole()) {
+            $reset = $this->di->get("admin")->getSingleAccount($this->di->get("request")->getGet('reset'));
+            if ($reset == "yes") {
+                $this->di->get("session")->set("resetpasswordmsg", "");
+            }
             $title = "Admin | Redigera konton";
             $singleaccount = $this->di->get("admin")->getSingleAccount($this->di->get("request")->getGet('id'));
             $editaccountHTML = $this->di->get("adminAssembler")->getEditAccountTable($singleaccount);
@@ -143,7 +147,41 @@ class AdminController implements InjectionAwareInterface
                 $id = htmlentities($this->di->get("request")->getPost('id'));
                 $this->di->get("admin")->deleteAccount($id);
                 $this->adminAccounts();
+            } else if ($this->di->get('request')->getPost('editpasswordaccountbtn') != null) {
+                $id = htmlentities($this->di->get("request")->getPost('id'));
+                $this->adminResetPassword($id);
             }
+        }
+    }
+
+    public function adminResetPassword($id)
+    {
+        if ($this->checkAdminRole()) {
+            $title = "Admin | Återställ lösenord";
+            $resetpasswordHTML = $this->di->get("adminAssembler")->resetPasswordHTML($id);
+            $this->di->get("view")->add("admin/adminresetpassword", ["resetpasswordHTML" => $resetpasswordHTML]);
+            $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
+        } else {
+            $this->di->get("response")->redirect("login");
+        }
+    }
+
+    public function adminResetPasswordProcess()
+    {
+        if ($this->checkAdminRole()) {
+            $id = htmlentities($this->di->get("request")->getPost('id'));
+            $passone = htmlentities($this->di->get("request")->getPost('passone'));
+            $passtwo = htmlentities($this->di->get("request")->getPost('passtwo'));
+            if ($passone == $passtwo) {
+                $this->di->get("admin")->resetPassword($id, $passone);
+                $this->di->get("session")->set("resetpasswordmsg", "Lösenordet ändrat.");
+                $this->di->get("response")->redirect("admineditaccount?id=".$id."&reset=no");
+            } else {
+                $this->di->get("session")->set("resetpasswordmsg", "Lösenorden inte återställt. Lösenorden stämde inte överens.");
+                $this->di->get("response")->redirect("admineditaccount?id=".$id."&reset=no");
+            }
+        } else {
+            $this->di->get("response")->redirect("login");
         }
     }
 

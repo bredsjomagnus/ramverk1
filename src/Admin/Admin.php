@@ -59,6 +59,15 @@ class Admin implements InjectionAwareInterface
         $this->di->get("database")->execute($sql, $params);
     }
 
+    public function resetPassword($id, $password)
+    {
+        $this->di->get("database")->connect();
+        $securepass = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE ramverk1accounts SET pass = ? WHERE id = ?";
+        $params = [$securepass, $id];
+        $this->di->get("database")->execute($sql, $params);
+    }
+
     public function deleteAccount($id)
     {
         $this->di->get("database")->connect();

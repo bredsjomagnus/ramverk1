@@ -70,7 +70,7 @@ class AdminAssembler implements InjectionAwareInterface
               <div class='panel-heading' role='tab' id='accountheading-".$account->id."'>
                 <h4 class='panel-title'>
                 <div class='btn-group' role='group' aria-label='Basic example'>
-                <a class='float-right btn' href='".$this->di->get("url")->create("admineditaccount")."?id=".$account->id."'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class='float-right btn' href='".$this->di->get("url")->create("admineditaccount")."?id=".$account->id."&reset=yes'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <button class='btn' role='button' data-toggle='collapse' data-parent=''#accordion' href='#accountcollapse-".$account->id."' aria-expanded='true' aria-controls='accountcollapse-".$account->id."'>
                   <span class='text-muted'>Senast inloggad: ".$lastloggedin."</span><br />
                     ". $account->forname . " " . $account->surname ."
@@ -211,10 +211,20 @@ class AdminAssembler implements InjectionAwareInterface
                                 <input type='hidden' name='id' value='".$res[0]->id."'  />
                                 <input class='float-left btn btn-danger' type='submit' name='deleteaccountbtn' value='Ta bort' />
                                 <input class='float-right btn btn-primary' type='submit' name='editaccountbtn' value='Spara' />
+                                <input class='float-right btn btn-primary' type='submit' name='editpasswordaccountbtn' value='Återställa lösenord' />
                                 <a href='".$this->di->get("url")->create("adminaccounts")."' class='float-right btn btn-default'>Ångra</a>
-
-
                             </form><br /><br />";
         return $editaccountHTML;
+    }
+
+    public function resetPasswordHTML($id)
+    {
+        $resetpasswordHTML =    "<form action='adminresetpasswordprocess' method='POST'>
+                                    <input class='form-control' type='password' name='passone' placeholder='Nytt lösenord' />
+                                    <input class='form-control' type='password' name='passtwo' placeholder='Nytt lösenord igen' />
+                                    <input type='hidden' name='id' value='".$id."' />
+                                    <input class='btn btn-primary' type='submit' name='resetpasswordbtn' value='Återställ lösenord' />
+                                </form>";
+        return $resetpasswordHTML;
     }
 }
