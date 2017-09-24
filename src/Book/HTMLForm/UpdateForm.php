@@ -22,7 +22,7 @@ class UpdateForm extends FormModel
         parent::__construct($di);
         $book = $this->getItemDetails($id);
 
-        $categories = explode(", ",$book->categories);
+        $categories = explode(", ", $book->categories);
 
 
         $this->form->create(
@@ -109,7 +109,7 @@ class UpdateForm extends FormModel
      *
      * @param integer $id get details on item with id.
      *
-     * @return boolean true if okey, false if something went wrong.
+     * @return object true if okey, false if something went wrong.
      */
     public function getItemDetails($id)
     {

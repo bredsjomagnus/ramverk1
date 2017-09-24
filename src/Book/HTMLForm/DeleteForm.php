@@ -76,9 +76,9 @@ class DeleteForm extends FormModel
     {
         $book = new Book();
         $book->setDb($this->di->get("db"));
-        $deleting_ids = $this->form->value("deleting_ids");
-        foreach ($deleting_ids as $delete_id) {
-            $book->find("id", $delete_id);
+        $deletingIds = $this->form->value("deleting_ids");
+        foreach ($deletingIds as $deleteId) {
+            $book->find("id", $deleteId);
             $book->delete();
         }
         $this->di->get("response")->redirect("book/view-all");
