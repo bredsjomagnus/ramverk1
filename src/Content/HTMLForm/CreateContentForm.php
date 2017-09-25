@@ -42,7 +42,18 @@ class CreateContentForm extends FormModel
                     "readonly"      => true,
                     // "validation"    => ["not_empty"],
                 ],
-
+                "status" => [
+                    "type"          => "select",
+                    "label"         => "Välj status publiserad/inte publiserad",
+                    "class"         => "form-control",
+                    // "description"   => "Here you can place a description.",
+                    "size"          => 2,
+                    "options"       => [
+                        "notPublished"      => "Inte publiserad",
+                        "published"         => "Publiserad",
+                    ],
+                    "checked"   => "notPublished",
+                ],
                 "filter" => [
                     "label"         => "Filter",
                     "type"          => "text",
@@ -51,6 +62,7 @@ class CreateContentForm extends FormModel
                     "readonly"      => true,
                     // "validation"    => ["not_empty"],
                 ],
+
                 "data" => [
                     "label"         => "Text",
                     "type"          => "textarea",
@@ -90,6 +102,7 @@ class CreateContentForm extends FormModel
         $content->slug  = $slug;
         $content->type = $this->form->value("type");
         $content->filter = $this->form->value("filter");
+        $content->status = $this->form->value("status");
         $content->data = $this->form->value("data");
         $content->save();
 

@@ -100,12 +100,12 @@ class ContentController implements
      *
      * @return void
      */
-    public function getPostEditBook($id)
+    public function getPostUpdateContent($id)
     {
-        $title      = "Redigera bokinformation | Maaa16";
+        $title      = "Redigera innehåll | Maaa16";
         $view       = $this->di->get("view");
         $pageRender = $this->di->get("pageRender");
-        $form       = new UpdateForm($this->di, $id);
+        $form       = new UpdateContentForm($this->di, $id);
 
         $form->check();
 
@@ -113,8 +113,8 @@ class ContentController implements
             "form" => $form->getHTML(),
         ];
 
-        $view->add("book/crud/edit", $data);
+        $view->add("admin/adminupdatecontent", $data);
 
-        $pageRender->renderPage(["title" => $title]);
+        $pageRender->renderAdminPage(["title" => $title], "admin");
     }
 }

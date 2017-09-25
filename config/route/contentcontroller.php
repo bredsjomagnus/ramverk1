@@ -5,7 +5,7 @@
 return [
     "routes" => [
         [
-            "info" => "Admin innehåll",
+            "info" => "Innehåll",
             "requestMethod" => null,
             "path" => "",
             "callable" => ["contentController", "getIndex"]
@@ -15,6 +15,12 @@ return [
             "requestMethod" => "get|post",
             "path" => "create",
             "callable" => ["contentController", "getPostCreateContent"],
+        ],
+        [
+            "info" => "Update content.",
+            "requestMethod" => "get|post",
+            "path" => "update/{id:digit}",
+            "callable" => ["contentController", "getPostUpdateContent"],
         ],
     ]
 ];

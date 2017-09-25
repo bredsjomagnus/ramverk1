@@ -18,7 +18,7 @@ namespace Anax\View;
     return;
 endif;?>
 <div class="container">
-    <h3>ARTIKLAR OCH ANNAT INNEHÅLLER PÅ SIDAN</h3>
+    <h3>ARTIKLAR OCH ANNAT INNEHÅLL PÅ SIDAN</h3>
     <div class="row">
         <div class="col-md-12">
             <a href=<?= $this->di->get("url")->create("admincontent/create") ?>>Lägg till innehåll</a>
@@ -38,7 +38,7 @@ endif;?>
                 <?= $content->id ?>
             </td>
             <td>
-                <a href=<?= url("admincontent/admineditcontent").$content->id ?>><?= $content->title ?></a>
+                <a href=<?= url("admincontent/update/".$content->id) ?>><?= $content->title ?></a>
             </td>
             <td>
                 <?= $content->slug ?>
