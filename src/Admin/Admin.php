@@ -28,6 +28,14 @@ class Admin implements InjectionAwareInterface
         return $res;
     }
 
+    public function getContent()
+    {
+        $this->di->get("database")->connect();
+        $sql = "SELECT * FROM RV1content";
+        $res = $this->di->get("database")->executeFetchAll($sql);
+        return $res;
+    }
+
     public function getLastLoggedIn($id, $default)
     {
         $this->di->get("database")->connect();

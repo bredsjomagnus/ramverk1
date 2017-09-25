@@ -23,6 +23,12 @@ return [
             "path" => "adminaccounts",
             "callable" => ["adminController", "adminAccounts"]
         ],
+        // [
+        //     "info" => "Admin innehåll",
+        //     "requestMethod" => null,
+        //     "path" => "admincontent",
+        //     "callable" => ["adminController", "adminContent"]
+        // ],
         [
             "info" => "Admin redigera konto",
             "requestMethod" => "get",

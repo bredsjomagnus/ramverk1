@@ -167,6 +167,22 @@ return [
                 return $obj;
             }
         ],
+        "contentController" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Maaa16\Content\ContentController();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
+        "contentFactory" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Maaa16\Content\ContentFactory();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
         "database" => [
             "shared" => true,
             "callback" => function () {

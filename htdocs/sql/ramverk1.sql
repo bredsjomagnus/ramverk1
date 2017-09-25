@@ -1,5 +1,5 @@
 -- CREATE DATABASE ramverk1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-show databases;
+-- show databases;
 use ramverk1;
 -- show tables;
 
@@ -30,10 +30,52 @@ email varchar(50) not null,
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-  
+
+--
+-- Create table for Content
+--
+-- DROP TABLE IF EXISTS RV1content;
+CREATE TABLE IF NOT EXISTS RV1content
+(
+  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  path CHAR(120) UNIQUE,
+  slug CHAR(120) UNIQUE,
+  title VARCHAR(120),
+  `data` TEXT,
+  `type` CHAR(20),
+  filter VARCHAR(80) DEFAULT NULL,
+  `status` CHAR(20) DEFAULT 'notPublished',
+
+  -- MySQL version 5.6 and higher
+  -- `published` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  -- `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  -- `updated` DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+ 
+  -- MySQL version 5.5 and lower
+  published DATETIME DEFAULT NULL,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated DATETIME DEFAULT NULL, --  ON UPDATE CURRENT_TIMESTAMP,
+  deleted DATETIME DEFAULT NULL
+
+) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
+
+
+
+-- DROP TABLE IF EXISTS RVDBbook;
+CREATE TABLE IF NOT EXISTS RVDBbook (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    title VARCHAR(256) NOT NULL,
+    author VARCHAR(256) NOT NULL,
+    publisher VARCHAR(256),
+    categories VARCHAR(256)
+) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
+
+
 -- INSERT INTO ramverkcomments (user, comm) VALUES ('Janne Banan', 'åäö rules');
-  -- SELECT * FROM ramverk1comments;
-  SELECT * FROM ramverk1accounts;
+SELECT * FROM ramverk1comments;
+SELECT * FROM ramverk1accounts;
+SELECT * FROM RVDBbook;
+SELECT * FROM RV1content;
   -- UPDATE ramverk1accounts SET active = 'yes' WHERE id = 1;
 -- UPDATE ramverk1accounts SET role = 'admin' WHERE id = 1;
 

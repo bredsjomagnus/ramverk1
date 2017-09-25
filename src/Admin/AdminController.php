@@ -184,7 +184,17 @@ class AdminController implements InjectionAwareInterface
             $this->di->get("response")->redirect("login");
         }
     }
-
+    public function adminContent()
+    {
+        if ($this->checkAdminRole()) {
+            $title = "Admin | Innehåll";
+            $contents = $this->di->get("admin")->getContent();
+            $this->di->get("view")->add("admin/admincontent", ["contents" => $contents]);
+            $this->di->get("pageRender")->renderAdminPage(["title" => $title], 'admin');
+        } else {
+            $this->di->get("response")->redirect("login");
+        }
+    }
     public function checkAdminRole()
     {
         return ($this->di->get("session")->get("role") == "admin") ? true : false;

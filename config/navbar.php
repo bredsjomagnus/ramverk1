@@ -79,6 +79,11 @@ return [
                 "route" => "adminaccounts",
                 "class" => ""
             ],
+            "content" => [
+                "text" => "INNEHÅLL",
+                "route" => "admincontent",
+                "class" => ""
+            ],
             "login" => [
                 "text" => "LOGGA IN",
                 "route" => "login",

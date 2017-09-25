@@ -88,3 +88,20 @@ Ja. Nu finns beroende till $di istället. Det behöver dock renodlas mer vad gä
 Jag lade till databas i kmom02 och har därmed startat upp med detta. Men tror säker att det kommer bli en hel del förändringar från hur det ser ut idag. Det var inte det lättaste att få till refaktoriseringen med just databasen. Tyckte att det gick smidigare än man kan förtjäna till en böjan. Men det tog fleratalet försök och dagar innan jag återigen kunde kommentera eller logga in.
 ####Allmänna kommentare kring din me-sida och dess kodstruktur?
 Det har gått från att ha upplevt total förvirring vad gäller MVC till att äntligen fått en förståelse och framför allt sett vinsten med en sådan struktur. Det finns mer renodling att göra innan jag är helt framme. Men som jag förstått det kommer det mer refaktoring längre fram och strukturarbetet kommer vara något ständigt pågående. Allt nytt görs på nya sättet. Allt gammalt skall struktureras om efterhand.
+
+
+---
+
+*2017-09-24*
+
+###KMOM04
+
+####Hur gick det att integrera formulärhantering och databashantering i ditt kommentarssystem?
+
+####Berätta om din syn på Active record och liknande upplägg, ser du fördelar och nackdelar?
+
+####Utveckla din syn på koden du nu har i ramverket och din kommentars- och användarkod. Hur känns det?
+
+####Om du vill, och har kunskap om, kan du även berätta om din syn på ORM och designmönstret Data Mapper som är närbesläktade med Active Record. Du kanske har erfarenhet av likande upplägg i andra sammanhang?
+
+####Vad tror du om begreppet scaffolding, kan det vara något att kika mer på?

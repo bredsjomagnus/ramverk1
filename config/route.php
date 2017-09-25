@@ -27,6 +27,11 @@ return [
             "file" => __DIR__ . "/route/bookcontroller.php",
         ],
         [
+            // Add routes from ContentController and mount on admincontent/
+            "mount" => "admincontent",
+            "file" => __DIR__ . "/route/contentcontroller.php",
+        ],
+        [
             // These are for internal error handling and exceptions
             "mount" => null,
             "file" => __DIR__ . "/route/internal.php",
