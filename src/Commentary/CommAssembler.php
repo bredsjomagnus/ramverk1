@@ -90,4 +90,19 @@ class CommAssembler implements InjectionAwareInterface
                     </table>";
         return $table;
     }
+
+    public function getForm($id, $path)
+    {
+        $addcommenturl = $this->di->get("url")->create("addcomment")."?path=".$path;
+        $disabled = $this->di->get("session")->has('user') ? "" : "disabled";
+        $form =     "<form action='".$addcommenturl."' method='POST'>
+            <textarea rows='4' cols='200' name='comment' value='' placeholder='Skriv kommentar här!' ".$disabled."></textarea><br />
+            <input type='hidden' name='username' value='".$this->di->get("session")->get('user', "")."'>
+            <input type='hidden' name='email' value='".$this->di->get("session")->get('email', "")."'>
+            <input type='hidden' name='article' value='".$id."'>
+            <input type='submit' name='commentbtn' value='Lägg kommentar' ".$disabled.">
+            <input type='submit' name='resetdbbtn' value='Rensa databas på kommentarer' ".$disabled.">
+        </form>";
+        return $form;
+    }
 }

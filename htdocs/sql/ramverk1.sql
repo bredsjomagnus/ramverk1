@@ -3,11 +3,12 @@
 use ramverk1;
 -- show tables;
 
--- DROP TABLE IF EXISTS ramverk1comments;
+DROP TABLE IF EXISTS ramverk1comments;
 -- DROP TABLE IF EXISTS ramverk1accounts;
 
 CREATE TABLE IF NOT EXISTS ramverk1comments (
      id INT AUTO_INCREMENT NOT NULL,
+     comment_on INT,
      created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      edited TIMESTAMP NULL,
      username varchar(100) NOT NULL default 'NA',
@@ -16,6 +17,9 @@ CREATE TABLE IF NOT EXISTS ramverk1comments (
      likes VARCHAR(1000) DEFAULT '',
       PRIMARY KEY  (id)
   ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  
+-- ALTER TABLE ramverk1comments
+-- ADD COLUMN comment_on INT AFTER id;
   
 CREATE TABLE IF NOT EXISTS ramverk1accounts 
 (
@@ -34,7 +38,7 @@ created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 --
 -- Create table for Content
 --
-DROP TABLE IF EXISTS RV1content;
+-- DROP TABLE IF EXISTS RV1content;
 CREATE TABLE IF NOT EXISTS RV1content
 (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -54,8 +58,8 @@ CREATE TABLE IF NOT EXISTS RV1content
   -- MySQL version 5.5 and lower
   published DATETIME DEFAULT NULL,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated TIMESTAMP DEFAULT NULL, --  ON UPDATE CURRENT_TIMESTAMP,
-  deleted TIMESTAMP DEFAULT NULL
+  updated TIMESTAMP NULL, --  ON UPDATE CURRENT_TIMESTAMP,
+  deleted TIMESTAMP NULL
 
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 
@@ -76,6 +80,8 @@ SELECT * FROM ramverk1comments;
 SELECT * FROM ramverk1accounts;
 SELECT * FROM RVDBbook;
 SELECT * FROM RV1content;
+
+SELECT * FROM ramverk1comments WHERE comment_on = 2 ORDER BY created DESC;
   -- UPDATE ramverk1accounts SET active = 'yes' WHERE id = 1;
 -- UPDATE ramverk1accounts SET role = 'admin' WHERE id = 1;
 

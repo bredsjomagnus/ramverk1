@@ -1,6 +1,8 @@
 <?php
 namespace Maaa16\Block;
 
+use \Maaa16\Content\Content;
+
 class Block
 {
     /**

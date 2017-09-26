@@ -73,11 +73,11 @@ class Commentary implements ConfigureInterface, InjectionAwareInterface
     * @param string $comment
     * @param object $app
     */
-    public function addComment($username, $email, $comment)
+    public function addComment($commentOn, $username, $email, $comment)
     {
         $this->di->get("database")->connect();
-        $sql = "INSERT INTO ramverk1comments (username, email, comm, edited) VALUES (?, ?, ?, ?)";
-        $params = [$username, $email, $comment, null];
+        $sql = "INSERT INTO ramverk1comments (comment_on, username, email, comm, edited) VALUES (?, ?, ?, ?, ?)";
+        $params = [$commentOn, $username, $email, $comment, null];
         $this->di->get("database")->execute($sql, $params);
     }
 
@@ -196,5 +196,18 @@ class Commentary implements ConfigureInterface, InjectionAwareInterface
         }
         $usernames = substr($usernames, 2);
         return $usernames;
+    }
+
+    /**
+    * Get comment from session
+    *
+    * @param object $app
+    */
+    public function getComments($id)
+    {
+        $this->di->get("database")->connect();
+        $sql = "SELECT * FROM ramverk1comments WHERE comment_on = ? ORDER BY created ASC";
+        $res = $this->di->get("database")->executeFetchAll($sql, [$id]);
+        return $res;
     }
 }

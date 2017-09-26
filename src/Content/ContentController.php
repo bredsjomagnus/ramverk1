@@ -70,31 +70,6 @@ class ContentController implements
         $pageRender->renderAdminPage(["title" => $title], "admin");
     }
 
-
-
-    /**
-     * Handler with form to delete an item.
-     *
-     * @return void
-     */
-    public function getPostDeleteBooks()
-    {
-        $title      = "Ta bort böcker | Maaa16";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
-        $form       = new DeleteForm($this->di);
-        $book = new Book();
-        $book->setDb($this->di->get("db"));
-        $form->check();
-
-
-        $view->add("book/crud/delete", ["books" => $book->findAll(), "form" => $form->getHTML()]);
-
-        $pageRender->renderPage(["title" => $title]);
-    }
-
-
-
     /**
      * Handler with form to update an book.
      *

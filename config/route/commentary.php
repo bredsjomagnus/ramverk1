@@ -12,7 +12,7 @@ return [
         ],
         [
             "info" => "Lägg till kommentar",
-            "requestMethod" => "post",
+            "requestMethod" => "get|post",
             "path" => "addcomment",
             "callable" => ["commController", "addComment"]
         ],
@@ -33,6 +33,12 @@ return [
             "requestMethod" => "get",
             "path" => "addlikeprocess",
             "callable" => ["commController", "addLikeProcess"]
+        ],
+        [
+            "info" => "Lägg till gilla process",
+            "requestMethod" => null,
+            "path" => "article/{path:alphanum}",
+            "callable" => ["commController", "articleCommentary"]
         ],
     ]
 ];

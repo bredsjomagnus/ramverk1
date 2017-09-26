@@ -34,6 +34,19 @@ class UpdateContentForm extends FormModel
                     "validation"    => ["not_empty"],
                     "value"         => $content->title
                 ],
+
+                "status" => [
+                    "type"          => "select",
+                    "label"         => "Välj status",
+                    "class"         => "form-control",
+                    "description"   => "<i>Ett publiserat innehåll visas för användaren.</i>",
+                    "size"          => 2,
+                    "options"       => [
+                        "notPublished"      => "Inte publiserad",
+                        "published"         => "Publiserad",
+                    ],
+                    "value"         => $content->status,
+                ],
                 "data" => [
                     "label"         => "Text",
                     "type"          => "textarea",
@@ -109,14 +122,15 @@ class UpdateContentForm extends FormModel
         $content->title  = $this->form->value("title");
         $slug = $this->di->get("contentFactory")->slugify($this->form->value("title"));
         $content->slug = $slug;
+        $content->status  = $this->form->value("status");
         $content->data = $this->form->value("data");
         $content->updated = date("Y-m-d H:i:s");
         $content->save();
 
-        $this->form->addOutput($content->title . " redigerad");
+        // $this->form->addOutput($content->title . " redigerad");
 
-        // $this->di->get("response")->redirect("book/view-all");
-        return true;
+        $this->di->get("response")->redirect("admincontent");
+        // return true;
     }
 
     /**
@@ -127,24 +141,11 @@ class UpdateContentForm extends FormModel
      */
     public function callbackDelete()
     {
-        // $book = new Book();
-        // $book->setDb($this->di->get("db"));
-        // $book->find("id", $this->form->value("id"));
-        // $book->column1 = $this->form->value("title");
-        // $book->column2 = $this->form->value("column2");
-        // $book->save();
-        // $this->di->get("response")->redirect("book/update/{$book->id}");
         $content = new Content();
         $content->setDb($this->di->get("db"));
         $content->find("id", $this->form->value("id"));
         $content->deleted = date("Y-m-d H:i:s");
         $content->save();
-
-        // $this->di->get("database")->connect();
-        // $sql = "UPDATE RV1content SET deleted =  WHERE id = ?";
-        // $this->di->get("database")->execute($sql, [$this->form->value("id")])
-
-        // $this->form->addOutput($book->title . " redigerad");
 
         $this->di->get("response")->redirect("admincontent");
         // return true;

@@ -28,7 +28,9 @@
 .main-wrap hr {
     border-top: 1px solid #b3b3b3;
 }
-
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    background-color: #3a3c5e;
+}
 .main-wrap {
     min-height: 700px;
     padding: 0 20px;
@@ -62,12 +64,16 @@
         }
         .likecircle {
             border-radius: 50%;
-            width: 22px;
-            background-color: @navbarcolor;
-            height: 22px;
-            color: white;
-            padding-top: 1px;
-            padding-left: 2px;
+            width: 35px;
+            background: transparent;
+            // background: -moz-radial-gradient(center, ellipse cover, #693a86 0%, #e1cfcf 50%, #fff 77%);
+            // background: -webkit-radial-gradient(center, ellipse cover, #693a86 0%, #e1cfcf 50%, #fff 77%);
+            // background: radial-gradient(ellipse at center, #693a86 0%, #e1cfcf 50%, #fff 77%);
+            // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8e8e8e', endColorstr='#e5e5e5', GradientType=1);
+            height: 35px;
+            color: black;
+            padding-top: 6px;
+            padding-left: 6px;
         }
     }
 
@@ -90,5 +96,11 @@
         }
 
     }
-
+}
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='url']:focus,
+textarea:focus {
+    background: #f9dffe;
+    color: #0d0d0d;
 }

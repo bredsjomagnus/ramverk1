@@ -30,7 +30,8 @@ endif;?>
             <th>ID</th>
             <th>TITEL</th>
             <th>SLUG</th>
-            <th style="width: 600px;">INNEHÅLL</th>
+            <th>STATUS</th>
+            <th style="max-width: 600px;">INNEHÅLL</th>
         </tr>
     <?php foreach ($contents as $content) : ?>
         <tr>
@@ -42,6 +43,9 @@ endif;?>
             </td>
             <td>
                 <?= $content->slug ?>
+            </td>
+            <td>
+                <?= $content->status ?>
             </td>
             <td>
                 <?= $content->data ?>

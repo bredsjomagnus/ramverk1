@@ -33,11 +33,11 @@ return [
                 "route" => "book",
                 "class" => ""
             ],
-            "kommentarsmodul" => [
-                "text" => "KOMMENTARSMODUL",
-                "route" => "commentary",
-                "class" => ""
-            ],
+            // "kommentarsmodul" => [
+            //     "text" => "KOMMENTARSMODUL",
+            //     "route" => "commentary",
+            //     "class" => ""
+            // ],
             "login" => [
                 "text" => "LOGGA IN",
                 "route" => "login",
@@ -48,16 +48,24 @@ return [
                 "route" => "logout",
                 "class" => ""
             ]
+        ],
+        "dropdown" => [
+            "namn" => "ARTIKLAR",
+            "items" => [
+                "mvc" => [
+                    "text" => "MVC",
+                    "route" => "article/mvc"
+                ],
+                "books" => [
+                    "text" => "BÖCKER",
+                    "route" => "article/books"
+                ],
+                "food" => [
+                    "text" => "MAT",
+                    "route" => "article/food"
+                ]
+            ]
         ]
-        // "dropdown" => [
-        //     "namn" => "ARTIKLAR",
-        //     "items" => [
-        //         "mvc" => [
-        //             "text" => "MVC",
-        //             "route" => "article/mvc"
-        //         ]
-        //     ]
-        // ]
     ],
     "navbar-admin" => [
         "config" => [

@@ -3,6 +3,7 @@ namespace Maaa16\Content;
 
 use \Anax\DI\InjectionAwareInterface;
 use \Anax\DI\InjectionAwareTrait;
+use \Maaa16\Content\Content;
 
 class ContentFactory implements InjectionAwareInterface
 {
@@ -99,4 +100,32 @@ class ContentFactory implements InjectionAwareInterface
 
         return $blogfilter;
     }
+
+    public function getFilteredHTML($id)
+    {
+        $content = new Content();
+        $content->setDb($this->di->get("db"));
+        $content->find("id", $id);
+        // $content->find("status", "published");
+        $filteredData = $this->di->get("textfilter")->parse($content->data, ["markdown"]);
+        return $filteredData;
+    }
+
+    public function getId($slug)
+    {
+        $content = new Content();
+        $content->setDb($this->di->get("db"));
+        $content->find("slug", $slug);
+        return $content->id;
+    }
+
+    // public function getFilteredHTML($id)
+    // {
+    //     $content = new Content();
+    //     $content->setDb($this->di->get("db"));
+    //     $content->find("id", $id);
+    //     $content->find("status", "published");
+    //     $filteredData = $this->di->get("textfilter")->parse($content->data, [$content->$filter]);
+    //     return $filteredData;
+    // }
 }
