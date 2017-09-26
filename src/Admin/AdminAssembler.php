@@ -32,13 +32,19 @@ class AdminAssembler implements InjectionAwareInterface
             $gravatar->border = "FF0000";
             $filteredcomment = $this->di->get("textfilter")->markdown($comment->comm);
 
-            $editcommenturl = $this->di->get("url")->create("editcomment") ."?id=". $comment->id;
+            $editcommenturl = $this->di->get("url")->create("editcomment") ."?id=". $comment->id."&path=admin";
+            $title = $this->di->get("contentFactory")->getTitle($comment->comment_on);
+
 
             $table .=   "<tr>
+                            <td><b>Artikel:</b></td>
+                            <td>".$title."</td>
+                        </tr>
+                        <tr>
                             <td valign=top>".$gravatar->toHTML()."</td>
                             <td><b>".$comment->username."</b><br />".$filteredcomment."</td>
                         </tr>
-                        <tr>
+                        <tr style='border-bottom: 1px solid lightgray;'>
                             <td></td>
                             <td><a href='".$editcommenturl."'>Redigera</a></td>
                         </tr>";

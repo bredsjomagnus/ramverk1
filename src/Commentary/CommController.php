@@ -139,7 +139,11 @@ class CommController implements InjectionAwareInterface
             $this->di->get("comm")->deleteComment($id);
         }
         // $this->commentarypage();
-        $this->di->get("response")->redirect("article/".$path);
+        if ($path != 'admin') {
+            $this->di->get("response")->redirect("article/".$path);
+        } else {
+            $this->di->get("response")->redirect("admincomments");
+        }
     }
 
     /**

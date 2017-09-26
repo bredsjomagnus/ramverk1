@@ -97,11 +97,22 @@ Det har gått från att ha upplevt total förvirring vad gäller MVC till att ä
 ###KMOM04
 
 ####Hur gick det att integrera formulärhantering och databashantering i ditt kommentarssystem?
+Både och kan man säga. Jag hade ju en databas integrerad sedan förut (hoppade session i kmom02 och gick direkt till databas). Det blev lösningen att lägga till det nya med active record för 'böcker' och 'innehåll'. 'Innehåll' är artiklar som kan läggas till via admingränssnittet som sedan kan kommenteras.
+
+Men jag tyckte om det nya sättet med Active Record. Även HTMLForm var skönt att använda. Man får en bättre överblick och det blir snabbare att både redigera och skapa nytt. Kommer nog använda både och i individuella projektet.
 
 ####Berätta om din syn på Active record och liknande upplägg, ser du fördelar och nackdelar?
+Det kan vara rätt så frustrerande att för tusende gången behöva connecta mot databas mm för att ställa en fråga. Med Active Record blir det både renare och snabbare. Det är ett väldigt skönt sätt att arbeta på. Men samtidigt har jag, förmodligen pga ovanan, inte lyckats göra allt jag ville på detta sätt. Har fått gå vanliga vägen när frågorna blir lite mer komplicerade än vanligt. Det kanske kan ses som en nackdel. Men jag har heller inte full koll på hur jag formulerar mig via det systemet som vi använder ännu. Så vad som beror på vad får jag nog låta vara osägt i nuläget.
 
 ####Utveckla din syn på koden du nu har i ramverket och din kommentars- och användarkod. Hur känns det?
+Det känns verkligen som att koden utvecklats. Den är lite av en blandning nu, av nytt och gammalt. Har lovat mig själv att städa lite efter hand.
+
+När jag satte igång med artiklarna som skall kommenteras hade jag en helt annan struktur, ett annat tänk och tillvägagångssätt, mot vid första kmom. Det skulle vara skönt om tiden fanns att gå tillbaka och skriva om. Det kan behövas.
+
+Som det ser ut nu har jag artiklarna via databasen. Dessa skapas i admingränssnittet. Den slug som då blir av titlen på artikeln används som path, article/articleslug. När sidan laddas visas artikel följt av form för ny kommentar, därefter kommer kommentarer som är knutna till just den artikeln. Man kan redigera egna kommentarer och gilla andras (en gång). Ännu har jag inte lagt in att man kan svara på varandras kommentarer. Lyssnade på rådet att inte lägga in för många funktioner i detta läge. Får se om det kan bli längre fram istället.
 
 ####Om du vill, och har kunskap om, kan du även berätta om din syn på ORM och designmönstret Data Mapper som är närbesläktade med Active Record. Du kanske har erfarenhet av likande upplägg i andra sammanhang?
+Det jag kommer ihåg att jag tyckte mycket om ORM som vi använde i Python förut. Det blir mycket mer lätthanterligt och överblickbart. Det är, enligt min mening, helt klart att föredra att använda ORM eller Active Record.
 
 ####Vad tror du om begreppet scaffolding, kan det vara något att kika mer på?
+Absolut. Det gör det ju väldigt smidigt. Tänker på hur snabbt vi med det kan få fram fungerande Anaxsidor. Något som kan ta sin lilla tid i vanliga fall är nu klart på några sekunder. Skulle gärna lära mig mer om detta.

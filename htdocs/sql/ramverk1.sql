@@ -1,6 +1,6 @@
 -- CREATE DATABASE ramverk1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- show databases;
-use ramverk1;
+use maaa16;
 -- show tables;
 
 DROP TABLE IF EXISTS ramverk1comments;
@@ -86,7 +86,8 @@ SELECT * FROM ramverk1comments WHERE comment_on = 2 ORDER BY created DESC;
 -- UPDATE ramverk1accounts SET role = 'admin' WHERE id = 1;
 
 -- ALTER TABLE ramverk1accounts
--- ADD COLUMN address varchar(100) AFTER surname;
+-- ADD COLUMN address varchar(100) AFTER surname,
+-- ADD COLUMN postnumber varchar(50) AFTER email,
 -- ADD COLUMN phone varchar(50) AFTER postnumber,
 -- ADD COLUMN mobile varchar(50) AFTER phone,
 -- ADD COLUMN city varchar(100) AFTER mobile,

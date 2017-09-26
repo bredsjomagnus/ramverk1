@@ -119,6 +119,14 @@ class ContentFactory implements InjectionAwareInterface
         return $content->id;
     }
 
+    public function getTitle($id)
+    {
+        $content = new Content();
+        $content->setDb($this->di->get("db"));
+        $content->find("id", $id);
+        return $content->title;
+    }
+
     // public function getFilteredHTML($id)
     // {
     //     $content = new Content();
