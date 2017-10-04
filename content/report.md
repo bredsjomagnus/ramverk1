@@ -116,3 +116,25 @@ Det jag kommer ihåg att jag tyckte mycket om ORM som vi använde i Python föru
 
 ####Vad tror du om begreppet scaffolding, kan det vara något att kika mer på?
 Absolut. Det gör det ju väldigt smidigt. Tänker på hur snabbt vi med det kan få fram fungerande Anaxsidor. Något som kan ta sin lilla tid i vanliga fall är nu klart på några sekunder. Skulle gärna lära mig mer om detta.
+
+---
+
+*2017-10-04*
+
+###KMOM05
+####Hur gick arbetet med att lyfta ut koden ur me-sidan och placera i en egen modul?
+Det var inte helt enkelt och jag fick göra om och göra rätt fyra gånger innan det fungerade. Dels har jag behov av flera moduler för att få det att fungera. Dels så när jag fick det att fungera gick det inte att köra `composer update` en andra eller tredje gång efter lyckad installation.
+
+Det blev slutligen så att jag slog ihop till en större modul och lämnade information i installationen att det krävs inloggad användare med vissa kriterier. Det var det som höll hela vägen. Lite synd. Men man har inte hur mycket tid som helst. Speciellt nu när en deadline för individuella projektet dessutom kryper närmare oroväckande fort.
+
+####Flöt det på bra med GitHub och kopplingen till Packagist?
+Den delen fungerade relativt smidigt. Det tog några vändor att vänja sig och förstå packagist. Men inte värre än så. Följde man övningen var det bara att tuta och köra. Skönt att det fanns delar som var så detta kmom.
+
+####Hur gick det att åter installera modulen i din me-sida med composer, kunde du följa du din installationsmanual?
+Eftersom att jag testat och därmed ändrat för att kunna testa gick det inte lika smidigt som jag hoppats. Det rörde sig om att få routes och views att stämma i en testmiljö. I vanliga fall kan jag bara komma åt vissa delar som inloggad admin och behövde komma runt det i testet. Men nu är det ändrat så att det skall gå lättare gång nummer två. Så är tanken och förhoppningen i allafall.
+
+####Hur väl lyckas du enhetstesta din modul och hur mycket kodtäckning fick du med?
+Det var nog denna delen som tog mest tid av allt, tror jag. Det var väldigt länge sedan jag använde phpunit och det fanns många frågor och funderingar på hur jag överhuvudtaget skulle gå tillväga. Men som tur är fanns det sparat från tidigare kurser och tillslut kunde jag få fram test som fungerade. Däremot valde jag av tidskäl bara göra en ynka test. Nu vet jag hur jag gör och kommer kunna lägga till fler framöver. Men är för stressad över deadlines nu för att ha ro att tänka på grad av kodtäckning.
+
+####Några reflektioner över skillnaden med och utan modul?
+En sak är ju att det är väldigt kul att ha gjort en. Även om den aldrig kommer användas mer så har man fått testa. Det blir ju mer återanvändbart och när man uppdaterar den så kan alla andra projekt som använder modulen snabbt och enkelt få med sig uppdateringarna. Mycket smidigt. Har redan innan tänkt lägga till kommentarsmöjlighet i individuella projektet och nu blir det ännu lättare att göra det.
