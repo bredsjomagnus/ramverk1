@@ -40,18 +40,31 @@ return [
             "path" => "article/{path:alphanum}",
             "callable" => ["commController", "articleCommentary"]
         ],
+
+        // Articles Routes
+        // [
+        //     "info" => "Artiklar",
+        //     "requestMethod" => null,
+        //     "path" => "",
+        //     "callable" => ["commController", "getArticles"]
+        // ],
+        [
+            "info" => "Create an article",
+            "requestMethod" => "get|post",
+            "path" => "admincontent/create",
+            "callable" => ["commController", "getPostCreateArticle"],
+        ],
+        [
+            "info" => "Create an article",
+            "requestMethod" => "get|post",
+            "path" => "admincontent/delete/{id:digit}",
+            "callable" => ["commController", "getPostCreateArticle"],
+        ],
+        [
+            "info" => "Uppdatera artiklar",
+            "requestMethod" => "get|post",
+            "path" => "admincontent/update/{id:digit}",
+            "callable" => ["commController", "getPostUpdateArticle"],
+        ],
     ]
 ];
-
-
-//  /** Go to article page index.md with commentary features */
-// $app->router->add("commentary", [$app->commController, "commentarypage"]);
-//
-// /** Posting new comment or reseting db (development)*/
-// $app->router->post("addcomment", [$app->commController, "addComment"]);
-// // Edit comment
-// $app->router->get("editcomment", [$app->commController, "editComment"]);
-// // Edit comment process
-// $app->router->post("editcommentprocess", [$app->commController, "editCommentProcess"]);
-// // Add like to comment
-// $app->router->get("addlikeprocess", [$app->commController, "addLikeProcess"]);

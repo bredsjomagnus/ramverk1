@@ -111,6 +111,14 @@ return [
                 return $remController;
             }
         ],
+        "articleFactory" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Maaa16\Commentary\ArticleFactory();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
         "comm" => [
             "shared" => false,
             "callback" => function () {

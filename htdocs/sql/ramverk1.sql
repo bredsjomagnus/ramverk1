@@ -1,6 +1,6 @@
 -- CREATE DATABASE ramverk1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- show databases;
-use maaa16;
+use ramverk1;
 -- show tables;
 
 DROP TABLE IF EXISTS ramverk1comments;
@@ -63,7 +63,29 @@ CREATE TABLE IF NOT EXISTS RV1content
 
 ) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 
+CREATE TABLE IF NOT EXISTS RV1article
+(
+  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  path CHAR(120) UNIQUE,
+  slug CHAR(120) NOT NULL UNIQUE,
+  title VARCHAR(120),
+  `data` TEXT,
+  `type` CHAR(20),
+  filter VARCHAR(80) DEFAULT NULL,
+  `status` CHAR(20) DEFAULT 'notPublished',
 
+  -- MySQL version 5.6 and higher
+  -- `published` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  -- `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  -- `updated` DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+ 
+  -- MySQL version 5.5 and lower
+  published DATETIME DEFAULT NULL,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated TIMESTAMP NULL, --  ON UPDATE CURRENT_TIMESTAMP,
+  deleted TIMESTAMP NULL
+
+) ENGINE INNODB CHARACTER SET utf8 COLLATE utf8_swedish_ci;
 
 -- DROP TABLE IF EXISTS RVDBbook;
 CREATE TABLE IF NOT EXISTS RVDBbook (
@@ -76,10 +98,13 @@ CREATE TABLE IF NOT EXISTS RVDBbook (
 
 
 -- INSERT INTO ramverkcomments (user, comm) VALUES ('Janne Banan', 'åäö rules');
-SELECT * FROM ramverk1comments;
+
 SELECT * FROM ramverk1accounts;
 SELECT * FROM RVDBbook;
 SELECT * FROM RV1content;
+
+DELETE FROM ramverk1comments WHERE username = 'user';
+SELECT * FROM ramverk1comments;
 
 SELECT * FROM ramverk1comments WHERE comment_on = 2 ORDER BY created DESC;
   -- UPDATE ramverk1accounts SET active = 'yes' WHERE id = 1;

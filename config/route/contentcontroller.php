@@ -5,22 +5,23 @@
 return [
     "routes" => [
         [
-            "info" => "Innehåll",
+            "info" => "Artiklar",
             "requestMethod" => null,
             "path" => "",
             "callable" => ["contentController", "getIndex"]
         ],
         [
-            "info" => "Create an item.",
+            "info" => "Create an article",
             "requestMethod" => "get|post",
             "path" => "create",
             "callable" => ["contentController", "getPostCreateContent"],
         ],
         [
-            "info" => "Update content.",
+            "info" => "Uppdatera artiklar",
             "requestMethod" => "get|post",
             "path" => "update/{id:digit}",
             "callable" => ["contentController", "getPostUpdateContent"],
         ],
+
     ]
 ];

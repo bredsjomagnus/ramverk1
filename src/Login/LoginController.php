@@ -23,7 +23,7 @@ class LoginController implements InjectionAwareInterface
     {
         $this->di->get("view")->add("login/login");
         $title = "Login | maaa16";
-        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
+        $this->di->get("pageRender")->renderPage(["title" => $title]);
     }
 
     /**
@@ -48,9 +48,9 @@ class LoginController implements InjectionAwareInterface
             if ($userdone && $passdone) {
                 $loginuser =  htmlentities($this->di->get("request")->getPost("user"));
                 $loginpass =  htmlentities($this->di->get("request")->getPost("pass"));
-                $this->di->get("database")->connect();
+                $this->di->get("db")->connect();
                 $sql = "SELECT * FROM ramverk1accounts WHERE BINARY username = BINARY '$loginuser'";
-                if ($res = $this->di->get("database")->executeFetchAll($sql)) {
+                if ($res = $this->di->get("db")->executeFetchAll($sql)) {
                     $dbpass = $res[0]->pass;
                     $this->di->get("session")->set("loginmsg", "<span>kommer åt databasen vid inloggningsförsök</span>");
                     $passwordverify = password_verify($loginpass, $dbpass);
@@ -84,7 +84,7 @@ class LoginController implements InjectionAwareInterface
 
                         $sql = "UPDATE ramverk1accounts SET inlogged = CURRENT_TIMESTAMP WHERE BINARY username = BINARY ?";
                         $params = [$loginuser];
-                        $this->di->get("database")->execute($sql, $params);
+                        $this->di->get("db")->execute($sql, $params);
 
                         $this->di->get("response")->redirect("accountinfo");
 
@@ -110,7 +110,7 @@ class LoginController implements InjectionAwareInterface
     {
         $this->di->get("view")->add("login/accountinfo");
         $title = "Konto | maaa16";
-        $this->di->get("pageRender")->renderPage(["title" => $title], "login");
+        $this->di->get("pageRender")->renderPage(["title" => $title]);
     }
 
     /**

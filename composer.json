@@ -15,7 +15,8 @@
         "anax/page": "^1.0",
         "anax/di": "^1.0",
         "anax/htmlform": "^1.0",
-        "anax/database": "^1.1"
+        "anax/database": "^1.1",
+        "maaa16/commentary": "^0.0.2"
     },
     "autoload": {
         "psr-4": {

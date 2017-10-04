@@ -6,6 +6,11 @@ return [
     // Load these routefiles in order specified and optionally mount them
     // onto a base route.
     "routeFiles" => [
+        // [
+        //     // Add routes from ContentController and mount on admincontent/
+        //     "mount" => "admincontent",
+        //     "file" => __DIR__ . "/route/contentcontroller.php",
+        // ],
         [
             // These are for internal error handling and exceptions
             "mount" => null,
@@ -26,11 +31,7 @@ return [
             "mount" => "book",
             "file" => __DIR__ . "/route/bookcontroller.php",
         ],
-        [
-            // Add routes from ContentController and mount on admincontent/
-            "mount" => "admincontent",
-            "file" => __DIR__ . "/route/contentcontroller.php",
-        ],
+
         [
             // These are for internal error handling and exceptions
             "mount" => null,

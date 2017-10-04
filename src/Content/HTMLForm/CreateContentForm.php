@@ -52,7 +52,7 @@ class CreateContentForm extends FormModel
                         "notPublished"      => "Inte publiserad",
                         "published"         => "Publiserad",
                     ],
-                    "checked"   => "notPublished",
+                    "value"   => "notPublished",
                 ],
                 "filter" => [
                     "label"         => "Filter",
