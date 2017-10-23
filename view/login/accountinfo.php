@@ -165,37 +165,37 @@ if (isset($_POST['editaccount'])) {
                     </div>
                 </div>
                 <!-- <?php var_dump($_SESSION); ?> -->
-        </div>
-
-        <div class="col-md-5">
-            <div class="collapse" id="editpasswordcollapse">
-                <div class="pillow-20">
-
-                </div>
-                <div class="well">
-                    <p class='info'>Skriv in ditt nuvarande lösenord följt av det nya lösenordet två gånger.</p>
-                    <form action="#" method="POST">
-                        <div class="form-group">
-                            <label for="forname">Nuvarande lösenord</label>
-                            <input class="form-control" type="password" name="oldpass" value="" placeholder="Nuvarande lösenord">
-                        </div>
-                        <div class="form-group">
-                            <label for="forname">Nytt lösenord</label>
-                            <input class="form-control" type="password" name="newpassone" value="" placeholder="Nytt lösenord">
-                        </div>
-                        <div class="form-group">
-                            <label for="forname">Nytt lösenord igen</label>
-                            <input class="form-control" type="password" name="newpasstwo" value="" placeholder="Nytt lösenord igen">
-                        </div>
-
-                        <input class="btn btn-primary" type="submit" name="editpassword" value="Ändra lösenordet">
-                    </form>
-                </div>
             </div>
 
-        </div>
+            <div class="col-md-5">
+                <div class="collapse" id="editpasswordcollapse">
+                    <div class="pillow-20">
 
-</div>
+                    </div>
+                    <div class="well">
+                        <p class='info'>Skriv in ditt nuvarande lösenord följt av det nya lösenordet två gånger.</p>
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="forname">Nuvarande lösenord</label>
+                                <input class="form-control" type="password" name="oldpass" value="" placeholder="Nuvarande lösenord">
+                            </div>
+                            <div class="form-group">
+                                <label for="forname">Nytt lösenord</label>
+                                <input class="form-control" type="password" name="newpassone" value="" placeholder="Nytt lösenord">
+                            </div>
+                            <div class="form-group">
+                                <label for="forname">Nytt lösenord igen</label>
+                                <input class="form-control" type="password" name="newpasstwo" value="" placeholder="Nytt lösenord igen">
+                            </div>
+
+                            <input class="btn btn-primary" type="submit" name="editpassword" value="Ändra lösenordet">
+                        </form>
+                    </div>
+                    <!-- /well -->
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </div>

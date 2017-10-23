@@ -138,3 +138,131 @@ Det var nog denna delen som tog mest tid av allt, tror jag. Det var väldigt lä
 
 ####Några reflektioner över skillnaden med och utan modul?
 En sak är ju att det är väldigt kul att ha gjort en. Även om den aldrig kommer användas mer så har man fått testa. Det blir ju mer återanvändbart och när man uppdaterar den så kan alla andra projekt som använder modulen snabbt och enkelt få med sig uppdateringarna. Mycket smidigt. Har redan innan tänkt lägga till kommentarsmöjlighet i individuella projektet och nu blir det ännu lättare att göra det.
+
+---
+*2017-10-12*
+
+###KMOM06
+####Har du någon erfarenhet av automatiserade testar och CI sedan tidigare?
+Nej. Men började bekanta mig under förra kursmomentet så det var roligt att man via detta kursmomentet fick lite mer insikt i vad det är och hur man kan använda det.
+
+####Hur ser du på begreppen, bra, onödigt, nödvändigt, tidskrävande?
+Får man slänga in frustrerande? Men nödvändigt i vissa fall. Det är även tidskrävande. Men tar man tiden till att lägga upp bra tester blir det en säkerhet både för dig och andra. Är metoderna testade så kan man utesluta dessa då fel uppstår, vilket kan spara tid i slutändan. Men sen tror jag inte man i varje läge bör sträva efter 100% kodtäckning. Tror det tar mer tid och energi än vad man får tillbaka. Då går det snarare över till en jakt efter bättre 'poäng'. Som ett datorspel. Men var någonstans som är rimligt att lägga sig kan säkert skifta från fall till fall.
+
+####Hur stor kodtäckning lyckades du uppnå i din modul?
+Jag hade lite problem med databasen. Därav att det var frustrerande. Fick skapa en sqlitekopia som jag kunde arbeta mot. Dessutom hade jag svårt att få till tester mot controllern. Hur testa response/request. Googlade utan framgång. Kom upp tillslut upp i 35% kodtäckning.
+
+####Berätta hur det gick att integrera mot de olika externa tjänsterna?
+Detta gick på sätt och vis väldigt smidigt. Det var ju sen kring testerna som det blev fail efter fail efter fail. Efter 20 mail om att man failat så var jag rätt irriterad. Så lyckan blev desto större när det väl lossnade och jag kunde använda min sqlite istället. Skulle verkligen vilja veta hur man smidigt testar när koden är beroende av databas.
+
+####Vilken extern tjänst uppskattade du mest, eller har du förslag på ytterligare externa tjänster att använda?
+Tycker bäst om scrutinizer som har lite av varje i ett och samma kit. Utöver build fail eller passed så får man en liten poäng på kodkvalitén. Alltid kul. Sen är det schysst med kodtäckningsprocenten. Känns som att denna tjänsten täcker in vad de andra, vi testade, har. Kommer främsta använda mig av den hädanefter.
+
+---
+*2017-10-23*
+###KMOM07/10
+####Krav 1, 2, 3: Grunden
+Det krävs att man loggar in för att kunna lägga till, svara på och skriva kommentarer. Man kan även skapa konto. Kontobild fås via Gravatar.
+Överst på sidorna följer med en etikettlista över de fem mest populära etiketterna (tagsen) samt en länk, etikett, för alla frågor. Alla etiketter på alla sidor fungerar som länk där man får se alla frågor med denna etikett.
+
+Alla frågor, svar och kommentarer skrivs i Markdown. Till hjälp använder jag bootstrap-markdown.js för att få verktygsfält för att få fetstil, kursivt mm.
+Väl inne på en fråga kan användaren välja svara via ’Ditt svar’ textfältet. Man kan även lägga till kommentar, antingen till frågan eller till redan existerande svar via länken ’Lägg till kommentar’.
+
+Användaren kan ändra en fråga, ett svar eller en kommentar den skrivit. Men inte ta bort. Detta är ett medvetet val för att andra användare via svar och kommenterar bli sammankopplade via frågorna och inte skall ligga i händerna på en användare fullt så mycket. Vill användaren kan den däremot redigera innehållet. Då redigering görs noteras det att frågan, svaret eller kommentaren redigerats och vilket datum och klockslag.
+
+Koden finns på GitHub under namnet RVIProject sammanlänkat med Travis och Scrutinizer och med en README som förklarar hur man kan installera Commentary.
+
+####Förstasidan – Översikt
+Här ser man de fem senaste frågorna, de fem senaste svaren, de fem aktivaste användarna och de fem högst rankade användarna.
+Tabellerna visar följande information:
+
+* De senaste fem frågorna
+    - Antal svar
+    - Rang
+    - Antal röster
+    - Antal kommentarer
+    - Länk till och information om frågan – etiketter, skapat datum och författare.
+* De senaste fem svaren
+    - Rang
+    - Antal röster
+    - Antal kommentarer
+    - Länk till och information om frågan – etiketter, skapat datum och författare.
+* De fem mest aktiva användarna. Aktivitetpoäng fås via frågor (1,5 p), svar (1 p) och kommentarer (0,5 p).
+    - Användaren med länk till dess statistiksida
+    - Antal ställda frågor
+    - Antal ställda svar
+    - Antal skriva kommentarer
+    - Aktivitetspoäng
+    - Rang
+* De fem högst rankade användarna. Rang får man via röster – röst*5 för på fråga, röst*10 på svar och röst*1 på kommentar. 15 p för varje svar som är accepterat svar.
+    - Användaren med länk till dess statistiksida
+    - Antal ställda frågor
+    - Antal ställda svar
+    - Antal skriva kommentarer
+    - Aktivitetspoäng
+    - Rang
+
+####Frågor
+Denna vy visar frågorna i en tabell med paginator och sökfält. Man kan välja söka via titel eller etikett. Tabellen visar frågans antal svar, röstsammanställning, antal röster, rang och länk till frågan samt frågans etiketter, skapat datum och författare.
+
+Här kan man även via länken ’Lägg till fråga’. Den leder till formulär där man ha möjlighet att skapa ny fråga. Minst en etikett måste finnas med.
+Frågorna kan även sorteras titelvis. Detta gäller även om man filtrerar frågorna etikettvis, genom att klicka på en etikett. Då sorteras de frågorna med den etiketten.
+
+####Etiketter
+Denna vy sammanställer etiketterna i en tabell med etikettnamnet, antal av den etiketten och datum för när den först skapades. Etikettnamnen är länkar som leder till Frågorvyn med enbart de frågorna med den etiketten i tabellen filtrerade.
+
+Det finns även ett etikettmoln där de vanligaste etiketterna är större än de etiketter som är få till antalet.
+
+####Om
+Här finns kort information om mig samt information om Commentarmodulen. Det står även hur aktivitetspoäng och rangpoäng räknas fram.
+Det finns länkar till repot på Github och information och länk till extern js som använts i projektet.
+
+####Krav 4: Frågor
+Den som skrivit frågan kan välja att markera något av svaren som ’Accepterat svar’. Detta markeras då med att frågan blir grön. Frågeförfattaren kan då ångra sig genom att klicka ’Ångra accepterat svar’ och sen välja ett annat svar istället eller inget alls.
+
+Användaren som får svar accepterat får 15 p i rangpoäng.
+
+Varje fråga, svar och kommentar kan röstas både upp och ner. För frågor och svar visas både antalet röster och fråga/svar fått samt sammanställningen av dessa röster.
+Man kan bara rösta på andras frågar/svar/kommentarer och man kan enbart rösta en gång per fråga/svar/kommentar. Den som röstat har möjlighet att ångra en röst via länk ’Ångra röst’.
+
+Svaren kan sorteras både stigande och sjunkande med tanke på datum eller rang. Det står vilken typ av sortering som man har för tillfället.
+
+####Krav 5: Användare
+En användare får rangpoäng. Jag har valt att frångå exemplet som gavs i kravspecifikationen. Istället baseras rangen enbart på själva röstningen och om man har svar som är accepterade. Istället finns parallellt statistik för aktiviteten som enbart visar på hur mycket man engagerat sig. Det blir en siffra för kvantitet och en siffra för kvalitet vilket känns mer användbart.
+
+För hur aktivitetspoäng och rangpoäng räknas se under 'Förstasidan - Översikt'.
+
+####Statistiksida
+Varje användare har en statistiksida och användare kan se andras statistiksidor.
+Här listas delar av kontoinformationen, totala antalet ställda frågor, svar, kommenterer, antal gjorda röstningar, totala antalet aktivitetspoäng och totala antalet rangpoäng.
+Är det ens egen statistiksida har man även en länk till sida för att redigera kontoinformation samt lösenord.
+
+Statistiksidan visar i fyra tabeller vilka frågor, svar, kommentarer på frågor samt kommentarer på svar som användaren skrivit. Tabellerna innehåller, lite beroende på vilken av dem det är, information om antalet svar, sammanställning av rösterna, antal röster, rang och antal kommentarers samt en länk till frågan det gäller.
+
+Har användaren accepterade svar visas de som gröna i den tabellen på denna sidan.
+
+####Krav 6: Valfritt
+Som krav 6 har jag dels lagt in en paginator och ett sökfält för frågorna, som nämnts ovan. Det finns valet via radioknappar att söka antingen på titel eller etiketter med ’%’ som wildcard (vilket nämns i placeholdern).
+
+Jag har även valt att dela upp och se aktivitet som en sak skiljt från rang. Det kan blir intressant i jämförelse hur aktivitet och rang står i förhållande till varandra.
+Som något lite utanför vill jag även nämna etikettmolnet. Det är en kul detalj vilket ger en bättre överblick över vilka etiketter som finns och vilka som är mest populära. Etiketterna i etikettmolnet funkar även som länkar till att få fram enbart de frågor med just den etiketten.
+
+####Allmänt
+Det var ett bra projekt på så vis att det följde kursmomenten och att man hade byggt upp kod som skulle användas i slutändan. Men att det nog var lite tur det, för min del, för det har ändå varit tidskrävande att få med alla delar. Det är väl främst att allting även skall kunna kommenteras och att dessa också skall kunna få en röst som har gjort att det blivit en hel del kod i slutändan.
+
+En av de svåra bitarna var etiketterna. Jag ville ha etiketter med å, ä och ö. Samtidigt ville jag ha dem som filter att användas som path. Bara så pass krävde inte mer än att skapa två kolumner – en för etikett man ser och en för path. Men sen när man skall ändra befintliga började det bli komplicerat. Det blev en del turer mellan metoder som skulle kolla av tecken och som skulle uppdatera olika tabeller. Var de unika eller inte? Togs det bort någon vid ändring? De fanns ju två som skulle hanteras olika i allt det här så när det väl började krångla blev det snart som ett tilltrasslat garnnystan som måste redas ut.
+
+Även etikettmolnen tog mer tid i anspråk än jag hoppats. Ville ha molnkänsla och därmed inte ha de uppradade i en box. Samtidigt något som kan funka för olika antal etiketter. Tycker nog det funka i slutändan.
+
+Annars låg mycket av svårigheten att det var mycket som skulle både läggas och plockas fram på rätt plats. Detta stötte på patrull då jag ju gillar att använda vyer och att det inte fungerade på studentservern. Fick bli en del ändringar och anpassningar där lösningen blev flera olika anrop för varje tabell.
+
+####Avslutningsvis
+Det har varit en kul och intressant kurs. Det kom en frustrerande dipp när det skulle phpunit-testas och databasen gjorde att allt blev ett ända mörker för ett tag. Men jag känner nu äntligen att jag vet hur jag skall jobba med Anax. Tredje gången gillt. Att arbeta enligt MVC är också något jag kommit att tycka mycket om. Även hur kul som helst att kunna göra egna moduler och använda/återanvända i annan kod. Så på många sätt en intressant och givande kurs.
+
+Feedbacken på kursmomenten har inte varit så bra. Kanske för att de halkat efter lite tidsmässigt? Men hjälpen på Gitter chatten har däremot varit mycket bra. Både från andra kurskamrater och lärare.
+
+En sak jag tänker på som kan underlätta inför nästa gång är att, även om det gjorts förut, skulle vara trevligt med stoff, repetition och stöd vad gäller phpunit-test. Hur var det nu man satte upp testerna nu igen och framför allt mot databas.
+
+Kursen får, för mycket intressant innehåll och bra kursmoment, en 9:a. Kan absolut rekommenderas vidare.
+
+Nu ser jag väldigt mycket fram emot del 2.

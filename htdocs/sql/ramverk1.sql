@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS ramverk1comments (
      email VARCHAR(200) NOT NULL DEFAULT 'na@email.com',
      comm VARCHAR(100000),
      likes VARCHAR(1000) DEFAULT '',
-      PRIMARY KEY  (id)
+	 PRIMARY KEY  (id)
   ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   
 -- ALTER TABLE ramverk1comments
